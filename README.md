@@ -2,9 +2,8 @@
 A simple arrival manager plugin for EuroScope. Uses the position predictions provided by EuroScope to visualize the arrival flow for a given airport or waypoint.
 The project is based on the project AMAN with somewhat different objectives. The development of AMAN was stalled at one point.
 
-## Known issues as of 0.0.0.8h
+## Known issues as of 0.2.0a
 - inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
-- Reload of the config file does not work yet. You need to restart Euroscope or remove the plugin from the plugin list and add it again
 
 ## Euroscope gotya
 HOLD & XHOLD are transmittet by TopSky via ScratchPad messages that are overwritten. Newly opened clients will not have the history.
