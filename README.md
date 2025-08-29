@@ -2,7 +2,7 @@
 A simple arrival manager plugin for EuroScope. Uses the position predictions provided by EuroScope to visualize the arrival flow for a given airport or waypoint.
 The project is based on the project AMAN with somewhat different objectives. The development of AMAN was stalled at one point.
 
-##Capabilities
+## Capabilities
 - Can show one or more timelines via drop-down menu
 - Can show stats
 - Can dim non-selected via-Fixes via drop-down menu
