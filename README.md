@@ -282,9 +282,8 @@ If relevant a TMA centre can be defined with a radius. This is used as a simple 
 
 
 
-![Window](https://i.gyazo.com/abd832a844331f03635ee72e5562ee13.png)
+![Window](https://gyazo.com/a17c178138339ff8994755e77b0400b9)
 
-![Window](https://gyazo.com/f48c47b6b9004a6428d16ab38e817757.png)
 
 Search tags:
 > Vatsim, air traffic control, ATC, flight simulator
