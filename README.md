@@ -15,7 +15,7 @@ ALB will only process these after the initial Open command.
 - A change in Planned landing rate will result in an adjustment of times without a recalc of sequence.
 
 ## Download, installation and start up
-The plugin .dll-file can be found under [Releases](https://github.com/EvenAR/euroscope-aman/releases. 
+The plugin .dll-file can be found under https://github.com/sodgaard/Euroscope-ALB_Releases/releases
 Place the .dll and a config file in the same directory.
 Add the dll in the Euroscope plugin menu. It does not currently need permission to write on the main ES window.
 The ALB-display will appear in a separate window once the plugin has been loaded and window opened.
@@ -31,33 +31,124 @@ Example `alb-config.json`:
     "openAutomatically": false,
     "timelines": {
         "EKCH 04L/04R": {
+            "destinationAirports": [ "EKCH", "EKRK" ],
             "targetFixes": [ "CH4LF", "CH4RF" ],
-
-            "viaFixes": ["TIDVU", "OLPIB", "-----", "ERNOV", "LUGAS", "ROSBI", "-----"],
-            "tagLayout": "SSOtest",
-            "destinationAirports": [ "EKCH" ]
+            "viaFixes": [  "OLPIB", "TIDVU", "-----", "ROSBI", "LUGAS", "ERNOV", "-----"],
+            "ArrivalScenarios": {
+                "test":       [  1,  2,  3,  4,  5 ],
+                "Green":      [  2,  2,  2,  2,  2 ],
+                "Yellow":     [  4, 10,  8,  8, 10 ],
+                "Yellow-ER":  [  3, 10,  6,  6,  6 ],
+                "Yellow-TI":  [  4,  6,  6, 10,  6 ],
+                "Yellow-ERTI":[  4,  6,  8,  8,  6 ],
+                "Red-ER":     [  3, 10,  6, 10,  6 ],
+                "Red-TI":     [  6,  6,  6, 10,  6 ],
+                "Red-ERTI":   [  6,  6,  8,  6,  8 ],
+                "Priority-O": [  3, 10, 12, 12, 10 ],
+                "Priority-W": [  6, 10,  6,  6, 10 ],
+                "Stop":       [  0,  0,  0,  0,  0 ]
+             },
+            "ArrivalScenarios-ssoBackup": {
+                "test":      [  1,  2,  3,  4,  5 ],
+                "Default":   [  2,  2,  2,  2,  2 ],
+                "FreeFlow":  [  2,  2,  2,  2,  2 ],
+                "Standard":  [  4, 10,  8,  8, 10 ],
+                "PO":        [  3, 10, 12, 12, 10 ],
+                "PW":        [  6, 10,  6,  6, 10 ],
+                "Stop":      [  0,  0,  0,  0,  0 ]
+             },
+            "tagLayout": "Expanded"
         },
         "EKCH 22L/22R": {
+            "destinationAirports": [ "EKCH", "EKRK" ],
             "targetFixes": [ "CH2LF", "CH2RF" ],
-            "viaFixes": [ "TIDVU", "OLPIB", "-----", "ERNOV", "LUGAS", "ROSBI", "-----"],
-            "tagLayout": "SSOtest",
-            "destinationAirports": [ "EKCH" ]
+            "viaFixes": [  "OLPIB", "TIDVU", "-----", "ROSBI", "LUGAS", "ERNOV", "-----"],
+            "ArrivalScenarios": {
+                "test":       [  1,  2,  3,  4,  5 ],
+                "Green":      [  2,  2,  2,  2,  2 ],
+                "Yellow":     [  4, 10,  8,  8, 10 ],
+                "Yellow-ER":  [  3, 10,  6,  6,  6 ],
+                "Yellow-TI":  [  4,  6,  6, 10,  6 ],
+                "Yellow-ERTI":[  4,  6,  8,  8,  6 ],
+                "Red-ER":     [  3, 10,  6, 10,  6 ],
+                "Red-TI":     [  6,  6,  6, 10,  6 ],
+                "Red-ERTI":   [  6,  6,  8,  6,  8 ],
+                "Priority-O": [  3, 10, 12, 12, 10 ],
+                "Priority-W": [  6, 10,  6,  6, 10 ],
+                "Stop":       [  0,  0,  0,  0,  0 ]
+             },
+            "ArrivalScenarios-ssoBackup": {
+                "test":      [  1,  2,  3,  4,  5 ],
+                "Default":   [  2,  2,  2,  2,  2 ],
+                "FreeFlow":  [  2,  2,  2,  2,  2 ],
+                "Standard":  [  4, 10,  8,  8, 10 ],
+                "PO":        [  3, 10, 12, 12, 10 ],
+                "PW":        [  6, 10,  6,  6, 10 ],
+                "Stop":      [  0,  0,  0,  0,  0 ]
+             },
+            "tagLayout": "Expanded"
         },
         "EKCH 12": {
+            "destinationAirports": [ "EKCH", "EKRK" ],
             "targetFixes": [ "VECJA" ],
-            "viaFixes": [ "TIDVU", "OLPIB", "-----", "ERNOV", "LUGAS", "ROSBI", "-----"],
-            "tagLayout": "SSOtest",
-            "destinationAirports": [ "EKCH" ]
+            "viaFixes": [  "OLPIB", "TIDVU", "-----", "ROSBI", "LUGAS", "ERNOV", "-----"],
+            "ArrivalScenarios": {
+                "test":       [  1,  2,  3,  4,  5 ],
+                "Green":      [  2,  2,  2,  2,  2 ],
+                "Yellow":     [  4, 10,  8,  8, 10 ],
+                "Yellow-ER":  [  3, 10,  6,  6,  6 ],
+                "Yellow-TI":  [  4,  6,  6, 10,  6 ],
+                "Yellow-ERTI":[  6,  6,  8,  6,  8 ],
+                "Red-ER":     [  3, 10,  6, 10,  6 ],
+                "Red-TI":     [  6,  6,  6, 10,  6 ],
+                "Red-ERTI":   [  6,  6,  8,  6,  8 ],
+                "Priority-O": [  3, 10, 12, 12, 10 ],
+                "Priority-W": [  6, 10,  6,  6, 10 ],
+                "Stop":       [  0,  0,  0,  0,  0 ]
+             },
+            "ArrivalScenarios-ssoBackup": {
+                "test":      [  1,  2,  3,  4,  5 ],
+                "Default":   [  2,  2,  2,  2,  2 ],
+                "FreeFlow":  [  2,  2,  2,  2,  2 ],
+                "Standard":  [  4, 10,  8,  8, 10 ],
+                "PO":        [  3, 10, 12, 12, 10 ],
+                "PW":        [  6, 10,  6,  6, 10 ],
+                "Stop":      [  0,  0,  0,  0,  0 ]
+             },
+            "tagLayout": "Expanded"
         },
         "EKCH 30": {
+            "destinationAirports": [ "EKCH", "EKRK" ],
             "targetFixes": [ "ORZIH" ],
-            "viaFixes": [ "TIDVU", "OLPIB", "-----", "ERNOV", "LUGAS", "ROSBI", "-----"],
-            "tagLayout": "SSOtest",
-            "destinationAirports": [ "EKCH" ]
+            "viaFixes": [  "OLPIB", "TIDVU", "-----", "ROSBI", "LUGAS", "ERNOV", "-----"],
+            "ArrivalScenarios": {
+                "test":       [  1,  2,  3,  4,  5 ],
+                "Green":      [  2,  2,  2,  2,  2 ],
+                "Yellow":     [  4, 10,  8,  8, 10 ],
+                "Yellow-ER":  [  3, 10,  6,  6,  6 ],
+                "Yellow-TI":  [  4,  6,  6, 10,  6 ],
+                "Yellow-ERTI":[  6,  6,  8,  6,  8 ],
+                "Red-ER":     [  3, 10,  6, 10,  6 ],
+                "Red-TI":     [  6,  6,  6, 10,  6 ],
+                "Red-ERTI":   [  6,  6,  8,  6,  8 ],
+                "Priority-O": [  3, 10, 12, 12, 10 ],
+                "Priority-W": [  6, 10,  6,  6, 10 ],
+                "Stop":       [  0,  0,  0,  0,  0 ]
+             },
+            "ArrivalScenarios-ssoBackup": {
+                "test":      [  1,  2,  3,  4,  5 ],
+                "Default":   [  2,  2,  2,  2,  2 ],
+                "FreeFlow":  [  2,  2,  2,  2,  2 ],
+                "Standard":  [  4, 10,  8,  8, 10 ],
+                "PO":        [  3, 10, 12, 12, 10 ],
+                "PW":        [  6, 10,  6,  6, 10 ],
+                "Stop":      [  0,  0,  0,  0,  0 ]
+             },
+            "tagLayout": "Expanded"
         }
     },
     "tagLayouts": {
-        "myLayout": [
+        "Standard": [
             { "source": "assignedRunway", "width": 4 },
             { "source": "callsign", "width": 8 },
             { "source": "static", "defaultValue": " ", "width": 2, "isViaFixIndicator": true },
@@ -70,7 +161,7 @@ Example `alb-config.json`:
             { "source": "static", "width": 1 },
             { "source": "scratchPad", "width": 4 }
         ],
-        "SSOtest": [
+        "Expanded": [
             { "source": "assignedRunway", "width": 4 },
             { "source": "acno", "width": 3 },
             { "source": "callsign", "width": 8 },
@@ -82,7 +173,6 @@ Example `alb-config.json`:
             { "source": "remainingDistance", "width": 4, "rightAligned": true },
             { "source": "static", "width": 1 },
             { "source": "viaFix", "width": 7 },
-            { "source": "holdingFix", "width": 5 },
             { "source": "inboundGrouping", "width": 7 },
             { "source": "holdingFix", "width": 5 },
             { "source": "static", "width": 1 },
@@ -100,8 +190,26 @@ Example `alb-config.json`:
             { "lon": 12.24763954 },
             { "radius": 29 }
 
+    ],
+    "TMAPoly" : [
+           { "lat": 55.24944444444444, "lon": 11.680833333333332 },
+           { "lat": 55.42722222222222, "lon": 11.41 },
+           { "lat": 55.84666666666667, "lon": 11.362777777777778 },
+           { "lat": 55.985, "lon": 11.825833333333334 },
+           { "lat": 56.156388888888884, "lon": 12.412777777777778 },
+           { "lat": 56.16416666666667, "lon": 12.44 },
+           { "lat": 56.032777777777774, "lon": 12.656944444444445 },
+           { "lat": 56.032777777777774, "lon": 12.679444444444444 },
+           { "lat": 55.99944444444444, "lon": 12.732222222222223 },
+           { "lat": 55.976111111111116, "lon": 12.865555555555556 },
+           { "lat": 55.73277777777778, "lon": 13.115555555555556 },
+           { "lat": 55.24944444444444, "lon": 12.998888888888889 },
+           { "lat": 55.195277777777775, "lon": 11.979444444444445 },
+           { "lat": 55.24944444444444, "lon": 11.680833333333332 }
+
     ]
 }
+
 ```
 
 Note: the plugin uses the EuroScope font which is based on the [ANSI/Windows-1252 character encoding](http://www.alanwood.net/demos/ansi.html). If you want to use special symbols like ¶, ¤, •, |, ©, ®, ¬, ‡ or º in your "static" tag fields you must save the JSON-file using that encoding (select "ANSI" encoding in notepad). Also note that some of these symbols have a custom representation in the EuroScope font - like ¶ which is displayed as a telephone, and ¤ which is a filled rectangle.
