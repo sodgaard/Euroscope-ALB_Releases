@@ -2,8 +2,17 @@
 A simple arrival manager plugin for EuroScope. Uses the position predictions provided by EuroScope to visualize the arrival flow for a given airport or waypoint.
 The project is based on the project AMAN with somewhat different objectives. The development of AMAN was stalled at one point.
 
-## Known issues as of 0.2.0a
+##Capabilities
+- Can show one or more timelines via drop-down menu
+- Can show stats
+- Can dim non-selected via-Fixes via drop-down menu
+- Can update Arrival rate via Scenarios drop-down menu
+- Can update individual arrivalrates via .alb ar <fix> <interval_minuts>
+- Can vary layout via drop-down menu
+
+## Known issues as of 0.2.1a
 - inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
+- Currently the Controlpanel overlays the top of the ribon
 
 ## Euroscope gotya
 HOLD & XHOLD are transmittet by TopSky via ScratchPad messages that are overwritten. Newly opened clients will not have the history.
