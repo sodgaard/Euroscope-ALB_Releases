@@ -10,13 +10,15 @@ The project is based on the project AMAN with somewhat different objectives. The
 - Can update individual arrivalrates via .alb ar <fix> <interval_minuts>
 - Can vary layout via drop-down menu
 
-## Known issues as of 0.2.1a
+## Known issues as of 0.2.1e
 - inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
 - Currently the Controlpanel overlays the top of the ribon
+- Aircraft are only cought if they have a STAR going to "targetFixes" as defined in the timeline. This means that aircraft without an (auto)assigned STAR will not show up on the timeline and not be part of the stats.
 
 ## Euroscope gotya
 HOLD & XHOLD are transmittet by TopSky via ScratchPad messages that are overwritten. Newly opened clients will not have the history.
 ALB will only process these after the initial Open command.
+
 
 ## Implemented dataprocessing
 - Aircraft in the TMA are ignored by the plugin.
