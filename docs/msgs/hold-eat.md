@@ -2,7 +2,7 @@
 
 
 
-How `/HOLD\_EAT/<HHMM>/` appears, when to use it, and controller expectations.
+How `/HOLD_EAT/<HHMM>/` appears, when to use it, and controller expectations.
 
 
 

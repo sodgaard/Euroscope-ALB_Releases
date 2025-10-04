@@ -27,6 +27,8 @@ nav:
   - ALB Messages:
       - Legend & Status: msgs/legend-status.md
       - HOLD / EAT: msgs/hold-eat.md
+
+  - Config file: config-description.md
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
   - Release Notes: release-notes.md
