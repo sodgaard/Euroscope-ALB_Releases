@@ -13,6 +13,7 @@ The ALB plugin for Euroscope provides a way to:
   - Flow rates per inbound fix
   - EAT (Estimated Arrival Time) - **not implemented yet**
 
+So to get you started:
 
 - **Installing?** See [Download & Install](download-install.md)
 
