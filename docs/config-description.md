@@ -30,7 +30,7 @@ The following `source`s are available:
 
 | Name                             | Description
 |----------------------------------|---------------
-| `callsign`                       | Aircraft call sign.
+| `callsign`                       | Aircraft callsign.
 | `assignedRunway`                 | Assigned landing runway.
 | `assignedStar`                   | Assigned STAR.
 | `aircraftType`                   | ICAO aircraft code.

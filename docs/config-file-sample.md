@@ -1,3 +1,5 @@
+# Example config file:
+
 ```json
 {
     "openAutomatically": false,
