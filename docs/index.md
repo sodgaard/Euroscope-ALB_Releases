@@ -10,3 +10,6 @@ Welcome! This site covers installation, quick start, common workflows, and troub
 
 \- \*\*Installing?\*\* See \[Download \& Install](download-install.md)
 
+![ALB main window](img/Full screenshot ESandALB.png)
+
+[Open full size](img/Full screenshot ESandALB.png)
