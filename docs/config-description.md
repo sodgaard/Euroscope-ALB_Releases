@@ -1,6 +1,6 @@
 # Config File description
 
-The config setup is described below. A sample file can be found here: [alb-config.json](./alb-config.md).
+The config setup is described below. A sample file can be found here: [alb-config.json](./alb-file-sample.md).
 
 Note: the plugin uses the EuroScope font which is based on the [ANSI/Windows-1252 character encoding](http://www.alanwood.net/demos/ansi.html). If you want to use special symbols like ¶, ¤, •, |, ©, ®, ¬, ‡ or º in your "static" tag fields you must save the JSON-file using that encoding (select "ANSI" encoding in notepad). Also note that some of these symbols have a custom representation in the EuroScope font - like ¶ which is displayed as a telephone, and ¤ which is a filled rectangle.
 
