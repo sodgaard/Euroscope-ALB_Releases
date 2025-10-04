@@ -3,6 +3,9 @@ site_url: https://sodgaard.github.io/Euroscope-ALB_Releases/
 repo_url: https://github.com/sodgaard/Euroscope-ALB_Releases
 repo_name: Euroscope-ALB_Releases
 
+markdown_extensions:
+  - attr_list
+
 theme:
   name: material
   features:
@@ -27,6 +30,3 @@ nav:
   - Troubleshooting: troubleshooting.md
   - FAQ: faq.md
   - Release Notes: release-notes.md
-
-  markdown_extensions:
-  - attr_list
