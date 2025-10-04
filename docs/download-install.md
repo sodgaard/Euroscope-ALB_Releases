@@ -2,7 +2,7 @@
 
 
 
-1. Download the latest release from the GitHub Releases page [Euroscope-ALB Releases](https://github.com/sodgaard/Euroscope-ALB_Releases).
+1. Download the latest release from the GitHub Releases page.
 
 2. Unzip to your EuroScope plugins folder. Make sure you have the **alb.dllÿ** and the **alb-config.json** in the folder.
 
