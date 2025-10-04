@@ -10,7 +10,7 @@
 
 
 
-Having issues? See [Troubleshooting](troubleshooting.md).
+Having issues? See [Troubleshooting](other/troubleshooting.md).
 
 
 
