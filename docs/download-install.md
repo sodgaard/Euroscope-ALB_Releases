@@ -1,16 +1,16 @@
-\# Download \& Install
+# Download \& Install
 
 
 
-1\. Download the latest release from the GitHub Releases page.
+1. Download the latest release from the GitHub Releases page.
 
-2\. Unzip to your EuroScope plugins folder.
+2. Unzip to your EuroScope plugins folder.
 
-3\. Start EuroScope and enable the ALB plugin.
+3. Start EuroScope and enable the ALB plugin.
 
 
 
-Having issues? See \[Troubleshooting](troubleshooting.md).
+Having issues? See [Troubleshooting](troubleshooting.md).
 
 
 

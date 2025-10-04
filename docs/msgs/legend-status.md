@@ -1,4 +1,4 @@
-\# Legend \& Status
+# Legend \& Status
 
 
 

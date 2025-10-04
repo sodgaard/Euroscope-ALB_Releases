@@ -1,10 +1,10 @@
-\# Troubleshooting
+# Troubleshooting
 
 
 
-\- No ALB window? Check plugin load order.
+- No ALB window? Check plugin load order.
 
-\- Messages not sending? Verify FMR state and network status.
+- Messages not sending? Verify FMR state and network status.
 
 
 
