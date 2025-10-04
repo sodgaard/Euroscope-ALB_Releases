@@ -1,0 +1,29 @@
+site_name: ALB User Guide
+site_url: https://sodgaard.github.io/Euroscope-ALB_Releases/
+repo_url: https://github.com/sodgaard/Euroscope-ALB_Releases
+repo_name: Euroscope-ALB_Releases
+
+theme:
+  name: material
+  features:
+    - navigation.top
+    - navigation.footer
+    - navigation.sections
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Download & Install: download-install.md
+  - Quick Start: quick-start.md
+  - Using ALB:
+      - Overview: user/overview.md
+      - In-Sim UI: user/ui.md
+      - Workflows: user/workflows.md
+  - ALB Messages:
+      - Legend & Status: msgs/legend-status.md
+      - HOLD / EAT: msgs/hold-eat.md
+  - Troubleshooting: troubleshooting.md
+  - FAQ: faq.md
+  - Release Notes: release-notes.md
