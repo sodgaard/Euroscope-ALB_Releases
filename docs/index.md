@@ -8,7 +8,7 @@ Welcome! This site covers installation, quick start, common workflows, and troub
 
 - **New user?** Start with [Quick Start](quick-start.md)
 
-- **Installing?** See [Download \& Install](download-install.md)
+- **Installing?** See [Download & Install](download-install.md)
 
 ![ALB main window](img/Full screenshot ESandALB.png)
 

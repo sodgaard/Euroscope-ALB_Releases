@@ -1,5 +1,7 @@
 # Quick Start
 
+
+
 1. Launch EuroScope with ALB enabled.
 
 2. Open the ALB window from the plugin menu.
