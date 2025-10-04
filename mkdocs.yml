@@ -29,9 +29,9 @@ nav:
       - HOLD / EAT: msgs/hold-eat.md
 
   - Config file:
-      - Layout and available parameters: config-description.md
-      - Sample File: config-file-sample.md
+      - Layout and available parameters: config/config-description.md
+      - Sample File: config/config-file-sample.md
   - Other:
-      - FAQ: faq.md
-      - Release Notes: release-notes.md
-      - Troubleshooting: troubleshooting.md
+      - FAQ: other/faq.md
+      - Release Notes: other/release-notes.md
+      - Troubleshooting: other/troubleshooting.md
