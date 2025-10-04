@@ -2,7 +2,7 @@
 
 
 
-Welcome! This site covers installation, quick start, common workflows, and troubleshooting for \*\*ALB\*\*.
+Welcome! This site covers installation, quick start, common workflows, and troubleshooting for **ALB**.
 
 
 
