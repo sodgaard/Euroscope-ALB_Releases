@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\docs",
+    "\\docs\\config",
+    "\\docs\\img",
+    "\\docs\\msgs",
+    "\\docs\\other",
+    "\\docs\\user"
   ],
+  "SelectedNode": "\\docs\\other\\faq.md",
   "PreviewInSolutionExplorer": false
 }

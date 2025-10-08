@@ -1,0 +1,108 @@
+name: Track release download counts
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 03:00 UTC (change if you like)
+    - cron: "0 3 * * *"
+
+permissions:
+  contents: write   # we commit the CSV back to the repo
+  actions: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run collector
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}  # e.g. sodgaard/ES-ArrivalLoadBallance
+        run: |
+          set -euo pipefail
+          python - << 'PY'
+          import csv, os, sys, json, datetime, urllib.request, urllib.error, pathlib
+
+          token = os.environ.get("GH_TOKEN")
+          repo  = os.environ.get("REPO")  # "owner/name"
+          today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+
+          out_dir  = pathlib.Path("metrics")
+          out_file = out_dir / "release_downloads.csv"
+          out_dir.mkdir(parents=True, exist_ok=True)
+
+          def gh_get(url):
+            req = urllib.request.Request(url)
+            if token:
+              req.add_header("Authorization", f"Bearer {token}")
+            req.add_header("Accept", "application/vnd.github+json")
+            with urllib.request.urlopen(req) as r:
+              return json.loads(r.read().decode("utf-8"))
+
+          # Fetch ALL releases (paginated)
+          releases = []
+          page = 1
+          while True:
+            url = f"https://api.github.com/repos/{repo}/releases?per_page=100&page={page}"
+            data = gh_get(url)
+            if not data:
+              break
+            releases.extend(data)
+            page += 1
+
+          # Prepare rows for "today"
+          rows_today = []
+          for rel in releases:
+            tag = rel.get("tag_name")
+            for a in rel.get("assets", []):
+              rows_today.append({
+                "date": today,
+                "version": tag,
+                "asset": a.get("name"),
+                "downloads": a.get("download_count", 0)
+              })
+
+          # Load existing rows (if any) and avoid duplicating same (date,version,asset)
+          existing = []
+          seen_keys = set()
+          if out_file.exists():
+            with out_file.open(newline="", encoding="utf-8") as f:
+              r = csv.DictReader(f)
+              for row in r:
+                key = (row["date"], row["version"], row["asset"])
+                existing.append(row)
+                seen_keys.add(key)
+
+          # Add today's rows if not present yet (idempotent daily runs)
+          for row in rows_today:
+            key = (row["date"], row["version"], row["asset"])
+            if key not in seen_keys:
+              existing.append(row)
+              seen_keys.add(key)
+
+          # Sort for readability (by date desc, then version, then asset)
+          existing.sort(key=lambda r: (r["date"], r["version"], r["asset"]))
+          # Write back
+          with out_file.open("w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=["date","version","asset","downloads"])
+            w.writeheader()
+            w.writerows(existing)
+
+          print(f"Wrote {out_file} with {len(existing)} rows.")
+          PY
+
+      - name: Commit & push CSV (if changed)
+        run: |
+          set -e
+          if git status --porcelain | grep -q "metrics/release_downloads.csv"; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add metrics/release_downloads.csv
+            git commit -m "chore(metrics): update release download counts"
+            git push
+          else
+            echo "No changes to commit."
+          fi
