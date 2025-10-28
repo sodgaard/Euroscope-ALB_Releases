@@ -8,7 +8,7 @@ The userinterface essentially consists of two different areas
 
 2. The inbound statistics for the same airports
 
-The base data for the timelines and statistics is defined in the config file  See [Config File Description](../config/config-description.md)
+The base data for the timelines and statistics is defined in the config file (see [Config File Description](../config/config-description.md) ).
 
 ## Main window
 
@@ -20,6 +20,8 @@ The total view can be seen below:
 ## Arrival statistics
 
 The statistics area is preseted in the top right and will overlap the upper part of the timeline.
+
+![ALB stats](../img/ALB-Stats area.png)
 
 For each ViaFix the following is displayed:
 
@@ -37,8 +39,6 @@ ViaFix lines with ------ are subtotals.
 The TOTAL line should be self explanatory.
 
 The Capacity line is based on the Planned Arrival Rate shown on the top line. Eg. 40 arrivals per hour leads to 10 each 15 mints.
-
-![ALB stats](../img/ALB-Stats area.png)
 
 ## Drop down menues
 You adjust the plugin via the drop down menues.
