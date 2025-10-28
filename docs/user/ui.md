@@ -69,7 +69,7 @@ You can choose between defined layouts of the timeline (data per aircraft) as de
 
 ![ALB Dropdown Layout](../img/ALB-Popup-Layout.png)
 
-## Other Manipulation of the User interface
+## Other manipulation of the User interface
 - You can left/right click on the Arrival Rate (AR) for a given ViaFix - to decrease /increase the rate by one minut. (min 1, max 20)
 - You can click on an aircraft in the list and ASEL of Euroscope will update accordingly. You can use this for eg. the .point command
 - You can click on an aircraft in any list in TopSky or on Euroscope and a box will surround the aircraft if it is relevant and on the timeline.
