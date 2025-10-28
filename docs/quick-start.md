@@ -20,7 +20,9 @@ Your options now depend on your connection status in Euroscope. You can use ALB 
 
 ## 2 - Part of a team for <ICAO> as regular user
 Launch is as for standalone user.
+
 If you are part of a team for a given airport <ICAO> and someone else has claimed the role as Flow Management Responsible (FMR) then you will se that indicated in the interface. You should not be changing Scenario or Arrival Rate as this will be overwritten by the FMR.
+
 You can change layout to whatever you prefer.
 
 ## 3 - Part of a team for <ICAO> as Flow Manager
