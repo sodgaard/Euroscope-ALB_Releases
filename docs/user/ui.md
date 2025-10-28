@@ -1,5 +1,7 @@
 # User Interface
 
+** Images taken from version 0.2.7 **
+
 The userinterface essentially consists of two different areas
 
 1. The Timeline showing inbound aircraft to the airports as defined for the selected Timeline(s).
@@ -19,10 +21,27 @@ The total view can be seen below:
 
 The statistics area is preseted in the top right and will overlap the upper part of the timeline.
 
+For each ViaFix the following is displayed.
+- AR: Arrival Rate (minuts between each release)
+- Cp: Capacity (60 min / AR)
+- ViaFx: The Inbound fix in question (typically the holding fix)
+- 30': The PERCENTAGE distribution of the aicraft arriving within the first 30 mints (excl. aircraft in the TMA)
+- 60': The NUMBER of aircraft arriving within the next 60 mints
+- Hold: The NUMBER of aircraft cleared in hold
+- 15': 4 intervals of 15 minuts with the NUMBER of aircraft in the given interval (0-15, 15-30, 30-45, 45-60)
+- TMA: The NUMBER of aircraft in the TMA.
+
+ViaFix lines with ------ are subtotals.
+The TOTAL line is self explanatory
+The Capacity line is based on the Planned Arrival Rate shown on the top line. Eg. 40 arrivals per hour leads to 10 each 15 mints.
+
 ![ALB stats](../img/ALB-Stats area.png)
 
 ## Drop down menues
-You adjust the plugin via the drop down menues:
+You adjust the plugin via the drop down menues.
+
+You can select one or more timelines.
+A timeline is based on Final Approach Fixes with a number of associated ViaFixes
 ![ALB Dropdown Timeline](../img/ALB-Popup-Timelines.png)
 
 You can dim all aircraft for ViaFixes not of interest via the menu:
