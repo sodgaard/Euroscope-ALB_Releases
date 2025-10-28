@@ -1,8 +1,20 @@
 # Release Notes
 
-
-
 See the GitHub Releases page for detailed change logs.
+
+## 0.2.7 of 251027
+
+### New features
+- FMR claim and resign TX/RX
+- AR set and TX/RX
+- SEAT TX/RX
+
+### Bug fixes
+- Stability
+
+### Known issues
+
+
 
 ## Known issues as of 0.2.1e
 - inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
