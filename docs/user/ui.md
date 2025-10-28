@@ -22,6 +22,7 @@ The total view can be seen below:
 The statistics area is preseted in the top right and will overlap the upper part of the timeline.
 
 For each ViaFix the following is displayed.
+
 - AR: Arrival Rate (minuts between each release)
 - Cp: Capacity (60 min / AR)
 - ViaFx: The Inbound fix in question (typically the holding fix)
@@ -32,7 +33,9 @@ For each ViaFix the following is displayed.
 - TMA: The NUMBER of aircraft in the TMA.
 
 ViaFix lines with ------ are subtotals.
-The TOTAL line is self explanatory
+
+The TOTAL line should be self explanatory.
+
 The Capacity line is based on the Planned Arrival Rate shown on the top line. Eg. 40 arrivals per hour leads to 10 each 15 mints.
 
 ![ALB stats](../img/ALB-Stats area.png)
