@@ -1,6 +1,6 @@
 # User Interface
 
-** Images taken from version 0.2.7 **
+**Images taken from version 0.2.7**
 
 The userinterface essentially consists of two different areas
 
@@ -21,7 +21,7 @@ The total view can be seen below:
 
 The statistics area is preseted in the top right and will overlap the upper part of the timeline.
 
-For each ViaFix the following is displayed.
+For each ViaFix the following is displayed:
 
 - AR: Arrival Rate (minuts between each release)
 - Cp: Capacity (60 min / AR)
@@ -44,16 +44,20 @@ The Capacity line is based on the Planned Arrival Rate shown on the top line. Eg
 You adjust the plugin via the drop down menues.
 
 You can select one or more timelines.
-A timeline is based on Final Approach Fixes with a number of associated ViaFixes
+A timeline is based on Final Approach Fixes with a number of associated ViaFixes.
+
 ![ALB Dropdown Timeline](../img/ALB-Popup-Timelines.png)
 
 You can dim all aircraft for ViaFixes not of interest via the menu:
+
 ![ALB Dropdown ViaFixes](../img/ALB-Popup-ViaFixes.png)
 
-You can update all Arrival Rates at once by clicking one of the predefined scenarios
+You can update all Arrival Rates at once by clicking one of the predefined scenarios.
+
 ![ALB Dropdown Scenarios](../img/ALB-Popup-Scenarios.png)
 
 You can choose between defined layouts of the timeline as defined in the config file:
+
 ![ALB Dropdown Layout](../img/ALB-Popup-Layout.png)
 
 ## Other Manipulation of the User interface
