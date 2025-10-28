@@ -9,7 +9,6 @@
             "targetFixes": [ "CH4LF", "CH4RF" ],
             "viaFixes": [  "OLPIB", "TIDVU", "-----", "ROSBI", "LUGAS", "ERNOV", "-----"],
             "viaFixColors": ["00FFFF", "00BFFF", "96D796", "00FF7F", "6E996E"],
-            "viaFixColors-safe": ["96D796", "D7B296", "96C6D7", "C896D7", "D796B3"],
             "ArrivalScenarios": {
 		"Green":  [  2,  2,  2,  2,  2 ],
                 "Yellow":    [  3, 10,  5,  5, 10 ],
