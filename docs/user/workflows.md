@@ -2,6 +2,14 @@
 
 In the following the available workflows are presented
 
+## Open and activate the plugin
+
+```.alb open```
+
+## Close and deactivate the plugin
+
+```.alb close```
+
 ## Set the planned landing rate (landings per hour)
 
 ```.alb plr <rate>```

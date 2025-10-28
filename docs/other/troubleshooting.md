@@ -2,9 +2,13 @@
 
 
 
-- No ALB window? Check plugin load order.
+## No ALB window? 
+- Check plugin loaded.
 
-- Messages not sending? Verify FMR state and network status.
+- The window is hidden until ```.alb open```
+
+## Messages not sending? 
+- Verify FMR claimed and network status.
 
 
 
