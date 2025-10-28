@@ -1,0 +1,85 @@
+# --- Visual Studio caches
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- Build outputs (VS/MSBuild)
+[Dd]ebug*/
+[Rr]elease*/
+[Rr]eleases*/
+x64/
+x86/
+[Aa][Rr][Mm]*/
+[bB]in/
+[oO]bj/
+ipch/
+zips/
+
+# --- Compiled artifacts
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.idb
+*.ilk
+*.bsc
+*.sbr
+
+*.lib
+
+# --- Build logs/state
+*.tlog/
+*.log
+*.lastbuildstate
+*.cache
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# --- CMake (if used)
+build*/
+[Cc]MakeFiles/
+[Cc]MakeCache.txt
+cmake-build-*/
+CMakeSettings.json
+
+# --- vcpkg/NuGet
+vcpkg_installed/
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+
+# --- Crash/profiler dumps
+*.dmp
+*.etl
+*.diagsession
+*.vsp
+*.vspx
+
+# --- Editors/OS junk
+.vscode/
+.idea/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.swp
+*.tmp
+
+# --- Local config you don’t want in git
+*.local.json
+*.secret.json
+
+# --- If your repo contains a EuroScope install, keep plugin drops out of git
+EuroScope/Plugins/
+
+Alb/euroscope_sector_providers.txt
+Alb/SectorFileProviderDescriptor.txt
+Alb/ipaddr.txt
+Alb/version.txt
+Alb/Release/Alb.tlog/
+Alb/zips/

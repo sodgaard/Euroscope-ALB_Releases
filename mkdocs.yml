@@ -17,7 +17,7 @@ theme:
     - content.code.copy
 
 nav:
-  - Home: front-page.md
+  - Home: index.md
   - Download & Install: download-install.md
   - Quick Start: quick-start.md
   - Using ALB:
