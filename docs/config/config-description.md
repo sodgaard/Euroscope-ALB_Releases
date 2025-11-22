@@ -38,21 +38,21 @@ The following `source`s are available:
 | `assignedStar`                   | `STAR`| Assigned STAR.
 | `aircraftType`                   | `TYPE`| ICAO aircraft code.
 | `aircraftWtc`                    | `WTC`| Wake turbulence category (L/M/H/S).
-| `minutesBehindPreceedingRounded` | `dM`| Time behind preceeding aircraft (rounded to nearest minute).
-| `timeBehindPreceeding`           | `dT`| Time behind preceeding aircraft (mm:ss).
+| `minutesBehindPreceedingRounded` | `TdM`| Time behind preceeding aircraft  - at Target Fix (rounded to nearest minute) - no delay added.
+| `timeBehindPreceeding`           | `TdT`| Time behind preceeding aircraft  - at Target Fix(mm:ss) - no delay added.
 | `remainingDistance`              | `NM`| Distance to target fix (nautical miles).
-| `estimatedLandingTime`           | `EAT`| Estimated landing time (hh:mm) - no delay added.
+| `estimatedLandingTime`           | `ELT`| Estimated landing time (hh:mm) - no delay added.
 | `targetFixEta`                   | `(ETF)`| Estimated Time Over target Fix (hh:mm) - no delay added.
-| `targetFixATCTime`               | `[ATC]`|  (hh:mm).
+| `viaFixLooseGain`                | `G/L`| Calculated Gain / Loose (MM)
+| `targetFixATCTime`               | `[ETF]`| Estimated Time Over ViaFix + delay (hh:mm) .
 | `directRouting`                  | `DIR`| Direct routing (if any) given by ATC.
 | `groundSpeed`                    | `GS`| Calculated ground speed.
 | `groundSpeed10`                  | `GS/10`| Calculated ground speed (in tens).
 | `altitude`                       | `ALT`| Altitude (pressure altitude or FL).
 | `scratchPad`                     | `SCR`| Scratch pad value.
 | `viaFix`                         | `VIA`| ViaFix
-| `viaFixETE`                      | `ETE`| Estimated Time Enroute to ViaFix (hh:mm)
-| `viaFixETO`                       | `ETO`| Estimated Time Over ViaFix (hh:mm) - no delay added
-| `viaFixLooseGain`                | `G/L`| Calculated Gain / Loose (MM)
+| `viaFixETE`                      | `EVTE`| Estimated Time Enroute to ViaFix (hh:mm)
+| `viaFixETO`                       | `EVTO`| Estimated Time Over ViaFix (hh:mm) - no delay added
 | `inboundGrouping`                | `GROUP`| Grouping within which the AC currently falls.
 | `FlightPhase`                    | `FPh`| Determined Flight Phase
 | `ArrivalState`                  | `ASt`| Determined Arrival State
