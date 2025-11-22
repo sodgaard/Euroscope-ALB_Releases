@@ -30,23 +30,30 @@ The following `source`s are available:
 
 | Name                             | ID  | Description
 |----------------------------------|-----|---------------
+| `static`                         | ``  | A static text, specified in the `defaultValue` property.
 | `callsign`                       | `ACID` | Aircraft callsign.
-| `assignedRunway`                 | `XXXX` | Assigned landing runway.
-| `assignedStar`                   | `XXXX`| Assigned STAR.
+| `assignedRunway`                 | `RWY` | Assigned landing runway.
+| `assignedStar`                   | `STAR`| Assigned STAR.
 | `aircraftType`                   | `XXXX`| ICAO aircraft code.
 | `aircraftWtc`                    | `XXXX`| Wake turbulence category (L/M/H/S).
 | `minutesBehindPreceedingRounded` | `XXXX`| Time behind preceeding aircraft (rounded to nearest minute).
 | `timeBehindPreceeding`           | `XXXX`| Time behind preceeding aircraft (mm:ss).
-| `remainingDistance`              | `XXXX`| Distance to target fix (nautical miles).
-| `estimatedLandingTime`           | `XXXX`| Estimated landing time (hh:mm).
-| `directRouting`                  | `XXXX`| Direct routing (if any) given by ATC.
+| `remainingDistance`              | `NM`| Distance to target fix (nautical miles).
+| `estimatedLandingTime`           | `EAT`| Estimated landing time (hh:mm).
+| `targetFixEta`                   | `(ETF)`|  (hh:mm).
+| `targetFixATCTime`               | `[ATC]`|  (hh:mm).
+| `directRouting`                  | `DIR`| Direct routing (if any) given by ATC.
 | `groundSpeed`                    | `XXXX`| Calculated ground speed.
 | `groundSpeed10`                  | `XXXX`| Calculated ground speed (in tens).
 | `altitude`                       | `XXXX`| Altitude (pressure altitude or FL).
 | `scratchPad`                     | `XXXX`| Scratch pad value.
 | `viaFix`                         | `XXXX`| ViaFix
 | `inboundGrouping`                | `XXXX`| Grouping within which the AC currently falls.
-| `static`                         | `XXXX`| A static text, specified in the `defaultValue` property.
+| `FlightPhase`                    | `FPh`| Determined Flight Phase
+| `ArrivalState`                  | `ASt`| Determined Arrival State
+| `holdingFix`                  | `HOLD`| Holding fix (if available)
+| `holdingEAT`                  | `EAT`| Holding fix Estimated Release (arrival) time - if set (hh:mm)
+
 
 ### TMA Centre
 If relevant a TMA centre can be defined with a radius. This is used as a simple means of defining when an AC is in the TMA
