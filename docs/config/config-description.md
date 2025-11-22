@@ -28,25 +28,25 @@ A tag layout has a set of tag values, which will be drawn in the specified order
 
 The following `source`s are available:
 
-| Name                             | Description
-|----------------------------------|---------------
-| `callsign`                       | Aircraft callsign.
-| `assignedRunway`                 | Assigned landing runway.
-| `assignedStar`                   | Assigned STAR.
-| `aircraftType`                   | ICAO aircraft code.
-| `aircraftWtc`                    | Wake turbulence category (L/M/H/S).
-| `minutesBehindPreceedingRounded` | Time behind preceeding aircraft (rounded to nearest minute).
-| `timeBehindPreceeding`           | Time behind preceeding aircraft (mm:ss).
-| `remainingDistance`              | Distance to target fix (nautical miles).
-| `estimatedLandingTime`           | Estimated landing time (hh:mm).
-| `directRouting`                  | Direct routing (if any) given by ATC.
-| `groundSpeed`                    | Calculated ground speed.
-| `groundSpeed10`                  | Calculated ground speed (in tens).
-| `altitude`                       | Altitude (pressure altitude or FL).
-| `scratchPad`                     | Scratch pad value.
-| `viaFix`                         | ViaFix
-| `inboundGrouping`                | Grouping within which the AC currently falls.
-| `static`                         | A static text, specified in the `defaultValue` property.
+| Name                             | ID  | Description
+|----------------------------------|-----|---------------
+| `callsign`                       | `ACID` | Aircraft callsign.
+| `assignedRunway`                 | `XXXX` | Assigned landing runway.
+| `assignedStar`                   | `XXXX`| Assigned STAR.
+| `aircraftType`                   | `XXXX`| ICAO aircraft code.
+| `aircraftWtc`                    | `XXXX`| Wake turbulence category (L/M/H/S).
+| `minutesBehindPreceedingRounded` | `XXXX`| Time behind preceeding aircraft (rounded to nearest minute).
+| `timeBehindPreceeding`           | `XXXX`| Time behind preceeding aircraft (mm:ss).
+| `remainingDistance`              | `XXXX`| Distance to target fix (nautical miles).
+| `estimatedLandingTime`           | `XXXX`| Estimated landing time (hh:mm).
+| `directRouting`                  | `XXXX`| Direct routing (if any) given by ATC.
+| `groundSpeed`                    | `XXXX`| Calculated ground speed.
+| `groundSpeed10`                  | `XXXX`| Calculated ground speed (in tens).
+| `altitude`                       | `XXXX`| Altitude (pressure altitude or FL).
+| `scratchPad`                     | `XXXX`| Scratch pad value.
+| `viaFix`                         | `XXXX`| ViaFix
+| `inboundGrouping`                | `XXXX`| Grouping within which the AC currently falls.
+| `static`                         | `XXXX`| A static text, specified in the `defaultValue` property.
 
 ### TMA Centre
 If relevant a TMA centre can be defined with a radius. This is used as a simple means of defining when an AC is in the TMA
