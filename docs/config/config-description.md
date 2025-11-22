@@ -48,8 +48,8 @@ The following `source`s are available:
 | `altitude`                       | `ALT`| Altitude (pressure altitude or FL).
 | `scratchPad`                     | `SCR`| Scratch pad value.
 | `viaFix`                         | `VIA`| ViaFix
-| `viaFixETE                       | `ETE`| Estimated Time Enroute to ViaFix (hh:mm)
-| `viaFixETO                       | `ETO`| Estimated Time Over ViaFix (hh:mm) - no delay added
+| `viaFixETE`                      | `ETE`| Estimated Time Enroute to ViaFix (hh:mm)
+| `viaFixETO`                       | `ETO`| Estimated Time Over ViaFix (hh:mm) - no delay added
 | `viaFixLooseGain`                | `G/L`| Calculated Gain / Loose (MM)
 | `inboundGrouping`                | `GROUP`| Grouping within which the AC currently falls.
 | `FlightPhase`                    | `FPh`| Determined Flight Phase
