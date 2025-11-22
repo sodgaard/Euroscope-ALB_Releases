@@ -32,6 +32,8 @@ The following `source`s are available:
 |----------------------------------|-----|---------------
 | `static`                         | ``  | A static text, specified in the `defaultValue` property.
 | `callsign`                       | `ACID` | Aircraft callsign.
+| `ATCShort`                       | `ATC` | Tracking Controller ID - short.
+| `ATCLong`                       | `ATC` | Tracking Controller ID - long.
 | `assignedRunway`                 | `RWY` | Assigned landing runway.
 | `assignedStar`                   | `STAR`| Assigned STAR.
 | `aircraftType`                   | `TYPE`| ICAO aircraft code.
