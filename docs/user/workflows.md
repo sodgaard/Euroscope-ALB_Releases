@@ -270,24 +270,6 @@ Accepted phases: `EN1 EN2 ARR IAP FINAL GA ANY`
 
 ---
 
-## Cloud log test (developer)
-
-Sends a single “TEST” line to the cloud log endpoint.
-
-```
-.alb testcloudlog
-```
-
----
-
-## Reserved / placeholders
-
-Currently a no-op placeholder:
-
-```
-.alb XXX
-```
-
 Not currently implemented (present in code but disabled/commented out):
 
 ```
