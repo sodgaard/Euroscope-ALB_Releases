@@ -18,15 +18,23 @@ The total view can be seen below. The window will be on top. It can be moved to 
 
 [Open full size](../img/Full screenshot ESandALB.png)
 
-## Arrival statistics
+## Arrival planning and statistics
 
-The statistics area is presented in the top left and will overlap the upper part of the timeline.
+The planning and statistics area is presented in the top left and will overlap the upper part of the timeline.
+
+
 
 ![ALB stats](../img/ALB-Stats area.png)
 
+The first line contains planned landing rate as well as actual landing rate and actual missed approach count. The PLR is clickable LMB/RMB to decrease/increase
+Actual landing rate and missed are shown as 15 mints / 30 mints equivalents
+- Actual landing rate is converted to operations per hour.
+- Actual missed approach is a count.
+
+
 For each ViaFix the following is displayed:
 
-- AR: Arrival Rate (minuts between each release)
+- AR: Arrival Rate (minuts between each release) - The AR is clickable LMB/RMB to decrease/increase
 - Cp: Capacity (60 min / AR)
 - ViaFx: The Inbound fix in question (typically the holding fix)
 - 30': The PERCENTAGE distribution of the aircraft arriving within the first 30 mints (excl. aircraft in the TMA)
