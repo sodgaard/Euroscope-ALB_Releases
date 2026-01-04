@@ -9,7 +9,7 @@ Current baseline: **EAT:AR** (arrival‑rate based). A future “EAT to landing 
 ## Abbreviations
 
 - **EAT** — Estimated Approach Time (ALB’s scheduling time reference)
-- **FMR** — Flow Management Role (digital coordinator authority for the plan)
+- **FMR** — Flow Management Responsible (coordinator authority for the plan)
 - **TXE** — Transmit EAT requests (FMR toggle: request peers publish holding-list EAT)
 - **HLW** — Hold‑List Write accept (peer opt‑in: allow ALB to publish holding-list EAT for aircraft you control)
 - **HLS** — Holding‑List Sync / override ingestion (treat holding-list EAT as a constraint in the plan)
@@ -117,6 +117,7 @@ Operationally, EATLOOP is intended to be safe and generally enabled.
 ---
 
 ### SWAP
+Swapping two aircraft in a specific STAR flow is done in the TimelineView by double-right clicking the aircraft you want to move forward in the flow.
 SWAP is the “cheap tool” to fix ordering:
 
 - Use SWAP when the schedule is correct in principle but two aircraft need to trade places.
