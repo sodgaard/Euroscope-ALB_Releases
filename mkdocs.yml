@@ -26,7 +26,7 @@ nav:
       - Workflows: user/workflows.md
   - ALB Messages:
       - Legend & Status: msgs/legend-status.md
-      - HOLD / EAT: msgs/hold-eat.md
+      - Coordination of sequencing and EAT: msgs/eat_detailing.md
 
   - Config file:
       - Layout and available parameters: config/config-description.md
