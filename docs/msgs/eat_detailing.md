@@ -1,4 +1,5 @@
-# ALB EAT Operations Guide (User-facing) - Will be available in 0.2.11 or 0.2.12
+# ALB Flow and EAT Operations Guide
+## Will be available in 0.2.11 or 0.2.12
 
 This guide explains how **EAT** works in ALB from a controller point of view: what you see in the UI, what the buttons do, and how collaboration works between an **FMR (digital coordinator)** and **peers**.
 
