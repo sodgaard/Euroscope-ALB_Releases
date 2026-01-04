@@ -13,7 +13,7 @@ Current baseline: **EAT:AR** (arrival‑rate based). A future “EAT to landing 
 - **TXE** — Transmit EAT requests (FMR toggle: request peers publish holding-list EAT)
 - **HLW** — Hold‑List Write accept (peer opt‑in: allow ALB to publish holding-list EAT for aircraft you control)
 - **HLS** — Holding‑List Sync / override ingestion (treat holding-list EAT as a constraint in the plan)
-- **EATLOOP** — Drift correction / cascade correction of downstream timing
+- **EATLOOP** — (will be renamed) Drift correction / cascade correction of downstream timing
 - **SWAP** — Swap two aircraft in the sequence
 - **PLR** — Planned Landing Rate (used by EAT:Landing later)
 
