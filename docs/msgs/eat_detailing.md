@@ -9,7 +9,7 @@ Current baseline: **EAT:AR** (arrival‑rate based). A future “EAT to landing 
 ## Abbreviations
 
 - **EAT** — Estimated Approach Time (ALB’s scheduling time reference)
-- **FMR** — Flow Management Responsible (coordinator authority for the plan)
+- **FMR** — Flow Management Responsible (coordinating authority for the plan)
 - **TXE** — Transmit EAT requests (FMR toggle: request peers publish holding-list EAT)
 - **HLW** — Hold‑List Write accept (peer opt‑in: allow ALB to publish holding-list EAT for aircraft you control)
 - **HLS** — Holding‑List Sync / override ingestion (treat holding-list EAT as a constraint in the plan)
