@@ -1,4 +1,4 @@
-# Arrival Load Ballancer (ALB) - User Guide
+# Arrival Load Balancer (ALB) - User Guide
 
 
 
@@ -18,6 +18,8 @@ So to get you started:
 - **Installing?** See [Download & Install](download-install.md)
 
 - **New user?** Start with [Quick Start](quick-start.md)
+
+- **Support** Find us on [Discord]https://discord.gg/CH4N7WbT
 
 ![ALB main window](img/Full screenshot ESandALB.png)
 
