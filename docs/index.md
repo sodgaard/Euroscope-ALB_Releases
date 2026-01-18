@@ -19,7 +19,8 @@ So to get you started:
 
 - **New user?** Start with [Quick Start](quick-start.md)
 
-- **Support** Find us on [Discord]https://discord.gg/CH4N7WbT
+- **Support** Find us on [Discord](https://discord.gg/CH4N7WbT){target="_blank" rel="noopener"}
+
 
 ![ALB main window](img/Full screenshot ESandALB.png)
 
