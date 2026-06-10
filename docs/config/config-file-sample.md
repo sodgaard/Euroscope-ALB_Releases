@@ -5,12 +5,34 @@
   "configFormatVersion": 3,
   "openAutomatically": true,
   "logging": true,
+  "housekeeping": {
+    "enabled": true,
+    "textLogRetentionDays": 14,
+    "textLogMaxFilesPerFamily": 20,
+    "backendRecordingRetentionDays": 14,
+    "backendRecordingMaxFolderMb": 500
+  },
+  "soundMute": {
+    "all": false,
+    "missed": false,
+    "ar": {
+      "all": false,
+      "unselected": false
+    }
+  },
+  "layout": {
+    "EatDisplayPrecisionSec": 15,
+    "EatDisplayRecalcPeriodSec": 15,
+    "EatDisplayIntervalChars": ["", "a", "b", "c", "d"]
+  },
   "scratchpadRunwayOverride": true,
   "timeSyncBeacons": true,
   "timelineSort": "targetFixEta",
   "holdEatLockWindowMinutes": 5,
   "holdEatRecentChangeMinutes": 2,
-  "glEatCombiDisplay-off": {
+  "aircraftLastSeenSweepMinutes": 2,
+  "aircraftOfflineResetMinutes": 5,
+  "glEatCombiDisplay": {
     "unknownState": "SwitchGainLooseEat",
     "unsequencedState": "SwitchGainLooseEat",
     "sequenced1State": "GainLoose",
@@ -21,8 +43,6 @@
     "holdXSec": 120,
     "holdGtXState": "Eat",
     "holdLeXState": "Countdown",
-    "aircraftLastSeenSweepMinutes": 2,
-    "aircraftOfflineResetMinutes": 5,
     "afterPassYMinutes": 2,
     "afterPassFirstYState": "DeltaAtPassage",
     "afterPassAfterYState": "Blank"
@@ -679,6 +699,19 @@
         "22L": { "elevFt": 17 },
         "22R": { "elevFt": 17 },
         "30": { "elevFt": 17 }
+      },
+      "eat_lt_sequence_lock": {
+        "enabled": true,
+        "baseDistanceNm": 115.0,
+        "extraDistanceNm": 10.0,
+        "extraBufferIasKt": 280.0,
+        "extraBufferAltFt": 15000.0
+      },
+      "viafix_track_nm_orange": {
+        "ERNOV3A": 61.9,
+        "TIDVU3A": 62.8,
+        "TESPI4C": 84.8,
+        "TUDLO4C": 93.0
       }
     },
     "ENGM": {
