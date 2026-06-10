@@ -1,17 +1,21 @@
 # Arrival Load Balancer (ALB) - User Guide
 
-
-
 Welcome! 
 This site covers installation, quick start, common workflows, and troubleshooting for **ALB**.
 
 The ALB plugin for Euroscope provides a way to:
 
-- Get an overview of inbound traffic to the choosen airport(s)
-- Operate as Flow Management Responsible (FMR) providing a means of communication with other ALB users for the same airport:
+- Get an overview of inbound traffic to the chosen airport(s)
+- Coordinate arrival planning with other ALB users for the same airport
+- Manage flow rates per inbound fix and scenario
+- Coordinate hold-related EAT actions for aircraft already in hold
 
-    - Flow rates per inbound fix
-    - EAT (Estimated Arrival Time) - **not implemented yet**
+The installed package uses a small loader/runtime split:
+
+- `ALB.dll` is the EuroScope-facing loader
+- `ALBCore.dll` is the ALB runtime plugin
+
+EuroScope should load `ALB.dll`.
 
 So to get you started:
 
