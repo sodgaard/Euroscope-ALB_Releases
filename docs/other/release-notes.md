@@ -1,45 +1,39 @@
 # Release Notes
 
-See the GitHub Releases page for detailed change logs.
+For detailed asset-by-asset history, use the GitHub releases page:
 
-## 0.2.10 of 251215
-##
-- Config file format: 2
-- Minimum compatible peer 0.2.9
+- [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-### New features
-- Automated EAT calculation
-- Tag updating implemented in particular TAG_ITEM_GL_EAT_COMBI 
+## Current release line
 
-### Bug fixes
-- Stability
-### Known issues
-- Aircraft are only cought if they have a STAR going to "targetFixes" as defined in the timeline. This means that aircraft without an (auto)assigned STAR will not show up on the timeline and not be part of the stats.
+The current release pointer in this repository is:
 
+- `0.3.0`
 
+This release line reflects the current public packaging model:
 
-## 0.2.7 of 251027
+- `ALB.dll` is the EuroScope-facing loader
+- `ALBCore.dll` is the runtime plugin
+- EuroScope should load `ALB.dll`
+- the loader may update `ALBCore.dll`
+- the loader may refresh `alb-config.default.json`
+- the loader must not overwrite live `alb-config.json`
 
-### New features
-- FMR claim and resign TX/RX
-- AR set and TX/RX
-- SEAT TX/RX
+## What changed in the current packaging model
 
-### Bug fixes
-- Stability
+Compared with older ALB installs, the most important public-facing changes are:
 
-### Known issues
-- inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
-- Currently the Controlpanel overlays the top of the ribon
-- Aircraft are only cought if they have a STAR going to "targetFixes" as defined in the timeline. This means that aircraft without an (auto)assigned STAR will not show up on the timeline and not be part of the stats.
+- ALB now uses a loader/core split instead of a single DLL expectation
+- install guidance is based on `ALB.dll` plus `ALBCore.dll`
+- release/update behavior is tied to the release repo and its version pointer
+- the live operational config is preserved during loader updates
 
+## Notes for users
 
+If you are updating from an older ALB installation:
 
-## 0.2.1e
+- make sure EuroScope loads `ALB.dll`, not `ALBCore.dll`
+- keep `alb-config.json` as your live config
+- treat `alb-config.default.json` as a template/default file
 
-### Known issues
-- inTMA is a rough implementation based on ac passing the next fix after the holding Fix, For EKCH this is particularly important to understand for ERNOV arrivals.
-- Currently the Controlpanel overlays the top of the ribon
-- Aircraft are only cought if they have a STAR going to "targetFixes" as defined in the timeline. This means that aircraft without an (auto)assigned STAR will not show up on the timeline and not be part of the stats.
-
-
+For installation details, see [Download & Install](../download-install.md).

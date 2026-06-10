@@ -4,8 +4,9 @@ Great - you are ready to dive further in to the functionality of ALB.
 
 The purpose of the plugin in its current state is to:
 
-- Provide an overview of incomming traffic split on each STAR stream and with subtotals according to Approach sector split (eg East vs West).
-- Communicate Arrival rates per STAR defined in minuts in between each release
+- Provide an overview of incoming traffic split by stream, timeline, and via-fix grouping.
+- Coordinate arrival-rate planning between ALB users for the same airport.
+- Support hold-related EAT coordination for aircraft already established in hold.
 
 ## Capabilities
 - Can show one or more timelines via drop-down menu
@@ -15,6 +16,8 @@ The purpose of the plugin in its current state is to:
 - Can update all Arrival Rate via Scenarios drop-down menu
 - Can update individual Arrival rate via click on the Arrival Rate indicator
 - Can vary layout via drop-down menu
+- Can switch timeline sorting between target-fix ETA and landing ETA
+- Can reload the active configuration without restarting EuroScope via ```.alb reload```
 - Can set Estimated Approach Time (EAT) on aircraft already cleared in hold via ```.alb seat <AC> <HHMM>```
 
 ## Euroscope gotya
