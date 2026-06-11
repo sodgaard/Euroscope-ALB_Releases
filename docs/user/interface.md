@@ -69,6 +69,10 @@ Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB
 - `ELT-ES` is the live EuroScope-style branch
 - `ELT-ALB` is the ALB-corrected branch when that branch is relevant
 
+`ELT-ALB` may include ALB's configured orange timing before the aircraft is deep into terminal handling. In ALB documentation, orange timing means the configured route or STAR-based track miles from the via-fix or holding-fix area toward touchdown. It is a planning estimate used while the aircraft is still far enough out that route-based timing is useful.
+
+Once the aircraft is inside terminal or post-via handling, ALB should not keep inventing a separate orange-based landing estimate. At that point the live EuroScope-style branch is normally the safer basis.
+
 The top-row `ETA:ES` or `ETA:ALB` button controls which estimate branch ALB uses where that policy applies.
 
 ## Status line and peer awareness

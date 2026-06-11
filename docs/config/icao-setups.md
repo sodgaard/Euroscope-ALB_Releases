@@ -53,6 +53,8 @@ The `airports.<ICAO>` block can also hold advanced airport-specific tuning such 
 - `viafix_track_nm_orange`
 - `eat_lt_sequence_lock`
 
+`viafix_track_nm_orange` is part of the airport timing model. It tunes the orange route or STAR track-mile estimate used by the ALB estimate branch before terminal or post-via phases.
+
 These are valid runtime settings, but they belong in configuration/customization rather than the normal operator guide.
 
 ## Related page

@@ -31,6 +31,7 @@ If the hold phase column is blank, the aircraft is not currently treated as hold
 - `Cp`: capacity derived from the current spacing
 - `TMA`: aircraft already in the terminal area
 - `OBS`: observation or warning slot in the selected layout
+- Orange timing: ALB's configured route or STAR-based track-mile timing model used as part of the `ELT-ALB` or `ETA:ALB` estimate before terminal live estimates take over
 
 ## Peer and status indicators
 

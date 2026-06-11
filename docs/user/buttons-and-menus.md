@@ -40,6 +40,8 @@ The top button uses `ETA:ES` and `ETA:ALB`, while some layouts may show row fiel
 - `ETA:ES` or `ELT-ES` means the EuroScope or live estimate branch
 - `ETA:ALB` or `ELT-ALB` means the ALB-calculated or corrected estimate branch
 
+When `ETA:ALB` or `ELT-ALB` is selected, the ALB branch may use the configured orange timing model before terminal or post-via phases. Orange timing is ALB's configured route or STAR track-mile estimate toward touchdown. It is part of the ALB scheduling estimate, not a separate controller action.
+
 Operator-facing rule of thumb:
 
 - before the aircraft is deep into terminal or post-via handling, ALB can use its own corrected branch to give a more useful planning estimate

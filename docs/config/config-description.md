@@ -475,8 +475,11 @@ These are used by the current runtime and are valid advanced config.
 
 #### `viafix_track_nm_orange`
 
-Maps STAR name to track miles from holding-fix area to touchdown for the orange
-timing model.
+Maps STAR name to configured track miles for ALB's orange timing model.
+
+Orange timing is ALB's route or STAR-based timing estimate from the via-fix or holding-fix area toward touchdown. The value gives ALB a configured distance basis when it builds the corrected ALB estimate branch (`ELT-ALB` or `ETA:ALB`) before terminal or post-via live estimates become the better source.
+
+This is advanced airport tuning. Wrong values can make `ELT-ALB`, EAT planning, and landing-timeline scheduling too early or too late.
 
 Example:
 

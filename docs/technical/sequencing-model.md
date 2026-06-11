@@ -125,6 +125,10 @@ The technical invariant is:
 - `ELT-ALB` may use ALB correction before terminal or post-via phases
 - once the aircraft is terminal or post-via, ALB must stop inventing a separate stale corrected landing branch and should follow the live branch where appropriate
 
+Orange timing is part of the pre-terminal `ELT-ALB` branch. It may be used while the aircraft is before TMA, before via-fix, or before terminal handling, depending on the current sequencing state and available live data.
+
+Orange timing must not be used to keep a stale separate ALB landing estimate alive after the aircraft has become terminal, post-via, on approach, final, landing, or past final fix. In those states, `ELT-ALB` should follow the live branch where appropriate or be cleared when no live estimate is available.
+
 This keeps old route or STAR geometry from misleading the landing timeline once the aircraft is already deep into terminal handling.
 
 ## Design invariant
