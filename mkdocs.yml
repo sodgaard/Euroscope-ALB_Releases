@@ -11,8 +11,6 @@ theme:
   features:
     - navigation.top
     - navigation.footer
-    - navigation.tabs
-    - navigation.tabs.sticky
     - search.suggest
     - search.highlight
     - content.code.copy
