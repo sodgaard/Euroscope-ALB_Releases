@@ -1,14 +1,11 @@
-# Arrival Load Balancer (ALB) - User Guide
+# Arrival Load Balancer (ALB)
 
-Welcome! 
-This site covers installation, quick start, common workflows, and troubleshooting for **ALB**.
+This site is split into two lanes:
 
-The ALB plugin for Euroscope provides a way to:
+- **Operator documentation** for controllers using ALB during a session
+- **Technical documentation** for maintainers working across the ALB code, release, and documentation repos
 
-- Get an overview of inbound traffic to the chosen airport(s)
-- Coordinate arrival planning with other ALB users for the same airport
-- Manage flow rates per inbound fix and scenario
-- Coordinate hold-related EAT actions for aircraft already in hold
+ALB helps you keep an arrival picture, coordinate via-fix and landing planning, and share that plan with other ALB users for the same destination airport.
 
 The installed package uses a small loader/runtime split:
 
@@ -17,14 +14,39 @@ The installed package uses a small loader/runtime split:
 
 EuroScope should load `ALB.dll`.
 
-So to get you started:
+## Start Here
 
-- **Installing?** See [Download & Install](download-install.md)
+- [Download & Install](download-install.md)
+- [Quick Start](quick-start.md)
+- [User Overview](user/overview.md)
 
-- **New user?** Start with [Quick Start](quick-start.md)
+## Operator Guide
 
-- **Support** Find us on [Discord](https://discord.gg/CH4N7WbT){target="_blank" rel="noopener"}
+- [Interface](user/interface.md)
+- [Buttons & Menus](user/buttons-and-menus.md)
+- [Aircraft Actions](user/aircraft-actions.md)
+- [Workflows](user/workflows.md)
+- [Collaboration & FMR](user/collaboration-fmr.md)
+- [Legend & Status](msgs/legend-status.md)
+- [EAT Coordination](msgs/eat_detailing.md)
 
+## Technical Guide
+
+- [Technical Overview](technical/index.md)
+- [Architecture](technical/architecture.md)
+- [Collaboration Internals](technical/collaboration-internals.md)
+- [Sequencing Model](technical/sequencing-model.md)
+- [Backend Transport](technical/backend-transport.md)
+- [Playback & Recording](technical/playback-recording.md)
+
+## Configuration And Support
+
+- [Config Description](config/config-description.md)
+- [Sample Config](config/config-file-sample.md)
+- [FAQ](other/faq.md)
+- [Troubleshooting](other/troubleshooting.md)
+- [Release Notes](other/release-notes.md)
+- [Discord](https://discord.gg/CH4N7WbT){target="_blank" rel="noopener"}
 
 ![ALB main window](img/Full screenshot ESandALB.png)
 

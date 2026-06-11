@@ -1,48 +1,59 @@
 # Quick Start
 
-Users of ALB can take one of three roles:
+ALB users normally fall into one of three working styles:
 
 1. Standalone user
+2. Regular peer in a team session
+3. FMR for a destination airport
 
-2. Part of a team for ```<ICAO>``` as regular user
-
-3. Part of a team for ```<ICAO>``` as Flow Manager
-
-## 1. Standalone user
+## First clicks
 
 1. Launch EuroScope with `ALB.dll` enabled.
+2. Open the ALB window with `.alb open` if it did not open automatically.
+3. Pick the relevant `Timelines`.
+4. Check `Peers` if you are working with others.
+5. Pick a `Layout` that fits the task.
 
-2. Open the ALB window via the command ```.alb open``` if it did not already open automatically from config.
+Make sure the runway setup you are working with in EuroScope matches the timeline you are watching in ALB.
 
-3. Choose relevant Timeline from the drop down menu. NB: Make sure that the runway selection in the Euroscope menu matches the timeline selection in ALB.
+## Standalone user
 
-Your options now depend on your connection status in Euroscope. You can use ALB online, in playback, or on a sweatbox. As a standalone user you can adjust scenario, arrival rate, sorting, and layout locally for your own instance.
+Use ALB as your own planning display.
 
-## 2. Part of a team for ```<ICAO>``` as regular user
-Launch is as for standalone user.
+- Choose the timeline you want.
+- Pick a scenario or adjust AR/PLR as needed.
+- Change layout locally to feeder-style or runway-style views.
+- Use right-click aircraft actions if you want to tidy the sequence locally.
 
-If you are part of a team for a given airport `<ICAO>` and someone else has claimed the role as Flow Management Responsible (FMR), that will be indicated in the interface. In that case you should normally avoid changing scenario or arrival rate for that airport, as the active FMR plan will take precedence.
+## Regular peer in a team session
 
-You can still change your local layout and other display-oriented preferences.
+Open ALB the same way, then check who is coordinating the destination airport.
 
-## 3. Part of a team for ```<ICAO>``` as Flow Manager
-Claim FMR with:
+- If another controller is the active FMR, treat shared flow planning as read-only unless you have agreed otherwise.
+- You can still use your own local display tools such as timeline choice and layout selection.
+- If you need a sequence change, coordinate with the FMR rather than independently reshuffling shared traffic.
+
+## FMR for `<ICAO>`
+
+Claim manual FMR with:
 
 ```
 .alb fmr <ICAO>
 ```
 
-As FMR you coordinate the shared arrival plan for that airport, including scenario and arrival-rate changes. If an aircraft is already in hold and prerequisites are met, you can also set EAT with:
+As FMR you normally own the shared plan for that airport:
+
+- scenario changes
+- planned landing rate
+- via-fix arrival rates
+- shared EAT/ETA policy buttons
+- shared sequence actions
+
+If an aircraft is already in hold and prerequisites are met, you can also set EAT with:
 
 ```
 .alb seat <Callsign> <HHMM>
 ```
 
-For command details, see [Workflows](user/workflows.md). For the operational EAT model, see [Coordination of sequencing and EAT](msgs/eat_detailing.md).
-
-
-
-Next: [Using the UI](user/ui.md)
-
-
+For the next step, read [Interface](user/interface.md), [Buttons & Menus](user/buttons-and-menus.md), and [Workflows](user/workflows.md).
 

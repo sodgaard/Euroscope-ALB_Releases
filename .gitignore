@@ -69,6 +69,7 @@ Desktop.ini
 $RECYCLE.BIN/
 *.swp
 *.tmp
+*.zip
 
 # --- Local config you don’t want in git
 *.local.json

@@ -1,34 +1,38 @@
 # Overview
 
-Great - you are ready to dive further in to the functionality of ALB.
+# Overview
 
-The purpose of the plugin in its current state is to:
+ALB is an arrival-planning tool for EuroScope. In controller language, it gives you one shared place to watch inbound streams, compare demand against plan, and coordinate timing changes before the aircraft reaches the runway.
 
-- Provide an overview of incoming traffic split by stream, timeline, and via-fix grouping.
-- Coordinate arrival-rate planning between ALB users for the same airport.
-- Support hold-related EAT coordination for aircraft already established in hold.
+## What ALB is good at
 
-## Capabilities
-- Can show one or more timelines via drop-down menu
-- Can show inbound stats
-- Can dim non-selected via-Fixes via drop-down menu
-- Can claim or resign as Flow Management Responsible for a one or more airports (must be in the visible Timelines) via the command ```.alb fmr <ICAO>```
-- Can update all Arrival Rate via Scenarios drop-down menu
-- Can update individual Arrival rate via click on the Arrival Rate indicator
-- Can vary layout via drop-down menu
-- Can switch timeline sorting between target-fix ETA and landing ETA
-- Can reload the active configuration without restarting EuroScope via ```.alb reload```
-- Can set Estimated Approach Time (EAT) on aircraft already cleared in hold via ```.alb seat <AC> <HHMM>```
+- Showing inbound traffic by timeline and via-fix stream
+- Comparing current demand with planned landing rate and stream spacing
+- Letting you switch between feeder-style and runway-style planning views
+- Coordinating hold-related EAT work for aircraft already established in hold
+- Sharing one plan between multiple ALB users working the same destination airport
 
-## Euroscope gotya
-Certain commands are transmittet when an incidence (like putting a flight in Hold) occur. Clients connecting after the incidence has happened will not be updated on historical events.
+## What you will usually do in ALB
 
-ALB will only process these after the initial ```.alb open``` command.
+- Select the relevant `Timeline`
+- Use `Scenarios` or AR clicks to shape stream release spacing
+- Watch the stats block to see demand, hold load, and near-term distribution
+- Use `Layout` to switch between feeder-focused and landing-focused views
+- Right-click an aircraft when you need an explicit sequence action
 
-Euroscope path and timing calculation is based on current groundspeed, and does not contain anticipated slow down as the aircraft descends. The resulting sequencing may currently be influenced by this and will lead to incorrect estimates.
+## Shared planning in plain language
 
-## Implemented dataprocessing
-- Aircraft in the TMA are not processed by the plugin.
-- Aircraft beyond 60 mins are ignored in the Total sum on the overview.
-- A change in Planned Landing Rate will result in an adjustment of times without a recalc of sequence.
+When several ALB instances watch the same airport, one instance may act as **FMR**.
+
+- The FMR is the normal authority for the shared arrival plan.
+- Peers still see the same picture, but should avoid independent shared-plan changes when another controller is clearly acting as FMR.
+- ALB keeps the collaboration automatic when transport conditions allow.
+
+## A few practical limits
+
+- ALB is a planning aid, not a separation tool.
+- Local controller judgement still takes priority over the display.
+- Some figures are based on live EuroScope routing and timing inputs, so they should be read as planning support rather than exact prediction.
+
+Next: [Interface](interface.md)
 

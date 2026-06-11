@@ -1,158 +1,106 @@
 # Workflows
 
-In the following the available workflows are presented.
+# Workflows
 
----
+This page is about how to use ALB during a session, not just which commands exist.
 
-## Open and activate the plugin
+## Standalone planning
 
-```
-.alb open
-```
+Use this when ALB is only for your own picture.
 
-## Close and deactivate the plugin
+1. Open ALB.
+2. Select the timeline that matches the airport/runway setup you care about.
+3. Pick a layout that suits the task.
+4. Apply a scenario or adjust PLR/AR directly from the stats area.
+5. Use right-click aircraft actions only when you want to force an explicit local sequence change.
 
-```
-.alb close
-```
+## Regular peer workflow
 
-## Reload configuration (re-read alb-config.json)
+Use this when several controllers are watching the same destination.
 
-Reloads the stored config file path (same config used at startup) and applies changes.
+1. Open ALB and choose the relevant timeline.
+2. Open `Peers` and confirm who else is connected for that airport.
+3. Check whether a controller is acting as FMR.
+4. If another controller is FMR, treat shared planning controls as their tools.
+5. Keep using local display controls such as timeline choice, via-fix filtering, and layout selection.
 
-```
-.alb reload
-```
+## FMR workflow
 
----
+Use this when you are the controller coordinating the shared arrival plan.
 
-## Timeline sorting
+1. Claim manual FMR with `.alb fmr <ICAO>`.
+2. Confirm the correct timeline and layout for the active runway concept.
+3. Set the overall flow with `Scenarios`, PLR, and per-via-fix AR values.
+4. Choose the EAT and ETA policy buttons that match how you want the plan built.
+5. Use aircraft right-click actions for deliberate sequence interventions.
+6. Use hold-related EAT actions only when the aircraft is already in hold and the operational prerequisites are met.
 
-Show current timeline sort mode:
+## Hold and EAT workflow
 
-```
-.alb sort
-```
+For aircraft already established in hold:
 
-Set timeline sort mode:
+1. Decide whether hold EAT should stay synchronized with the holding list using `HLS*` or `HLS-`.
+2. If ALB should write accepted hold timing back to the holding list, enable `HLW*`.
+3. If you need to assign a specific EAT, use:
 
-- **Target fix ETA**: `target`, `targetfixeta`, `tfe`
-- **Landing ETA**: `landing`, `landingeta`, `lde`, `lnd`
-
-```
-.alb sort <target|landing>
-```
-
----
-
-## EAT loop compensation toggle
-
-Toggles or explicitly sets EAT loop compensation.
-
-```
-.alb eatloop
-.alb eatloop on
-.alb eatloop off
-.alb eatloop status
-```
-
----
-
-## Planned landing rate (landings per hour)
-
-Sets PLR for all active ICAOs derived from active timelines. If there are no active ICAOs, the rate is applied locally only.
-
-Valid range: **5-80 ops/hr**.
-
-```
-.alb plr <rate>
-```
-
-## Planned departure rate (departures per hour)
-
-Sets the local planned departure rate.
-
-Valid range: **1-99 ops/hr**.
-
-```
-.alb pdr <rate>
-```
-
-## Arrival rate via fix (minutes interval)
-
-Sets arrival spacing in minutes for a given via fix, applied to all active ICAOs derived from active timelines.
-
-Typical use: hold and arrival management for a specific entry fix.
-
-Valid range: **0-20 minutes**.
-
-```
-.alb ar <ViaFix> <minutes>
-```
-
----
-
-## Become or resign FMR for an airport
-
-Toggles FMR ownership for a destination ICAO.
-
-- Claim if you are not currently FMR
-- Resign if you are currently FMR
-
-```
-.alb fmr <ICAO>
-```
-
----
-
-## Set Estimated Arrival Time (SEAT)
-
-Prerequisites:
-
-- The aircraft must already have been marked as cleared into a hold, i.e. visible on a Holding List.
-- `HOLDFIX` must be set for the aircraft.
-- You must be FMR for the aircraft destination.
-- The controller who has the aircraft assumed must have a compatible ALB version installed and open.
-
-```
+```text
 .alb seat <Callsign> <HHMM>
 ```
 
----
+4. If older hold overrides are getting in the way, right-click `HLS` and reset the HOLD_EAT overrides.
 
-## Status output
+See [EAT Coordination](../msgs/eat_detailing.md) for the operational meaning.
 
-Toggle periodic status updates:
+## Scenario change workflow
 
-```
-.alb status
-```
+When the airport changes mode or the arrival plan needs tightening:
 
-Print status once:
+1. Pick the active timeline first.
+2. Use `Scenarios` for broad, preplanned changes.
+3. Use AR clicks on individual via-fixes when you need stream-specific shaping.
+4. Use PLR clicks when you need to change the landing plan target.
+5. Recheck the timeline after the change instead of making several blind adjustments in a row.
 
-```
-.alb statusonce
-```
+## Useful commands
 
-## Status refresh time
+Open ALB:
 
-Sets the status refresh time used by the status updater.
-
-Valid range: **1-99 minutes**.
-
-```
-.alb refreshtime <minutes>
+```text
+.alb open
 ```
 
----
+Close ALB:
 
-## Sound tests
-
-Plays built-in sounds to verify audio setup:
-
-- `dong` also accepts `plr` or `ar`
-- `ma`, `ga`, `goaround`, `missed`, `pointout`
-
+```text
+.alb close
 ```
-.alb sound <dong|ma|ga|goaround|missed|pointout>
+
+Reload the current config file:
+
+```text
+.alb reload
+```
+
+Claim or resign manual FMR:
+
+```text
+.alb fmr <ICAO>
+```
+
+Set planned landing rate:
+
+```text
+.alb plr <rate>
+```
+
+Set arrival spacing for one via-fix:
+
+```text
+.alb ar <ViaFix> <minutes>
+```
+
+Set hold EAT for an aircraft already in hold:
+
+```text
+.alb seat <Callsign> <HHMM>
 ```

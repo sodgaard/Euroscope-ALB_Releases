@@ -1,0 +1,71 @@
+# Collaboration & FMR
+
+ALB can work as a standalone planning tool, but it is also built to let several ALB instances follow one shared plan for the same destination airport.
+
+## What FMR means
+
+**FMR** means **Flow Management Responsible**.
+
+For a given destination ICAO, the FMR is the ALB instance that should be treated as the authority for the shared arrival plan.
+
+That normally includes:
+
+- scenario selection
+- planned landing rate
+- via-fix arrival rates
+- shared EAT mode
+- shared ETA source
+- hold/EAT policy controls such as `HLS`, `FPC`, and `HLW`
+- explicit sequence actions that affect the shared order
+
+## Manual FMR
+
+Manual FMR is claimed with:
+
+```text
+.alb fmr <ICAO>
+```
+
+If you claim manual FMR, other peers should normally stop changing shared planning for that airport and treat your ALB instance as the coordinating one.
+
+## Auto-FMR in user language
+
+ALB can also keep track of who currently appears to own the plan even when nobody has manually claimed it.
+
+Operationally, the important part is simple:
+
+- if nobody has explicitly taken manual FMR, ALB can still work collaboratively
+- if someone does explicitly take manual FMR, that controller becomes the clear owner for shared plan changes
+
+The low-level election details belong in the technical section, not in normal controller workflow.
+
+## Who should change what
+
+The source logic is slightly more permissive than the simplest FMR story:
+
+- if a manual FMR exists for the active airport, only that manual FMR should change shared operational policy
+- if no manual FMR exists, active peers can still change the shared policy
+
+For day-to-day operations, the safest habit is still:
+
+- one controller owns the shared plan
+- the other peers use ALB mainly to follow that plan
+
+## What peers should and should not do
+
+Peers should:
+
+- use the same timeline picture
+- follow the shared scenario and spacing plan
+- coordinate with the FMR before deliberate resequence actions
+
+Peers should normally not:
+
+- independently apply shared flow changes while a remote FMR is clearly active
+- make competing sequence interventions on the same traffic
+
+## How ALB shares state
+
+From an operator point of view, ALB shares planning state with peers automatically when network and backend conditions allow. The normal intent is that all peers reproduce the same operational picture without you needing to manage message details yourself.
+
+For the transport and authority mechanics behind that, see [Collaboration Internals](../technical/collaboration-internals.md) and [Backend Transport](../technical/backend-transport.md).

@@ -20,17 +20,26 @@ nav:
   - Home: index.md
   - Download & Install: download-install.md
   - Quick Start: quick-start.md
-  - Using ALB:
+  - User Guide:
       - Overview: user/overview.md
-      - In-Sim UI: user/ui.md
+      - Interface: user/interface.md
+      - Buttons & Menus: user/buttons-and-menus.md
+      - Aircraft Actions: user/aircraft-actions.md
       - Workflows: user/workflows.md
-  - ALB Messages:
+      - Collaboration & FMR: user/collaboration-fmr.md
+  - Operational Reference:
       - Legend & Status: msgs/legend-status.md
-      - Coordination of sequencing and EAT: msgs/eat_detailing.md
-
-  - Config file:
+      - EAT Coordination: msgs/eat_detailing.md
+  - Configuration:
       - Layout and available parameters: config/config-description.md
       - Sample File: config/config-file-sample.md
+  - Technical:
+      - Technical Overview: technical/index.md
+      - Architecture: technical/architecture.md
+      - Collaboration Internals: technical/collaboration-internals.md
+      - Sequencing Model: technical/sequencing-model.md
+      - Backend Transport: technical/backend-transport.md
+      - Playback & Recording: technical/playback-recording.md
   - Other:
       - FAQ: other/faq.md
       - Release Notes: other/release-notes.md
