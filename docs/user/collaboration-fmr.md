@@ -10,7 +10,6 @@ For a given destination ICAO, the FMR is the ALB instance that should be treated
 
 That normally includes:
 
-- scenario selection
 - planned landing rate
 - via-fix arrival rates
 - shared EAT mode
@@ -56,7 +55,7 @@ For day-to-day operations, the safest habit is still:
 Peers should:
 
 - use the same timeline picture
-- follow the shared scenario and spacing plan
+- follow the shared timeline and spacing plan
 - coordinate with the FMR before deliberate resequence actions
 
 Peers should normally not:

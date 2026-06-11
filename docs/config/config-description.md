@@ -237,7 +237,7 @@ Accepted state values are case-insensitive and normalized. Common values:
 | `targetFixes` | string[] | required | Aircraft expected to pass one of these fixes are shown in the timeline. Exactly two fixes create a dual timeline unless `forceSingleTimeline` is `true`. |
 | `tagLayout` | string | none | Tag layout id to use. Must exist in `tagLayouts`. |
 | `viaFixes` | string[] | `[]` | Optional via-fix lanes. The placeholder `"-----"` can be used as a visual separator. |
-| `ArrivalScenarios` | object | `{}` | Optional scenario-name to integer-array mapping. Arrays must match the number of non-placeholder via-fixes. |
+| `ArrivalScenarios` | object | `{}` | Optional legacy scenario-name to integer-array mapping. Retained for compatibility/history; not recommended as the normal operating method. Arrays must match the number of non-placeholder via-fixes. |
 | `destinationAirports` | string[] | `[]` | Optional destination ICAO filter. If non-empty, only matching destinations are included. |
 | `runways` | string[] | `[]` | Optional runways relevant for this timeline. |
 | `defaultTimeSpan` | uint | `30` | Initial visible timeline span in minutes. |
@@ -246,6 +246,7 @@ Accepted state values are case-insensitive and normalized. Common values:
 
 ### Notes on `ArrivalScenarios`
 
+- Operational note: `ArrivalScenarios` is retained for compatibility and history. Scenarios are no longer part of the recommended normal ALB workflow. Current operation should normally use `EAT:LT` landing-timeline monitoring and correction instead of scenario switching.
 - The loader reads the key exactly named `ArrivalScenarios`
 - alternate scenario blocks under other names are ignored
 - placeholder via-fixes such as `"-----"` do not consume scenario values

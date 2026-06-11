@@ -13,6 +13,10 @@ From a controller point of view, there are two practical parts:
 - Controllers may also work with hold-related EAT values visible in their
   operational tools.
 
+Current normal ALB use is centered on `EAT:LT`, where the landing timeline is
+the main planning driver and the controller monitors sequence conformance.
+`EAT:AR` remains available as a rougher fallback method.
+
 ALB can support that coordination, but it should be understood as a planning
 aid rather than a replacement for controller judgement.
 
@@ -24,8 +28,8 @@ For a given destination airport, one ALB user may act as
 The FMR is the controller using ALB to coordinate the shared arrival plan for
 that airport, including:
 
-- scenario changes
-- arrival-rate changes
+- landing-timeline planning
+- arrival-rate changes where the rougher AR method is being used
 - hold-related EAT coordination where applicable
 
 If you are not the active FMR, your local display can still be used normally,

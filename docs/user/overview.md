@@ -1,7 +1,5 @@
 # Overview
 
-# Overview
-
 ALB is an arrival-planning tool for EuroScope. In controller language, it gives you one shared place to watch inbound streams, compare demand against plan, and coordinate timing changes before the aircraft reaches the runway.
 
 ## What ALB is good at
@@ -12,10 +10,19 @@ ALB is an arrival-planning tool for EuroScope. In controller language, it gives 
 - Coordinating hold-related EAT work for aircraft already established in hold
 - Sharing one plan between multiple ALB users working the same destination airport
 
+## Recommended modern use
+
+Current ALB use is centered on `EAT:LT`.
+
+- `EAT:LT` is the preferred planning method for normal operation
+- `EAT:AR` remains available as a rougher fallback method
+- the FMR normally monitors conformance to the landing timeline and corrects aircraft that drift away from the expected order
+
 ## What you will usually do in ALB
 
 - Select the relevant `Timeline`
-- Use `Scenarios` or AR clicks to shape stream release spacing
+- Monitor the landing timeline and sequence conformance
+- Use AR controls only when you deliberately want the rougher via-fix release method
 - Watch the stats block to see demand, hold load, and near-term distribution
 - Use `Layout` to switch between feeder-focused and landing-focused views
 - Right-click an aircraft when you need an explicit sequence action
@@ -34,5 +41,4 @@ When several ALB instances watch the same airport, one instance may act as **FMR
 - Local controller judgement still takes priority over the display.
 - Some figures are based on live EuroScope routing and timing inputs, so they should be read as planning support rather than exact prediction.
 
-Next: [Interface](interface.md)
-
+Next: [Quick Intro](quick-intro.md) and [Interface](interface.md)

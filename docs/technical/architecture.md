@@ -39,6 +39,6 @@ The public operator controls map into runtime behavior roughly like this:
 - top buttons write local display state or shared planning policy
 - stats-area clicks adjust PLR or per-via-fix spacing
 - aircraft right-click actions trigger explicit resequencing helpers
-- menus switch active timelines, filters, scenarios, peers view, and layouts
+- menus switch active timelines, filters, peers view, layouts, and a retained legacy scenarios surface
 
 That is why the operator docs are organized around the window itself, while the technical docs are organized around authority, sequencing, and transport.

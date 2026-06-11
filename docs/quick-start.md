@@ -16,20 +16,22 @@ ALB users normally fall into one of three working styles:
 
 Make sure the runway setup you are working with in EuroScope matches the timeline you are watching in ALB.
 
+If you want the two-minute version first, read [Quick Intro](user/quick-intro.md).
+
 ## Standalone user
 
 Use ALB as your own planning display.
 
 - Choose the timeline you want.
-- Pick a scenario or adjust AR/PLR as needed.
+- Use `EAT:LT` as the normal planning mode unless you deliberately want the rougher AR-based method.
+- Monitor the landing picture and correct aircraft that drift away from the expected sequence.
 - Change layout locally to feeder-style or runway-style views.
-- Use right-click aircraft actions if you want to tidy the sequence locally.
 
-## Regular peer in a team session
+## Regular peer workflow
 
 Open ALB the same way, then check who is coordinating the destination airport.
 
-- If another controller is the active FMR, treat shared flow planning as read-only unless you have agreed otherwise.
+- If another controller is the active FMR, treat shared planning controls as read-only unless you have agreed otherwise.
 - You can still use your own local display tools such as timeline choice and layout selection.
 - If you need a sequence change, coordinate with the FMR rather than independently reshuffling shared traffic.
 
@@ -37,23 +39,25 @@ Open ALB the same way, then check who is coordinating the destination airport.
 
 Claim manual FMR with:
 
-```
+```text
 .alb fmr <ICAO>
 ```
 
 As FMR you normally own the shared plan for that airport:
 
-- scenario changes
 - planned landing rate
-- via-fix arrival rates
-- shared EAT/ETA policy buttons
+- via-fix arrival rates in AR/fallback operation
+- shared EAT mode
+- shared ETA source
+- hold/EAT policy controls such as `HLS`, `FPC`, and `HLW`
 - shared sequence actions
 
 If an aircraft is already in hold and prerequisites are met, you can also set EAT with:
 
-```
+```text
 .alb seat <Callsign> <HHMM>
 ```
 
-For the next step, read [Interface](user/interface.md), [Buttons & Menus](user/buttons-and-menus.md), and [Workflows](user/workflows.md).
+The recommended modern method is to monitor and correct the landing timeline in `EAT:LT`, not to drive the plan mainly through scenario switching.
 
+For the next step, read [Quick Intro](user/quick-intro.md), [Interface](user/interface.md), [Buttons & Menus](user/buttons-and-menus.md), and [Workflows](user/workflows.md).

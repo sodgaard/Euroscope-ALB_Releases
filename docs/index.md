@@ -18,15 +18,18 @@ EuroScope should load `ALB.dll`.
 
 - [Download & Install](download-install.md)
 - [Quick Start](quick-start.md)
+- [Quick Intro](user/quick-intro.md)
 - [User Overview](user/overview.md)
 
 ## Operator Guide
 
+- [Quick Intro](user/quick-intro.md)
 - [Interface](user/interface.md)
 - [Buttons & Menus](user/buttons-and-menus.md)
 - [Aircraft Actions](user/aircraft-actions.md)
 - [Workflows](user/workflows.md)
 - [Collaboration & FMR](user/collaboration-fmr.md)
+- [Retired: Scenarios](user/retired/scenarios.md)
 - [Legend & Status](msgs/legend-status.md)
 - [EAT Coordination](msgs/eat_detailing.md)
 
@@ -48,6 +51,6 @@ EuroScope should load `ALB.dll`.
 - [Release Notes](other/release-notes.md)
 - [Discord](https://discord.gg/CH4N7WbT){target="_blank" rel="noopener"}
 
-![ALB main window](img/Full screenshot ESandALB.png)
+![ALB main window](img/Full-screenshot-ESandALB.png)
 
-[Open full size](img/Full screenshot ESandALB.png)
+[Open full size](img/Full-screenshot-ESandALB.png)

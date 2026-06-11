@@ -21,12 +21,14 @@ nav:
   - Download & Install: download-install.md
   - Quick Start: quick-start.md
   - User Guide:
+      - Quick Intro: user/quick-intro.md
       - Overview: user/overview.md
       - Interface: user/interface.md
       - Buttons & Menus: user/buttons-and-menus.md
       - Aircraft Actions: user/aircraft-actions.md
       - Workflows: user/workflows.md
       - Collaboration & FMR: user/collaboration-fmr.md
+      - "Retired: Scenarios": user/retired/scenarios.md
   - Operational Reference:
       - Legend & Status: msgs/legend-status.md
       - EAT Coordination: msgs/eat_detailing.md

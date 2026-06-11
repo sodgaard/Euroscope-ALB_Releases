@@ -7,19 +7,19 @@ Some screenshots in this guide were taken on an older ALB release. They still sh
 ALB is built around four working areas:
 
 1. The top button row for quick policy and display toggles
-2. The menu row for timelines, via-fixes, scenarios, peers, and layout
+2. The menu row for timelines, via-fixes, peers, layout, and a retained legacy scenarios menu
 3. The stats and arrival-planning block at the top left
 4. The timeline area containing the aircraft rows
 
-![ALB main window](../img/Full screenshot ESandALB.png)
+![ALB main window](../img/Full-screenshot-ESandALB.png)
 
-[Open full size](../img/Full screenshot ESandALB.png)
+[Open full size](../img/Full-screenshot-ESandALB.png)
 
 ## Stats and arrival-planning block
 
 The planning block overlaps the upper-left part of the timeline area.
 
-![ALB stats](../img/ALB-Stats area.png)
+![ALB stats](../img/ALB-Stats-area.png)
 
 The top line contains the airport-wide landing plan:
 
@@ -46,7 +46,7 @@ Lines showing `-----` are separators or subtotal breaks from the configured time
 - Left-click a stream `AR` to decrease the interval by 1 minute
 - Right-click a stream `AR` to increase the interval by 1 minute
 
-In `EAT:LT` mode, the AR values are still displayed, but AR adjustment is disabled.
+In `EAT:LT`, AR is not the active planning driver. Visible AR values are legacy/context information, and AR adjustment is not the normal control method.
 
 ## Timeline area
 
@@ -58,6 +58,16 @@ The timeline rows are the operational center of ALB.
 - Right-click an aircraft row to open the aircraft action menu
 
 See [Aircraft Actions](aircraft-actions.md) for the right-click behavior.
+
+## ELT and ETA in the display
+
+Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB`.
+
+- `ELT` means estimated landing time
+- `ELT-ES` is the live EuroScope-style branch
+- `ELT-ALB` is the ALB-corrected branch when that branch is relevant
+
+The top-row `ETA:ES` or `ETA:ALB` button controls which estimate branch ALB uses where that policy applies.
 
 ## Status line and peer awareness
 
