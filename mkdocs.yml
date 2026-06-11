@@ -11,7 +11,8 @@ theme:
   features:
     - navigation.top
     - navigation.footer
-    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -20,23 +21,32 @@ nav:
   - Home: index.md
   - Download & Install: download-install.md
   - Quick Start: quick-start.md
-  - User Guide:
+  - Operational Guide:
       - Quick Intro: user/quick-intro.md
       - Overview: user/overview.md
+      - Planning Modes:
+          - Planning Modes Overview: user/planning-modes/index.md
+          - EAT:LT Landing Timeline Planning: user/planning-modes/eat-lt.md
+          - EAT:AR Arrival Rate Fallback Planning: user/planning-modes/eat-ar.md
+          - Feeder View vs Runway View: user/planning-modes/views.md
       - Interface: user/interface.md
       - Buttons & Menus: user/buttons-and-menus.md
       - Aircraft Actions: user/aircraft-actions.md
       - Workflows: user/workflows.md
       - Collaboration & FMR: user/collaboration-fmr.md
-      - "Retired: Scenarios": user/retired/scenarios.md
-  - Operational Reference:
       - Legend & Status: msgs/legend-status.md
       - EAT Coordination: msgs/eat_detailing.md
-  - Configuration:
-      - Layout and available parameters: config/config-description.md
-      - Sample File: config/config-file-sample.md
-  - Technical:
-      - Technical Overview: technical/index.md
+      - Retired:
+          - Scenarios: user/retired/scenarios.md
+  - Configuration & Customization:
+      - Config Overview: config/index.md
+      - Display Fields and Tag Layouts: config/display-fields.md
+      - ICAO / Airport Setups: config/icao-setups.md
+      - Timeline / Via-fix / Runway Setups: config/timelines.md
+      - Config File Reference: config/config-description.md
+      - Sample Config File: config/config-file-sample.md
+  - Developer / Internals:
+      - Developer / Internals Overview: technical/index.md
       - Architecture: technical/architecture.md
       - Collaboration Internals: technical/collaboration-internals.md
       - Sequencing Model: technical/sequencing-model.md

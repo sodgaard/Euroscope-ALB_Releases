@@ -18,6 +18,8 @@ Make sure the runway setup you are working with in EuroScope matches the timelin
 
 If you want the two-minute version first, read [Quick Intro](user/quick-intro.md).
 
+If you are deciding how ALB should be used operationally, read [Planning Modes Overview](user/planning-modes/index.md) next.
+
 ## Standalone user
 
 Use ALB as your own planning display.
@@ -60,4 +62,4 @@ If an aircraft is already in hold and prerequisites are met, you can also set EA
 
 The recommended modern method is to monitor and correct the landing timeline in `EAT:LT`, not to drive the plan mainly through scenario switching.
 
-For the next step, read [Quick Intro](user/quick-intro.md), [Interface](user/interface.md), [Buttons & Menus](user/buttons-and-menus.md), and [Workflows](user/workflows.md).
+For the next step, read [Planning Modes Overview](user/planning-modes/index.md), [EAT:LT Landing Timeline Planning](user/planning-modes/eat-lt.md), [Interface](user/interface.md), and [Buttons & Menus](user/buttons-and-menus.md).

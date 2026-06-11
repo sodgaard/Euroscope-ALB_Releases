@@ -2,15 +2,21 @@
 
 This page is the quick reference for the controls across the top of the ALB window.
 
+Use these pages for the full operational meaning behind the controls:
+
+- [Planning Modes Overview](planning-modes/index.md)
+- [EAT:LT Landing Timeline Planning](planning-modes/eat-lt.md)
+- [EAT:AR Arrival Rate Fallback Planning](planning-modes/eat-ar.md)
+- [Feeder View vs Runway View](planning-modes/views.md)
+
 ## Top buttons
 
 - `EAT` or `PLT`: changes what the compact combi field shows in the aircraft rows. It is a local display toggle and does not change the shared sequence logic.
 - `TXE*` or `TXE-`: controls whether EAT-related policy is transmitted when you are the manual FMR. In normal operations, only the manual FMR can change this.
 - `EAT:AR`, `EAT:LT`, and sometimes `EAT:TF`: selects the planning basis used for EAT.
-  - `EAT:AR` means via-fix or arrival-rate based planning
-  - `EAT:LT` means landing-timeline based planning
-  - `EAT:TF` means target-fix based planning when that mode is present
   - `EAT:LT` is the recommended modern operating mode
+  - `EAT:AR` is the rougher fallback method
+  - `EAT:TF` is a separate target-fix mode when present
 - `ETA:ES` or `ETA:ALB`: selects whether the ETA basis follows EuroScope or the ALB calculation.
 - `HLS*` or `HLS-`: controls whether hold EAT stays synchronized with the holding list. Right-clicking this button opens a reset menu for HOLD_EAT overrides. Turning `HLS` off clears the current HOLD_EAT override influence and returns hold EAT handling to the automatic ALB calculation path.
 - `FPC*` or `FPC-`: toggles fix-passage correction, which lets ALB correct downstream planning after actual fix passage.
@@ -20,25 +26,12 @@ This page is the quick reference for the controls across the top of the ALB wind
 
 - `EAT` or `PLT` is local display only
 - `TXE` is restricted to the manual FMR
+- `Layout`, `Timelines`, and via-fix visibility are local display controls
 - `EAT`, `ETA`, `HLS`, `FPC`, and `HLW` are shared-planning controls and should normally be changed by the controller currently responsible for the shared plan
+- `PLR` is a shared planning control
+- `AR` is a shared planning control when the older `EAT:AR` method is being used
 
 See [Collaboration & FMR](collaboration-fmr.md) for the authority rules behind that.
-
-## EAT:AR versus EAT:LT
-
-`EAT:AR` is the simpler fallback method.
-
-- it uses per-via-fix release spacing as the active planning driver
-- it often requires the FMR to keep watching and tweaking AR values
-- it gives a rougher flow picture than LT
-
-`EAT:LT` is the preferred current method.
-
-- it plans against the landing timeline
-- it gives ALB a stronger picture of the runway-side sequence
-- the FMR mainly monitors conformance and corrects aircraft that do not follow the expected order
-
-In `EAT:LT`, AR is not the active planning driver. Visible AR values are legacy/context information, and AR adjustment is not the normal control method.
 
 ## ETA and ELT naming
 
@@ -69,9 +62,11 @@ Chooses which timeline definitions are active.
 
 Lets you focus on the streams you care about.
 
-- In some layouts, deselected streams are dimmed
-- In other layouts, deselected streams may be hidden
-- The exact behavior depends on the selected layout
+- In some layouts, deselected streams remain visible but are dimmed
+- In other layouts, deselected streams are hidden entirely
+- The exact behavior depends on the selected layout and its `hideDeselectedViaFixes` setting
+
+See [Feeder View vs Runway View](planning-modes/views.md) for what that means operationally.
 
 ![ALB Dropdown ViaFixes](../img/ALB-Popup-ViaFixes.png)
 
@@ -102,6 +97,8 @@ Changes how each aircraft row is displayed.
 - A layout can make ALB feel feeder-oriented or runway-oriented
 - The available choices depend on the loaded config
 
+See [Feeder View vs Runway View](planning-modes/views.md) for how layout changes the meaning of ordering and sequence actions.
+
 ![ALB Dropdown Layout](../img/ALB-Popup-Layout.png)
 
 ## Stats-area click actions
@@ -110,3 +107,5 @@ Changes how each aircraft row is displayed.
 - `AR`: left-click decreases the stream interval by 1 minute. Right-click increases it by 1.
 
 In `EAT:LT`, AR is not the active planning driver. Visible AR values are legacy/context information, and AR adjustment is not the normal control method.
+
+For the operational difference between `PLR` and `AR`, see [EAT:LT Landing Timeline Planning](planning-modes/eat-lt.md) and [EAT:AR Arrival Rate Fallback Planning](planning-modes/eat-ar.md).

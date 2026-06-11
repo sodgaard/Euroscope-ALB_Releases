@@ -1,6 +1,6 @@
-# Technical Overview
+# Developer / Internals Overview
 
-This section is for maintainers, not day-to-day operators.
+This section is for maintainers, not day-to-day operators and not ordinary config/customization users.
 
 It documents how the public documentation and release repo relates to the ALB codebase, and where to find the main collaboration and sequencing rules that shape the user-facing behavior.
 
@@ -26,6 +26,8 @@ In practice:
 ## Intent
 
 The operator pages should answer "what do I click and why?".
+
+The configuration pages should answer "which JSON block do I edit?".
 
 The technical pages should answer:
 

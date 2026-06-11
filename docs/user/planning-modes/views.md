@@ -1,0 +1,39 @@
+# Feeder View vs Runway View
+
+## Why there are two views
+
+- Feeder view is centered on via-fix streams.
+- Runway view is centered on the runway and landing sequence.
+- Both can show overlapping aircraft data, but the operational meaning of ordering and actions differs.
+
+## Side-by-side table
+
+| Topic | Feeder View | Runway View |
+|---|---|---|
+| Main question answered | How is each via-fix stream flowing? | What is the landing order and timeline? |
+| Natural planning mode | AR/fallback and stream monitoring | LT/main landing planning |
+| Ordering focus | Aircraft grouped and ordered by via-fix stream | Aircraft ordered by the global landing sequence |
+| Via-fix deselection | Hides or dims that via-fix stream depending on layout/config | Filters visibility or context, but does not mean the global landing sequence stops existing |
+| `Advance 1` effect | Moves relative to the previous eligible aircraft in that via-fix stream | Moves relative to the previous eligible aircraft in the global landing sequence |
+| `Resequence` effect | Releases the aircraft back into normal stream planning | Releases the aircraft back into normal landing timeline planning |
+| Best use | Monitoring feeder and via-fix balance | Managing the planned runway and landing sequence |
+
+## Via-fix menu behaviour
+
+- In layouts with `hideDeselectedViaFixes: true`, deselected via-fix aircraft are hidden from that layout.
+- In layouts without that setting, deselected via-fix aircraft remain visible but are dimmed.
+- This is a display-only layout behavior. It does not change sequencing policy, EAT mode, ETA mode, or FMR authority.
+- In feeder layouts, deselection is primarily a stream visibility tool.
+- In runway layouts, deselection is still a display/filtering aid. The runway and landing sequence remain global even if one stream is hidden in that layout.
+
+## Advance 1 difference
+
+- In feeder view, `Advance 1` is stream-relative.
+- In runway view, `Advance 1` is landing-sequence-relative and global.
+- This same distinction is repeated on [Aircraft Actions](../aircraft-actions.md).
+
+## Recommended use
+
+- For current normal operations, use `EAT:LT` with runway and landing-timeline awareness as the main planning method.
+- Use feeder view to understand or troubleshoot via-fix stream balance.
+- Use `EAT:AR` mainly as fallback or rough flow management.

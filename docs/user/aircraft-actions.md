@@ -2,6 +2,8 @@
 
 ALB aircraft rows support both selection and a right-click action menu.
 
+The effect of sequence actions depends on whether the current layout is feeder-oriented or runway-oriented. See [Feeder View vs Runway View](planning-modes/views.md) for the high-level planning picture.
+
 ## Left-click
 
 Left-clicking an aircraft row selects that aircraft in ALB. In normal live use this also follows EuroScope selection behavior, which makes the row useful as a quick bridge to other controller actions outside ALB.
@@ -28,6 +30,11 @@ In runway layout:
 - it swaps with the previous eligible aircraft in the airport-wide landing sequence
 - ALB then rebuilds landing-timeline products behind the swap point
 
+That difference is important:
+
+- in feeder view, `Advance 1` is stream-relative
+- in runway view, `Advance 1` is global and landing-sequence-relative
+
 `Advance 1` is only available when ALB can see a valid previous aircraft to swap with and the aircraft is already in a sequenced, locked, or frozen part of the plan.
 
 ## Resequence
@@ -39,6 +46,11 @@ It clears old fixed sequence and timing baggage for that aircraft, then lets the
 `release this aircraft back into ALB's normal planning logic`
 
 Use it when an aircraft no longer belongs where ALB had previously pinned it.
+
+Operationally, `Resequence` returns the aircraft to the current planning logic of the active view:
+
+- stream-oriented re-placement in feeder/AR-style work
+- landing-timeline re-placement in runway/LT-style work
 
 ## Clear manual EAT
 

@@ -1,4 +1,4 @@
-# Example config file:
+# Sample Config File
 
 Note: this sample preserves legacy `ArrivalScenarios` blocks because existing configs may still contain them. They are retired from normal operation and should not be read as the recommended current workflow.
 

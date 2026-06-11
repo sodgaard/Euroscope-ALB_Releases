@@ -18,6 +18,8 @@ Current ALB use is centered on `EAT:LT`.
 - `EAT:AR` remains available as a rougher fallback method
 - the FMR normally monitors conformance to the landing timeline and corrects aircraft that drift away from the expected order
 
+Start with [Planning Modes Overview](planning-modes/index.md), then read [EAT:LT Landing Timeline Planning](planning-modes/eat-lt.md).
+
 ## What you will usually do in ALB
 
 - Select the relevant `Timeline`
@@ -41,4 +43,4 @@ When several ALB instances watch the same airport, one instance may act as **FMR
 - Local controller judgement still takes priority over the display.
 - Some figures are based on live EuroScope routing and timing inputs, so they should be read as planning support rather than exact prediction.
 
-Next: [Quick Intro](quick-intro.md) and [Interface](interface.md)
+Next: [Planning Modes Overview](planning-modes/index.md), [Feeder View vs Runway View](planning-modes/views.md), and [Interface](interface.md)

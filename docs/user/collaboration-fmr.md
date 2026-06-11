@@ -11,7 +11,7 @@ For a given destination ICAO, the FMR is the ALB instance that should be treated
 That normally includes:
 
 - planned landing rate
-- via-fix arrival rates
+- via-fix arrival rates when the older `EAT:AR` fallback method is being used
 - shared EAT mode
 - shared ETA source
 - hold/EAT policy controls such as `HLS`, `FPC`, and `HLW`

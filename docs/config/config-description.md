@@ -1,4 +1,4 @@
-# Config File Description
+# Config File Reference
 
 This page documents the public and advanced-user configuration surface for
 `alb-config.json`.

@@ -56,8 +56,10 @@ The timeline rows are the operational center of ALB.
 - When possible, that selection follows EuroScope ASEL behavior
 - If you select an aircraft elsewhere and it is relevant to the active timelines, ALB can highlight it in the list
 - Right-click an aircraft row to open the aircraft action menu
+- Whether ordering and sequence actions are stream-relative or global depends on the current feeder or runway layout
 
 See [Aircraft Actions](aircraft-actions.md) for the right-click behavior.
+See [Feeder View vs Runway View](planning-modes/views.md) for the layout-specific meaning.
 
 ## ELT and ETA in the display
 
@@ -75,5 +77,7 @@ The lower information area is used for ALB status text. It is where mode and com
 
 ## Next pages
 
+- [Planning Modes Overview](planning-modes/index.md)
+- [Feeder View vs Runway View](planning-modes/views.md)
 - [Buttons & Menus](buttons-and-menus.md)
 - [Aircraft Actions](aircraft-actions.md)
