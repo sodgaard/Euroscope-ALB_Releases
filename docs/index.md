@@ -1,8 +1,8 @@
 # Arrival Load Balancer (ALB)
 
-ALB is an arrival-planning tool for EuroScope. It helps controllers build a shared picture of inbound traffic, watch via-fix streams and landing sequence development, and coordinate timing or sequence corrections before aircraft reach the runway.
+ALB is an arrival-planning tool for EuroScope. It helps controllers have a shared picture of inbound traffic and flow, monitor via-fix streams (STARs) and landing sequence development, and coordinate timing or sequence corrections before aircraft reach the runway.
 
-In practice, ALB sits between the raw live EuroScope picture and the controller's operational plan. It is not a separation tool on its own. It is a planning and coordination aid for live positions, team sessions, and event-style arrival management.
+In practice, ALB sits between the raw live EuroScope picture and the controller's and FMRs operational plan. It is not a separation tool on its own. It is a planning and coordination aid for live positions, team sessions, and event-style arrival management.
 
 ![ALB main window](img/Full-screenshot-ESandALB.png)
 
