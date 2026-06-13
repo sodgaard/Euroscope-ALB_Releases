@@ -20,9 +20,9 @@ Before going deeper into the site, it helps to know the main ALB planning terms:
 Two planning modes matter most in normal use:
 
 - `EAT:LT` is the preferred modern method and plans against the landing timeline
-  - `PLR` Planned Landing Rate (aircraft per hour) - is the rate per airport ALB uses to separate aircraft.
+    - `PLR` Planned Landing Rate (aircraft per hour) - is the rate per airport ALB uses to separate aircraft.
 - `EAT:AR` is the older rough fallback method and plans more directly by via-fix arrival spacing
-  - `AR` Arrival Rate - is the rate (minuts separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
+    - `AR` Arrival Rate - is the rate (minuts separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
 
 Two estimate branches also matter:
 
