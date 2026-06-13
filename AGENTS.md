@@ -39,6 +39,21 @@ When updating documentation here:
 - treat this repo as the public explanation layer for what the source repo
   currently does
 
+## Conceptual Model To Preserve
+
+Keep these distinctions explicit and consistent in the public docs:
+
+- **Feeder** versus **Runway** is a view and operational-role distinction
+- it reflects the picture the controller wants, such as upstream or area
+  feeding context versus TMA or runway-side context
+- it is independent of `EAT:AR` versus `EAT:LT`
+- `EAT:AR` versus `EAT:LT` is an engine or planning-mode distinction
+- `EAT:LT` is the preferred modern method in normal operation
+- `EAT:AR` is the older rough fallback method
+
+Do not describe feeder view as "the AR view" or runway view as "the LT view".
+If a page discusses both concepts, explain them separately.
+
 ## Documentation Audience
 
 The documentation site is primarily for:

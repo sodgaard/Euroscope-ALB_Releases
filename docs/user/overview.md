@@ -10,6 +10,8 @@ ALB is an arrival-planning tool for EuroScope. In controller language, it gives 
 - Coordinating hold-related EAT work for aircraft already established in hold
 - Sharing one plan between multiple ALB users working the same destination airport
 
+Feeder versus runway view is a display and operational-role choice. It is separate from `EAT:AR` versus `EAT:LT`.
+
 ## Recommended modern use
 
 Current ALB use is centered on `EAT:LT`.

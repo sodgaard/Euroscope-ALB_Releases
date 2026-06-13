@@ -49,8 +49,8 @@ Use it when an aircraft no longer belongs where ALB had previously pinned it.
 
 Operationally, `Resequence` returns the aircraft to the current planning logic of the active view:
 
-- stream-oriented re-placement in feeder/AR-style work
-- landing-timeline re-placement in runway/LT-style work
+- stream-oriented re-placement in feeder view
+- landing-sequence-oriented re-placement in runway view
 
 ## Clear manual EAT
 

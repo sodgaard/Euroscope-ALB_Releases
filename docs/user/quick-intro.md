@@ -8,6 +8,7 @@ In one or two minutes, the important picture is this:
 - one ALB instance normally acts as the **FMR** for a destination airport and shares planning decisions to peers
 - the recommended modern method is `EAT:LT`, where ALB plans against the landing timeline and the FMR monitors conformance
 - `EAT:AR` is still available as a rougher fallback method based on via-fix release spacing
+- feeder versus runway view is a separate display and operational-role choice, not an `EAT:` mode choice
 
 ALB does not fly aircraft or replace controller judgement.
 
