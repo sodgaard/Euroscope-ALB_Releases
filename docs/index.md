@@ -10,7 +10,7 @@ In practice, ALB sits between the raw live EuroScope picture and the controller'
 
 ## Core ideas
 
-Before going deeper into the site, it helps to know the main ALB concepts:
+Before going deeper into the site, it helps to know the main ALB planning terms:
 
 - `EVTO`: the estimated time over the relevant via-fix or inbound gate point
 - `EAT`: the estimated arrival time used for flow and sequencing coordination
@@ -20,7 +20,9 @@ Before going deeper into the site, it helps to know the main ALB concepts:
 Two planning modes matter most in normal use:
 
 - `EAT:LT` is the preferred modern method and plans against the landing timeline
+  - `PLR` Planned Landing Rate (aircraft per hour) - is the rate per airport ALB uses to separate aircraft.
 - `EAT:AR` is the older rough fallback method and plans more directly by via-fix arrival spacing
+  - `AR` Arrival Rate - is the rate (minuts separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
 
 Two estimate branches also matter:
 
