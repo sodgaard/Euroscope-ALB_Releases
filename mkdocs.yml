@@ -33,6 +33,7 @@ nav:
       - Workflows: user/workflows.md
       - Collaboration & FMR: user/collaboration-fmr.md
       - Legend & Status: msgs/legend-status.md
+      - OBS Notes: msgs/obs-notes.md
       - EAT Coordination: msgs/eat_detailing.md
       - Retired:
           - Scenarios: user/retired/scenarios.md

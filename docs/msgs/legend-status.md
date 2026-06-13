@@ -33,6 +33,8 @@ If the hold phase column is blank, the aircraft is not currently treated as hold
 - `OBS`: observation or warning slot in the selected layout
 - Orange timing: ALB's configured route or STAR-based track-mile timing model used as part of the `ELT-ALB` or `ETA:ALB` estimate before terminal live estimates take over
 
+For the current OBS note set and how to resolve the common ones, see [OBS Notes](obs-notes.md).
+
 ## Peer and status indicators
 
 - `Peers(n)`: number of currently online ALB peers shown for the active airports
