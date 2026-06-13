@@ -8,6 +8,31 @@ In practice, ALB sits between the raw live EuroScope picture and the controller'
 
 [Open full size](img/Full-screenshot-ESandALB.png)
 
+## Core ideas
+
+Before going deeper into the site, it helps to know the main ALB concepts:
+
+- `EVTO`: the estimated time over the relevant via-fix or inbound gate point
+- `EAT`: the estimated arrival time used for flow and sequencing coordination
+- `ELT`: the estimated landing time branch
+- `PLT`: the planned landing time in the current ALB plan
+
+Two planning modes matter most in normal use:
+
+- `EAT:LT` is the preferred modern method and plans against the landing timeline
+- `EAT:AR` is the older rough fallback method and plans more directly by via-fix arrival spacing
+
+Two estimate branches also matter:
+
+- `ETA:ES` or `ELT-ES` follows the live EuroScope-style estimate branch
+- `ETA:ALB` or `ELT-ALB` follows ALB's own corrected estimate branch when that branch is useful
+
+In shared use, one controller may act as **FMR**:
+
+- **Flow Management Responsible**
+- the controller who is treated as the authority for the shared arrival plan for a destination airport
+- the person who normally owns the main planning choices, sequence interventions, and shared timing policy
+
 This documentation is meant to help with three slightly different kinds of work:
 
 - **Operational Guide** for controllers using ALB during a session
