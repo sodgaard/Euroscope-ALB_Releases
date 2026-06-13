@@ -1,12 +1,18 @@
 # Arrival Load Balancer (ALB)
 
-This site is split into three lanes:
+ALB is an arrival-planning tool for EuroScope. It helps controllers build a shared picture of inbound traffic, watch via-fix streams and landing sequence development, and coordinate timing or sequence corrections before aircraft reach the runway.
+
+In practice, ALB sits between the raw live EuroScope picture and the controller's operational plan. It is not a separation tool on its own. It is a planning and coordination aid for live positions, team sessions, and event-style arrival management.
+
+![ALB main window](img/Full-screenshot-ESandALB.png)
+
+[Open full size](img/Full-screenshot-ESandALB.png)
+
+This documentation is meant to help with three slightly different kinds of work:
 
 - **Operational Guide** for controllers using ALB during a session
 - **Configuration & Customization** for users editing `alb-config.json`, layouts, timelines, and airport setup
 - **Developer / Internals** for maintainers working across the ALB code, release, and documentation repos
-
-ALB helps you keep an arrival picture, coordinate via-fix and landing planning, and share that plan with other ALB users for the same destination airport.
 
 The installed package uses a small loader/runtime split:
 
@@ -64,7 +70,3 @@ EuroScope should load `ALB.dll`.
 - [Troubleshooting](other/troubleshooting.md)
 - [Release Notes](other/release-notes.md)
 - [Discord](https://discord.gg/CH4N7WbT){target="_blank" rel="noopener"}
-
-![ALB main window](img/Full-screenshot-ESandALB.png)
-
-[Open full size](img/Full-screenshot-ESandALB.png)
