@@ -71,8 +71,10 @@
 
 ## Feeder and Runway effects in LT
 
+- `EAT:LT` can be used in both feeder and runway views.
 - In runway view, the sequence and action context is the global landing sequence.
 - In feeder view, the display can still be stream-oriented even while LT remains the selected planning mode.
+- The view choice is about operational role and display context, not about whether the engine mode is `AR` or `LT`.
 - See [Feeder View vs Runway View](views.md) for the exact difference in ordering, deselection, and aircraft actions.
 
 ## When to intervene

@@ -7,8 +7,9 @@
     "\\docs\\img",
     "\\docs\\msgs",
     "\\docs\\other",
-    "\\docs\\user"
+    "\\docs\\user",
+    "\\docs\\user\\planning-modes"
   ],
-  "SelectedNode": "\\docs\\index.md",
+  "SelectedNode": "\\docs\\user\\planning-modes\\views.md",
   "PreviewInSolutionExplorer": false
 }

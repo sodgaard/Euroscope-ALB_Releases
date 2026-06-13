@@ -41,7 +41,9 @@ The relevant config lives in `tagLayouts.<layout>`:
 Important practical note:
 
 - `timelineLayout` and `hideDeselectedViaFixes` are display behavior
+- feeder versus runway layout is an operational-role or display choice
 - they do not change sequencing policy by themselves
+- they are independent of `EAT:AR` versus `EAT:LT`
 
 ## Via-fix deselection behavior
 

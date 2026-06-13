@@ -17,7 +17,9 @@ ALB currently supports two main sequence worlds:
 - via-fix stream order in feeder-style layouts
 - airport-wide landing order in runway-style layouts
 
-That split is why `Advance 1` has two different implementations, and why `EAT:AR` and `EAT:LT` should be documented separately.
+That split is why `Advance 1` has two different implementations.
+
+The feeder versus runway split is a view and operational-context distinction, not an `EAT:` mode distinction. `EAT:AR` and `EAT:LT` are separate engine or planning-mode concepts and should be documented separately from the view choice.
 
 ## AR versus LT
 

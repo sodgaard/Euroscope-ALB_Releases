@@ -97,6 +97,7 @@ Changes how each aircraft row is displayed.
 
 - Layouts come from config
 - A layout can make ALB feel feeder-oriented or runway-oriented
+- That view choice is independent of `EAT:AR` versus `EAT:LT`
 - The available choices depend on the loaded config
 
 See [Feeder View vs Runway View](planning-modes/views.md) for how layout changes the meaning of ordering and sequence actions.

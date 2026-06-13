@@ -4,6 +4,8 @@
 
 - Feeder view is centered on via-fix streams.
 - Runway view is centered on the runway and landing sequence.
+- In operational terms, feeder view usually matches the area-controller or upstream feeding picture, while runway view usually matches the TMA or runway-side picture.
+- This view choice is independent of `EAT:AR` versus `EAT:LT`.
 - Both can show overlapping aircraft data, but the operational meaning of ordering and actions differs.
 
 ## Side-by-side table
@@ -11,12 +13,12 @@
 | Topic | Feeder View | Runway View |
 |---|---|---|
 | Main question answered | How is each via-fix stream flowing? | What is the landing order and timeline? |
-| Natural planning mode | AR/fallback and stream monitoring | LT/main landing planning |
+| Natural operational fit | Area-controller or upstream feeding picture | TMA or runway-side planning picture |
 | Ordering focus | Aircraft grouped and ordered by via-fix stream | Aircraft ordered by the global landing sequence |
 | Via-fix deselection | Hides or dims that via-fix stream depending on layout/config | Filters visibility or context, but does not mean the global landing sequence stops existing |
 | `Advance 1` effect | Moves relative to the previous eligible aircraft in that via-fix stream | Moves relative to the previous eligible aircraft in the global landing sequence |
 | `Resequence` effect | Releases the aircraft back into normal stream planning | Releases the aircraft back into normal landing timeline planning |
-| Best use | Monitoring feeder and via-fix balance | Managing the planned runway and landing sequence |
+| Best use | Monitoring feeder balance and stream picture | Managing the runway-side landing picture |
 
 ## Via-fix menu behaviour
 
@@ -34,6 +36,8 @@
 
 ## Recommended use
 
-- For current normal operations, use `EAT:LT` with runway and landing-timeline awareness as the main planning method.
+- Choose feeder or runway view according to the operational role and picture you need.
+- That choice is separate from `EAT:AR` versus `EAT:LT`.
+- For current normal operations, `EAT:LT` is still the preferred engine mode.
 - Use feeder view to understand or troubleshoot via-fix stream balance.
-- Use `EAT:AR` mainly as fallback or rough flow management.
+- Use runway view when the landing-order picture is the more important one to manage.

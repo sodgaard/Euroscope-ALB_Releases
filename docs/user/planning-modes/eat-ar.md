@@ -68,9 +68,10 @@
 
 ## Feeder and Runway effects in AR
 
-- AR is naturally more stream-oriented than LT.
-- Feeder layouts are the most natural fit for AR/fallback work because they show the stream picture directly.
-- Runway layouts can still be used as a display, but AR remains a rougher planning input than a true landing-timeline method.
+- `EAT:AR` can be used in both feeder and runway views.
+- Feeder view is often useful when you want the upstream or area-controller stream picture directly.
+- Runway view is often useful when you still want to read the traffic against the runway-side picture while the engine mode remains `EAT:AR`.
+- The view choice is about operational role and display context, not about whether the engine mode is `AR` or `LT`.
 - See [Feeder View vs Runway View](views.md) for the exact difference in ordering, deselection, and aircraft actions.
 
 ## When to intervene

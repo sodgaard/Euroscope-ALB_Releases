@@ -13,18 +13,24 @@ In practice, ALB sits between the raw live EuroScope picture and the controller'
 Before going deeper into the site, it helps to know the main ALB planning terms:
 
 - `EVTO`: the estimated time over the relevant via-fix or inbound gate point
-- `EAT`: the estimated arrival time used for flow and sequencing coordination
+- `EAT`: the estimated arrival time - calculated and used for flow and sequencing coordination
+    - EAT is used for both planning modes as release time over the viaFix (typically STAR holding point)
 - `ELT`: the estimated landing time branch
 - `PLT`: the planned landing time in the current ALB plan
 
-Two planning modes matter most in normal use:
+Two planning modes matter most in normal use, and relate to how the EAT is calculated:
 
 - `EAT:LT` is the preferred modern method and plans against the landing timeline
     - `PLR` Planned Landing Rate (aircraft per hour) - is the rate per airport ALB uses to separate aircraft.
 - `EAT:AR` is the older rough fallback method and plans more directly by via-fix arrival spacing
     - `AR` Arrival Rate - is the rate (minuts separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
 
-Two estimate branches also matter:
+Feeder versus runway view is a separate choice:
+
+- it reflects the operational role and picture you want, such as upstream feeder or area work versus TMA or runway-side work
+- it does not decide whether the engine mode is `EAT:AR` or `EAT:LT`
+
+Two estimate branches also matter and controls the clculation of duration from ViaFix to Landing:
 
 - `ETA:ES` or `ELT-ES` follows the live EuroScope-style estimate branch
 - `ETA:ALB` or `ELT-ALB` follows ALB's own corrected estimate branch when that branch is useful
