@@ -2,11 +2,12 @@
 
 ## Why there are two views
 
-- Feeder view is centered on via-fix streams.
-- Runway view is centered on the runway and landing sequence.
-- In operational terms, feeder view usually matches the area-controller or upstream feeding picture, while runway view usually matches the TMA or runway-side picture.
+- Feeder view is centered on via-fix streams, and is most relevant for Area Controllers not covering the TMA.
+    - In Feeder view the Aircraft is attached to the timeline tape at its calculated EAT.
+- Runway view is centered on the runway and landing sequence, and is most relevant for Controllers covering the TMA.
+    - In Runway view the Aircraft is attached to the timeline tape at its calculated PLT.
 - This view choice is independent of `EAT:AR` versus `EAT:LT`.
-- Both can show overlapping aircraft data, but the operational meaning of ordering and actions differs.
+    - Both can show overlapping aircraft data, but the operational meaning of ordering and actions differs.
 
 ## Side-by-side table
 
@@ -37,6 +38,7 @@
 ## Recommended use
 
 - Choose feeder or runway view according to the operational role and picture you need.
+    - In operational terms, feeder view usually matches the area-controller or upstream feeding picture, while runway view usually matches the TMA or runway-side picture.
 - That choice is separate from `EAT:AR` versus `EAT:LT`.
 - For current normal operations, `EAT:LT` is still the preferred engine mode.
 - Use feeder view to understand or troubleshoot via-fix stream balance.
