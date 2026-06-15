@@ -146,6 +146,11 @@ Scratchpad fallback remains for:
 - legacy peer discovery and compatibility envelopes
 - fallback use of smaller shared command families when backend is unavailable or fallback is active
 
+For runway-sequence peer request or reply handling such as `Advance 1` and
+`Resequence`, the current design should stay aligned with backend-primary
+authority. In other words, the peer request path should not silently invent a
+competing local fallback result while waiting for canonical backend sync.
+
 ## FLOAT note
 
 Stage 5 FLOAT or advisory protocol is not implemented.

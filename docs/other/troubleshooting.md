@@ -33,6 +33,11 @@ suspended and that operational `DEL` remains allowed and rate-limited.
 If passive peer health monitoring is enabled, the status line may also show the
 last warned peer and warning age.
 
+If you are working as a non-FMR peer and use runway `Advance 1` or
+`Resequence`, ALB may also report that the request was sent, accepted and
+waiting for canonical sync, or timed out if the authoritative reply path does
+not complete.
+
 Change seqsync mode with:
 
 ```text

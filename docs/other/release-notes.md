@@ -27,6 +27,8 @@ uploaded as a public ALB release or update package.
 - Added bounded return-to-normal recovery behavior after reduced-sync modes.
 - When a manual FMR is active, non-FMR peers are now blocked from mutating shared `LT`, `PLR`, `AR`, and scenario policy locally.
 - In runway-sequence collaboration, `Advance 1` and `Resequence` now use a request-reply path and wait for canonical backend sync instead of silently applying a competing local result.
+- Tightened peer LT fallback gating so backend-primary runway-sequence handling stays aligned with canonical backend sync.
+- Added timeout handling for pending runway peer `Advance 1` and `Resequence` requests.
 
 ### Technical notes
 
@@ -59,8 +61,8 @@ uploaded as a public ALB release or update package.
 
 - Established the `0.3.x` release line.
 - Introduced the loader/core packaging model:
-- `ALB.dll` as the EuroScope loader
-- `ALBCore.dll` as the runtime core
+  - `ALB.dll` as the EuroScope loader
+  - `ALBCore.dll` as the runtime core
 - Updated public install and release documentation around the new packaging model.
 
 ### Changed

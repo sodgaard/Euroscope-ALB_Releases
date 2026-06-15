@@ -66,3 +66,6 @@ In runway-sequence collaboration, a non-FMR peer may send an `Advance 1` or
 `Resequence` request toward the FMR. If the request is accepted, the local peer
 then waits for canonical backend sync instead of treating its own local click as
 the authoritative result.
+
+If the authoritative reply or canonical sync does not arrive, ALB can time out
+that pending runway request instead of leaving it silently pending forever.
