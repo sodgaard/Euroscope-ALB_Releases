@@ -43,6 +43,28 @@ Use these pages for the detailed planning behavior:
 - In normal modern operation, monitor and correct the `EAT:LT` landing picture rather than continuously tuning AR values.
 - Use hold-related EAT actions only when the aircraft is already in hold and the operational prerequisites are met.
 
+## Backend seqsync operation
+
+Backend seqsync is the backend transport layer that shares canonical
+per-aircraft sequence state from the FMR to peers.
+
+Recommended use:
+
+- use `normal` unless load management or controlled testing requires otherwise
+- use `throttled` if backend or peer load is caused by `SET2` bursts, but all aircraft should remain canonical
+- use `horizon` if far-floating aircraft are creating unnecessary churn and only operationally relevant aircraft need canonical synchronization
+- use `suspend` only as an emergency or deliberately degraded mode when canonical `SET2` TX must stop temporarily
+
+Important limits:
+
+- seqsync commands do not change FMR ownership
+- they do not change `EAT:AR` versus `EAT:LT`
+- they do not change ETA policy, backend transport health, or scratchpad fallback state
+- they do not create peer-owned resequencing
+
+In `suspend`, peers may retain the last backend-owned overlay until recovery
+resync, explicit `DEL`, FMR ownership change, or local reset.
+
 ## Hold / EAT
 
 - Decide whether hold EAT should stay synchronized with the holding list using `HLS*` or `HLS-`.
@@ -94,4 +116,19 @@ Set hold EAT for an aircraft already in hold:
 
 ```text
 .alb seat <Callsign> <HHMM>
+```
+
+Show backend seqsync mode and queue status:
+
+```text
+.alb seqsync status
+```
+
+Change backend seqsync mode:
+
+```text
+.alb seqsync normal
+.alb seqsync throttled
+.alb seqsync horizon
+.alb seqsync suspend
 ```

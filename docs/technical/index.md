@@ -19,9 +19,9 @@ In practice:
 
 - [Architecture](architecture.md): component boundaries and loader/core split
 - [Collaboration Internals](collaboration-internals.md): FMR ownership and shared-plan authority
-- [Sequencing Model](sequencing-model.md): order stability, `Advance 1`, and `Resequence`
-- [Backend Transport](backend-transport.md): backend-primary versus scratchpad fallback
-- [Playback & Recording](playback-recording.md): recording artifacts and replay-related design
+- [Sequencing Model](sequencing-model.md): order stability, `Advance 1`, `Resequence`, and the seqsync boundary
+- [Backend Transport](backend-transport.md): backend-primary versus scratchpad fallback and backend seqsync transport modes
+- [Playback & Recording](playback-recording.md): recording artifacts, PERF summary lines, and validation direction
 
 ## Intent
 

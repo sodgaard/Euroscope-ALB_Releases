@@ -45,3 +45,15 @@ The `Peers` menu is informational. It gives the user a compact view of connected
 ## Backend-shadow display owner
 
 When backend-primary collaboration is healthy, the displayed FMR owner can be mirrored from backend authority state rather than from legacy scratchpad FMR claim traffic. This keeps the user-facing FMR view aligned with the transport path that is actually in charge.
+
+## Seqsync authority boundary
+
+Backend sequence synchronization does not change who owns the shared plan.
+
+- the FMR remains the authority for canonical per-aircraft sequence state
+- peers mirror that backend-owned canonical state
+- seqsync mode commands such as `.alb seqsync throttled` or `.alb seqsync horizon` change only transport behavior for canonical sequence traffic
+- they do not change FMR ownership, shared policy authority, EAT mode, backend health, or scratchpad fallback state
+
+That distinction matters because ALB is trying to reduce transport churn
+without introducing peer-owned resequencing.

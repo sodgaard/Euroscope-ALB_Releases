@@ -4,7 +4,7 @@ ALB has a small number of major runtime pieces.
 
 ## Main modules
 
-- `AlbPlugIn`: EuroScope entry point, timers, state orchestration, and policy helpers
+- `AlbPlugIn`: EuroScope entry point, timers, state orchestration, policy helpers, and backend seqsync mode or queue handling
 - controller and model objects: maintain active timelines and derived planning state
 - `AlbTimelineView`: renders the timeline, stats block, labels, and hit targets
 - `AlbIntercom`: collaboration, peer presence, and FMR-related transport behavior
@@ -31,6 +31,18 @@ At a high level, ALB does four things repeatedly:
 2. Build or update timeline and statistics state
 3. Apply sequencing and planning rules
 4. Render the result and synchronize shared state with peers when needed
+
+## Backend seqsync layer
+
+Within that flow, backend sequence synchronization is the transport layer that
+ships canonical per-aircraft sequence state from the authoritative FMR to peer
+ALB instances.
+
+The important architectural split is:
+
+- sequencing logic decides the local canonical state
+- backend seqsync decides whether that canonical state is sent immediately, queued, horizon-suppressed, or suspended
+- peer apply logic mirrors canonical backend state without becoming a second independent sequencing engine
 
 ## UI-to-model connection
 

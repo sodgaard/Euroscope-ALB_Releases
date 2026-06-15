@@ -139,3 +139,16 @@ When documenting or changing ALB, keep this invariant intact:
 
 - automatic live data may refine the plan
 - only explicit operational actions should deliberately reorder the plan
+
+## Backend seqsync boundary
+
+Backend seqsync load-management sits after the sequencing decision, not inside
+the sequencing algorithm itself.
+
+- AR and LT logic still decide the local canonical sequence picture
+- seqsync modes decide how that canonical result is transmitted to peers
+- `horizon` can suppress far-floating aircraft from canonical backend sync without changing the local AR or LT calculation
+- `suspend` suppresses canonical `SET2` TX without stopping local AR or LT calculations
+
+That is why the documentation treats seqsync as backend transport behavior
+rather than as a new planning mode.

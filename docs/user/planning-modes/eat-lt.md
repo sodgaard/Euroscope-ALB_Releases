@@ -83,3 +83,12 @@
 - Intervene when aircraft are not following ALB's planned sequence or when an operational trigger makes the plan wrong.
 - Use `Advance 1` for a one-position correction.
 - Use `Resequence` to release old fixed/timing baggage and let ALB place the aircraft again under the current plan.
+
+## Backend seqsync boundary
+
+Backend seqsync modes do not change the LT algorithm itself.
+
+- local LT ordering, gap-fill, PLT, and correction logic stay the same
+- `throttled` and `horizon` affect how canonical backend sequence state is shared with peers
+- `horizon` may suppress far-floating LT candidates from canonical backend sync while keeping operationally relevant or uncertain traffic canonical
+- `suspend` suppresses canonical `SET2` TX, but local LT calculations continue

@@ -80,6 +80,7 @@ top-level settings, the runtime reads only the exact expected key name.
 | `housekeeping` | object | defaults below | Startup housekeeping settings for ALB logs and backend recording folders. |
 | `soundMute` | object | all `false` | Startup mute state for ALB sounds. |
 | `layout` | object | defaults below | EAT display precision/suffix formatting settings. |
+| `backendSeqSync` | object | defaults below | Backend sequence synchronization transport mode and TX-budget settings. |
 | `glEatCombiDisplay` | object | defaults below | Optional display mapping for the combined `glEatCombi` field. |
 | `timelines` | object | required | Timeline definitions. |
 | `tagLayouts` | object | required | Tag layout definitions. |
@@ -177,6 +178,54 @@ across each minute. With the default suffix characters this behaves roughly as:
 - `0` = automatic
 - automatic means `15` seconds when precision is `15`
 - automatic means `1` second when precision is `60`
+
+## Backend SeqSync
+
+`backendSeqSync` controls backend sequence synchronization load-management.
+
+This block affects how ALB sends canonical backend sequence state to peers. It
+does not change FMR ownership, `EAT:AR` versus `EAT:LT`, scratchpad fallback,
+or the local sequencing algorithms themselves.
+
+Example:
+
+```json
+"backendSeqSync": {
+  "mode": "normal",
+  "txMaxSet2PerSecond": 10,
+  "txMaxSet2PerPoll": 10,
+  "txQueueMaxAgeSec": 30,
+  "authorityLeadMinutes": 10
+}
+```
+
+Accepted mode values:
+
+- `normal`
+- `throttled`
+- `horizon`
+- `suspend`
+
+Fallback behavior:
+
+- missing `mode` falls back to `normal`
+- malformed or unknown `mode` falls back to `normal`
+
+| Property | Type | Default | Accepted range or values | Description |
+|---|---:|---:|---|---|
+| `mode` | string | `normal` | `normal`, `throttled`, `horizon`, `suspend` | Backend seqsync transport mode. `normal` is immediate in steady state. |
+| `txMaxSet2PerSecond` | int | `10` | `1-200` | Per-second budget for queued canonical `SET2` transmission. Used by `throttled`, `horizon`, `suspend` recovery, and temporary normal recovery drain. |
+| `txMaxSet2PerPoll` | int | `10` | `1-200` | Per-poll budget for queued canonical `SET2` transmission. Used by the same queued or recovery paths as above. |
+| `txQueueMaxAgeSec` | int | `30` | `1-600` | Queue age budget for backend seqsync queue handling. |
+| `authorityLeadMinutes` | int | `10` | `1-60` | Horizon relevance window in minutes. Used by `horizon` to distinguish near-horizon traffic from far-floating traffic. |
+
+Operational notes:
+
+- `normal` is immediate in steady state
+- `throttled`, `horizon`, `suspend`, and temporary recovery drain use the TX queue budgets
+- `horizon` may suppress far-floating canonical candidates while keeping operationally relevant or uncertain aircraft canonical
+- `suspend` suppresses normal canonical `SET2` TX, but operational `DEL` remains allowed and bounded
+- returning from `throttled` or `horizon` to `normal` uses temporary bounded recovery drain until inherited queue backlog is empty
 
 ## `glEatCombiDisplay`
 

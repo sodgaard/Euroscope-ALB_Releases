@@ -67,4 +67,10 @@ Peers should normally not:
 
 From an operator point of view, ALB shares planning state with peers automatically when network and backend conditions allow. The normal intent is that all peers reproduce the same operational picture without you needing to manage message details yourself.
 
+That includes canonical backend sequence state.
+
+- the FMR sends the authoritative backend sequence picture
+- peers mirror that picture instead of inventing competing committed sequence changes
+- backend seqsync load-management modes change how canonical sequence traffic is transmitted, not who owns the shared plan
+
 For the transport and authority mechanics behind that, see [Collaboration Internals](../technical/collaboration-internals.md) and [Backend Transport](../technical/backend-transport.md).

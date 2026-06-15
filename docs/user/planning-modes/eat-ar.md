@@ -79,3 +79,12 @@
 - Tune `AR` when stream spacing is wrong.
 - Use `Advance 1` for a one-position sequence correction.
 - Use `Resequence` when ALB should place an aircraft again under the current AR logic.
+
+## Backend seqsync boundary
+
+Backend seqsync modes do not change the AR algorithm itself.
+
+- local AR calculation and release logic stay the same
+- `throttled` and `horizon` affect how canonical backend sequence state is shared with peers
+- `horizon` may suppress far-floating AR candidates from canonical backend sync
+- `suspend` suppresses canonical `SET2` TX, but local AR calculations continue
