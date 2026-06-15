@@ -1,55 +1,67 @@
 # Release Notes
 
+These notes summarize release highlights. They are not a complete commit log.
+
 For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-## Current release line
+## Unreleased - target 0.3.1C
 
-The current release pointer in this repository is:
+This version exists in the development source tree but has not yet been
+uploaded as a public ALB release or update package.
 
-- `0.3.0`
+### Added
 
-This release line reflects the current public packaging model:
+- Added backend sequence synchronization load-management work through Stage 4.1.
+- Added diagnostics-only instrumentation for backend `SEQ/SET2` synchronization.
+- Added `HORIZON` seqsync mode.
+- Added seqsync status and diagnostic visibility for reduced-sync operation.
 
-- `ALB.dll` is the EuroScope-facing loader
-- `ALBCore.dll` is the runtime plugin
-- EuroScope should load `ALB.dll`
-- the loader may update `ALBCore.dll`
-- the loader may refresh `alb-config.default.json`
-- the loader must not overwrite live `alb-config.json`
+### Changed
 
-## What changed in the current packaging model
+- Backend sequence synchronization can now reduce traffic under load while preserving backend canonical sequence authority.
+- Added bounded overlay-clear `DEL` handling.
+- Added bounded return-to-normal recovery behavior after reduced-sync modes.
 
-Compared with older ALB installs, the most important public-facing changes are:
+### Technical notes
 
-- ALB now uses a loader/core split instead of a single DLL expectation
-- install guidance is based on `ALB.dll` plus `ALBCore.dll`
-- release/update behavior is tied to the release repo and its version pointer
-- the live operational config is preserved during loader updates
+- Canonical per-aircraft sequence state remains backend-only.
+- `FLOAT` remains parked and is not part of this target release.
+- Runtime validation is still pending.
+- This work does not intentionally alter the `EAT:LT` or `EAT:AR` sequencing algorithms.
 
-## Documentation update: backend seqsync load-management
+## 0.3.1B
 
-Updated June 15, 2026.
+### Added
 
-The current documentation now reflects backend sequence synchronization
-load-management through Stage 4.1:
+- Added backend poll sub-phase performance breakdown.
+- Added backend poll timing and backlog visibility to performance reporting.
 
-- added `throttled`, `horizon`, and `suspend` seqsync mode coverage alongside the default `normal` mode
-- documented bounded recovery when returning to `normal`
-- documented `.alb seqsync status` and seqsync mode commands
-- documented `backendSeqSync` config knobs and clamps
-- documented PERF summary lines for queueing, horizon suppression, suspend behavior, and bounded normal recovery
+### Changed
 
-Important boundaries remain unchanged:
+- Improved diagnosis of backend-dominated timer spikes and performance pauses.
 
-- canonical sequence state stays backend-only
-- no peer-owned resequencing was introduced
-- `EAT:AR` and `EAT:LT` algorithms are unchanged by seqsync load-management
-- Stage 5 FLOAT or advisory protocol is not implemented
+## 0.3.1A
 
-Implementation build validation succeeded in the implementation thread. Live
-EuroScope runtime or performance validation is still pending.
+### Changed
+
+- Adjusted perftest reporting.
+- Refined live ALB policy button authority so active non-observer peers may control shared live policy when no manual FMR is present, while manual FMR ownership remains exclusive when active.
+
+## 0.3.0
+
+### Added
+
+- Established the `0.3.x` release line.
+- Introduced the loader/core packaging model:
+  - `ALB.dll` as the EuroScope loader
+  - `ALBCore.dll` as the runtime core
+- Updated public install and release documentation around the new packaging model.
+
+### Changed
+
+- Set the source version and minimum protocol floor to `0.3.0`.
 
 ## Notes for users
 
@@ -57,6 +69,16 @@ If you are updating from an older ALB installation:
 
 - make sure EuroScope loads `ALB.dll`, not `ALBCore.dll`
 - keep `alb-config.json` as your live config
-- treat `alb-config.default.json` as a template/default file
+- treat `alb-config.default.json` as a template or default file
 
 For installation details, see [Download & Install](../download-install.md).
+
+## Maintainer note
+
+The `0.3.x` release tags may not line up cleanly with the release-version
+pointer history. For future release-note maintenance, prefer:
+
+1. `alb-plugin-release-version.txt` history in `Euroscope-ALB_Releases`
+2. `MY_PLUGIN_VERSION` history in `ES-ArrivalLoadBallance`
+3. commit ranges between those anchors
+4. release tags only after checking what content they actually point to
