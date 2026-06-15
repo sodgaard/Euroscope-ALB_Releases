@@ -52,6 +52,7 @@ Important summary lines include:
 - `BACKEND_SEQ_HORIZON`
 - `BACKEND_SEQ_SUSPEND`
 - `BACKEND_SEQ_NORMAL_RECOVERY`
+- `BACKEND_PEER_HEALTH`
 
 Important field families include:
 
@@ -60,6 +61,7 @@ Important field families include:
 - `backendSeq.suspend.*`
 - `backendSeq.normalRecoveryDrain.*`
 - `backendSeq.rxSet2.*`
+- `backendPeerHealth.*`
 - `backendPoll.*`
 
 High-level reading guide:
@@ -69,6 +71,7 @@ High-level reading guide:
 - Stage 3 counters describe horizon canonical versus suppressed behavior
 - Stage 4 counters describe suspend suppression and resume behavior
 - Stage 4.1 counters describe temporary bounded recovery drain when returning to `normal`
+- Stage 4.2 counters describe passive peer update-cycle health monitoring and warning or recovery events
 
 ## Runtime validation pending
 

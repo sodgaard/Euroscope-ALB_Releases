@@ -17,12 +17,16 @@ uploaded as a public ALB release or update package.
 - Added diagnostics-only instrumentation for backend `SEQ/SET2` synchronization.
 - Added `HORIZON` seqsync mode.
 - Added seqsync status and diagnostic visibility for reduced-sync operation.
+- Added passive peer update-cycle health monitoring.
+- Added backend-only peer health warnings for the FMR when a peer appears slow to apply shared backend updates.
 
 ### Changed
 
 - Backend sequence synchronization can now reduce traffic under load while preserving backend canonical sequence authority.
 - Added bounded overlay-clear `DEL` handling.
 - Added bounded return-to-normal recovery behavior after reduced-sync modes.
+- When a manual FMR is active, non-FMR peers are now blocked from mutating shared `LT`, `PLR`, `AR`, and scenario policy locally.
+- In runway-sequence collaboration, `Advance 1` and `Resequence` now use a request-reply path and wait for canonical backend sync instead of silently applying a competing local result.
 
 ### Technical notes
 
@@ -55,8 +59,8 @@ uploaded as a public ALB release or update package.
 
 - Established the `0.3.x` release line.
 - Introduced the loader/core packaging model:
-  - `ALB.dll` as the EuroScope loader
-  - `ALBCore.dll` as the runtime core
+- `ALB.dll` as the EuroScope loader
+- `ALBCore.dll` as the runtime core
 - Updated public install and release documentation around the new packaging model.
 
 ### Changed

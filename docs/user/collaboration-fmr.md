@@ -63,6 +63,17 @@ Peers should normally not:
 - independently apply shared flow changes while a remote FMR is clearly active
 - make competing sequence interventions on the same traffic
 
+When a manual FMR is active, ALB now treats that more strictly for shared
+policy edits:
+
+- non-FMR peers should expect shared `LT`, `PLR`, `AR`, and scenario changes to be ignored locally
+- this is deliberate protection against accidental competing edits while a manual FMR is already in charge
+
+In runway-sequence collaboration, a non-FMR peer can still request actions such
+as `Advance 1` or `Resequence`, but the request is sent toward the authority and
+the peer then waits for canonical backend sync instead of applying a competing
+local result first.
+
 ## How ALB shares state
 
 From an operator point of view, ALB shares planning state with peers automatically when network and backend conditions allow. The normal intent is that all peers reproduce the same operational picture without you needing to manage message details yourself.

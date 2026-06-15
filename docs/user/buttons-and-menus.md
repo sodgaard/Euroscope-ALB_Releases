@@ -31,6 +31,10 @@ Use these pages for the full operational meaning behind the controls:
 - `PLR` is a shared planning control
 - `AR` is a shared planning control when the older `EAT:AR` method is being used
 
+When a manual FMR is active, ALB now enforces that more directly for several
+shared controls. Non-FMR peers should expect shared `PLR`, `AR`, and scenario
+edits to be ignored locally instead of quietly creating a competing plan.
+
 See [Collaboration & FMR](collaboration-fmr.md) for the authority rules behind that.
 
 ## ETA and ELT naming

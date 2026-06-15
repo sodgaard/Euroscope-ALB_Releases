@@ -81,6 +81,7 @@ top-level settings, the runtime reads only the exact expected key name.
 | `soundMute` | object | all `false` | Startup mute state for ALB sounds. |
 | `layout` | object | defaults below | EAT display precision/suffix formatting settings. |
 | `backendSeqSync` | object | defaults below | Backend sequence synchronization transport mode and TX-budget settings. |
+| `backendPeerHealth` | object | defaults below | Passive backend peer update-cycle health monitoring and warning thresholds. |
 | `glEatCombiDisplay` | object | defaults below | Optional display mapping for the combined `glEatCombi` field. |
 | `timelines` | object | required | Timeline definitions. |
 | `tagLayouts` | object | required | Tag layout definitions. |
@@ -226,6 +227,45 @@ Operational notes:
 - `horizon` may suppress far-floating canonical candidates while keeping operationally relevant or uncertain aircraft canonical
 - `suspend` suppresses normal canonical `SET2` TX, but operational `DEL` remains allowed and bounded
 - returning from `throttled` or `horizon` to `normal` uses temporary bounded recovery drain until inherited queue backlog is empty
+
+## Backend Peer Health
+
+`backendPeerHealth` controls passive backend peer update-cycle health
+monitoring.
+
+This is an advanced diagnostic block. It does not change FMR ownership or
+canonical seqsync rules. It helps the FMR detect when a peer appears slow to
+apply shared backend updates and surfaces backend-only warn or recover events.
+
+Example:
+
+```json
+"backendPeerHealth": {
+  "enabled": true,
+  "warnAverageMs": 333,
+  "recoverAverageMs": 200,
+  "windowSec": 30,
+  "consecutiveWarnWindows": 3,
+  "consecutiveRecoverWindows": 2,
+  "repeatWarnCooldownSec": 60
+}
+```
+
+| Property | Type | Default | Accepted range | Description |
+|---|---:|---:|---:|---|
+| `enabled` | bool | `true` | n/a | Enables passive backend peer health monitoring. |
+| `warnAverageMs` | int | `333` | `100-5000` | Average cycle threshold above which ALB starts treating a peer cycle window as slow. |
+| `recoverAverageMs` | int | `200` | `50-warnAverageMs` | Average cycle threshold below which ALB may treat the peer as recovered. |
+| `windowSec` | int | `30` | `10-300` | Measurement window length in seconds. |
+| `consecutiveWarnWindows` | int | `3` | `1-10` | Number of bad windows required before warning. |
+| `consecutiveRecoverWindows` | int | `2` | `1-10` | Number of good windows required before recovery. |
+| `repeatWarnCooldownSec` | int | `60` | `30-600` | Cooldown before repeat warnings may be sent again. |
+
+Operational notes:
+
+- these warnings are passive monitoring, not transport control
+- warnings are backend-only and intended to help the FMR notice slow peer update cycles
+- `.alb seqsync status` can show peer-health summary fields when this monitoring is enabled
 
 ## `glEatCombiDisplay`
 

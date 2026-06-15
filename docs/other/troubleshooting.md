@@ -25,9 +25,13 @@ Useful fields in the status output include:
 - `set2`, `del`, and `hclr` queue counts
 - max queue age
 - queued ICAOs where relevant
+- peer health summary when enabled, such as `peerHealth`, `peerAvgMs`, `peerMaxMs`, `peerWarnedLocal`, and `peerWarnedPeers`
 
 When ALB is in `suspend`, the status line also shows that canonical TX is
 suspended and that operational `DEL` remains allowed and rate-limited.
+
+If passive peer health monitoring is enabled, the status line may also show the
+last warned peer and warning age.
 
 Change seqsync mode with:
 
@@ -50,8 +54,8 @@ For deeper technical inspection, look for PERF summary lines such as:
 
 Relevant field families include `backendSeq.txQueue.*`,
 `backendSeq.horizon.*`, `backendSeq.suspend.*`,
-`backendSeq.normalRecoveryDrain.*`, and backend poll timing fields such as
-`backendPoll.*`.
+`backendSeq.normalRecoveryDrain.*`, `backendPeerHealth.*`, and backend poll
+timing fields such as `backendPoll.*`.
 
 If you are deliberately validating this behavior in a technical session, use:
 

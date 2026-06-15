@@ -61,3 +61,8 @@ In normal live use, this is only available when you are the tracking controller 
 ## Shared-session note
 
 In collaborative use, explicit sequence actions should normally come from the controller who currently owns the shared plan for that airport.
+
+In runway-sequence collaboration, a non-FMR peer may send an `Advance 1` or
+`Resequence` request toward the FMR. If the request is accepted, the local peer
+then waits for canonical backend sync instead of treating its own local click as
+the authoritative result.
