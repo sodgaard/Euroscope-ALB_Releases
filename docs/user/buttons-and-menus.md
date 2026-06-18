@@ -18,16 +18,24 @@ Use these pages for the full operational meaning behind the controls:
   - `EAT:AR` is the rougher fallback method
   - `EAT:TF` is a separate target-fix mode when present
 - `ETA:ES` or `ETA:ALB`: selects whether the ETA basis follows EuroScope or the ALB calculation.
-- `HLS*` or `HLS-`: controls whether hold EAT stays synchronized with the holding list. Right-clicking this button opens a reset menu for HOLD_EAT overrides. Turning `HLS` off clears the current HOLD_EAT override influence and returns hold EAT handling to the automatic ALB calculation path.
 - `FPC*` or `FPC-`: toggles fix-passage correction, which lets ALB correct downstream planning after actual fix passage.
-- `HLW*` or `HLW-`: allows this ALB instance to write accepted hold timing back to the TopSky holding list.
+- `HLW*` or `HLW-`: is the active local permission for this ALB instance to write accepted hold timing back to the TopSky holding list.
+
+## Hold / EAT controls
+
+- `HLW` is the active operator-facing local write gate for `HOLD_EAT`.
+- `HLS` is retained only as legacy or compatibility state and is no longer a normal visible top-row control.
+- In backend-primary healthy operation, canonical per-aircraft EAT comes from backend `SEQ/SET2+AC`.
+- The final `/HOLD_EAT/HHMM/` write is only the aircraft-visible local side effect of that canonical authority path.
+- `SEAT` remains available only as legacy, fallback, or compatibility hold-EAT handling. It is not the normal backend-primary transport.
 
 ## Who can change these buttons
 
 - `EAT` or `PLT` is local display only
 - `TXE` is restricted to the manual FMR
 - `Layout`, `Timelines`, and via-fix visibility are local display controls
-- `EAT`, `ETA`, `HLS`, `FPC`, and `HLW` are shared-planning controls and should normally be changed by the controller currently responsible for the shared plan
+- `EAT`, `ETA`, `FPC`, and legacy `HLS` preference state are shared-planning controls and should normally be changed by the controller currently responsible for the shared plan
+- `HLW` is the active local write permission for the final local `HOLD_EAT` publication side effect
 - `PLR` is a shared planning control
 - `AR` is a shared planning control when the older `EAT:AR` method is being used
 
@@ -94,6 +102,7 @@ Shows an informational list of ALB peers for the active airport or airports.
 
 - This menu is for awareness, not for actions
 - It is the quick way to see whether another ALB instance is already coordinating the plan
+- It can also show the peer's current EAT policy and ETA branch context in a compact form
 
 ### Layout
 

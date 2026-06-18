@@ -67,10 +67,12 @@ resync, explicit `DEL`, FMR ownership change, or local reset.
 
 ## Hold / EAT
 
-- Decide whether hold EAT should stay synchronized with the holding list using `HLS*` or `HLS-`.
-- If ALB should write accepted hold timing back to the holding list, enable `HLW*`.
+- Use `HLW*` if this ALB instance should be allowed to write accepted hold timing back to the holding list after canonical EAT has been accepted locally.
+- Treat `HLS` as legacy or compatibility state rather than as a normal modern top-row workflow control.
+- In backend-primary healthy operation, canonical per-aircraft EAT authority comes from backend `SEQ/SET2+AC`.
+- The final `/HOLD_EAT/HHMM/` write is the aircraft-visible side effect of that authority path.
 - If you need to assign a specific EAT, use `.alb seat <Callsign> <HHMM>`.
-- If older hold overrides are getting in the way, right-click `HLS` and reset the HOLD_EAT overrides.
+- Treat `SEAT` as legacy, fallback, or compatibility handling rather than as the normal backend-primary authority path.
 
 See [EAT Coordination](../msgs/eat_detailing.md) for the hold/EAT meaning and [Retired: Scenarios](retired/scenarios.md) for the retired scenario workflow.
 

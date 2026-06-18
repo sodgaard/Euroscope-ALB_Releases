@@ -44,6 +44,18 @@ The important architectural split is:
 - backend seqsync decides whether that canonical state is sent immediately, queued, horizon-suppressed, or suspended
 - peer apply logic mirrors canonical backend state without becoming a second independent sequencing engine
 
+In this context, canonical means the official shared sequence truth from the
+FMR. On peers, that canonical state is the authoritative source for order, EAT,
+PLT, timeline anchoring, sequence influence, and special treatment state.
+
+Peers may still compute local live or presentational data around that canonical
+state, such as:
+
+- flight phase and local visibility
+- live distance or countdown formatting
+- local warnings and OBS surfaces
+- tag decoration and display hydration
+
 ## UI-to-model connection
 
 The public operator controls map into runtime behavior roughly like this:

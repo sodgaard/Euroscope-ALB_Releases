@@ -51,7 +51,7 @@ As FMR you normally own the shared plan for that airport:
 - via-fix arrival rates in AR/fallback operation
 - shared EAT mode
 - shared ETA source
-- hold/EAT policy controls such as `HLS`, `FPC`, and `HLW`
+- hold/EAT policy controls such as shared EAT policy, legacy `HLS` compatibility state, `FPC`, and `HLW`
 - shared sequence actions
 
 If an aircraft is already in hold and prerequisites are met, you can also set EAT with:

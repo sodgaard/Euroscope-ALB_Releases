@@ -6,10 +6,35 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-## Unreleased - target 0.3.1C
+## Unreleased - target 0.3.1D
 
-This version exists in the development source tree but has not yet been
-uploaded as a public ALB release or update package.
+This section summarizes the next post-`0.3.1C` change set heading toward the
+next public ALB release. The development source tree has already been bumped
+past `0.3.1D`, but no `0.3.1D` package has been published in this release repo
+yet.
+
+### Added
+
+- Added clearer peer visibility for EAT policy in the `Peers` view.
+- Added improved active-timeline PRA display resolution by ICAO and callsign context.
+
+### Changed
+
+- Fixed FMR EAT mode policy synchronization on peers.
+- Clarified HOLD_EAT authority so `HLW` is the active local write gate.
+- Retired the `HLS` control-bar button from normal operator use while keeping legacy compatibility state.
+- Removed `SEAT` from the normal backend-primary authority path. Backend-primary `SET2` authority now carries canonical EAT, and the final `/HOLD_EAT/HHMM/` write is only an aircraft-visible side effect. Legacy `SEAT` handling remains only as fallback or compatibility code.
+- Kept peer PRA display informational only.
+- Replaced the peer-list `HLS` column with an EAT-policy view while keeping ETA as the `ES` or `ALB` branch indicator.
+- Cleared stale `HIG` and RT-issue state more cleanly on `/XHOLD/` and related non-hold scratchpad updates.
+
+### Technical notes
+
+- These changes are aimed at clearer authority boundaries and cleaner peer display behavior.
+- The development source tree has already moved on to a `0.3.1E` virgin version bump after these changes.
+- They do not intentionally change the core `EAT:LT` or `EAT:AR` sequencing model.
+
+## 0.3.1C
 
 ### Added
 
@@ -33,8 +58,7 @@ uploaded as a public ALB release or update package.
 ### Technical notes
 
 - Canonical per-aircraft sequence state remains backend-only.
-- `FLOAT` remains parked and is not part of this target release.
-- Runtime validation is still pending.
+- `FLOAT` remains parked and is not part of this release.
 - This work does not intentionally alter the `EAT:LT` or `EAT:AR` sequencing algorithms.
 
 ## 0.3.1B

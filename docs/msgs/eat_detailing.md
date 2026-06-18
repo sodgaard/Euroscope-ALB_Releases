@@ -38,7 +38,7 @@ FMR.
 
 ## Setting EAT for an aircraft in hold
 
-ALB supports `SEAT` for aircraft already in hold:
+ALB still supports the `SEAT` command surface for aircraft already in hold:
 
 ```text
 .alb seat <Callsign> <HHMM>
@@ -50,6 +50,14 @@ Normal prerequisites are:
 - `HOLDFIX` must be available for that aircraft
 - you must be FMR for the aircraft destination
 - the responsible peer/controller must be using a compatible ALB version
+
+Operational note:
+
+- In backend-primary healthy operation, canonical per-aircraft EAT authority is carried by backend `SEQ/SET2+AC`, not by a normal `SEAT` command workflow.
+- The final `/HOLD_EAT/HHMM/` write is an aircraft-visible side effect after canonical EAT has been accepted locally.
+- `HLW` is the active local write permission for publishing accepted `HOLD_EAT` back to the holding list.
+- `HLS` is legacy compatibility state and should not be read as the main modern operator control.
+- `SEAT` remains available only as legacy, fallback, or compatibility handling when backend-primary authority is unavailable or fallback is active.
 
 See [Workflows](../user/workflows.md) for the command reference.
 

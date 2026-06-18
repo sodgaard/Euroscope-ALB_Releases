@@ -79,6 +79,10 @@ The top-row `ETA:ES` or `ETA:ALB` button controls which estimate branch ALB uses
 
 The lower information area is used for ALB status text. It is where mode and communication health feedback appears, while the `Peers` menu gives you a compact airport-by-airport view of who else is connected.
 
+In current ALB builds, the `Peers` view may also summarize the peer's EAT
+policy and ETA branch context in a compact form. It remains an informational
+surface, not the place where you change authority.
+
 ## Next pages
 
 - [Planning Modes Overview](planning-modes/index.md)

@@ -32,11 +32,19 @@ That is why the user docs recommend a simple operational habit even though the c
 The shared-policy rules currently drive the top-row controls like this:
 
 - `TXE` is manual-FMR only
-- `HLS` and `HLW` follow shared operational policy authority
+- legacy `HLS` preference state follows shared operational policy authority
+- `HLW` is the active local write gate for the final local `HOLD_EAT` publication side effect
 - `EAT` mode and `ETA` source follow shared operational policy authority and also respect sequence-policy lock
 - `FPC` follows the same shared-policy path
 
 The local display-only `EAT` or `PLT` combi toggle is deliberately outside shared authority.
+
+For hold-related per-aircraft authority, backend-primary healthy operation now
+expects canonical EAT to arrive through backend `SEQ/SET2+AC`. The local peer
+may still write `/HOLD_EAT/HHMM/`, but that write is only the aircraft-visible
+side effect of the canonical backend authority path. Legacy `SEAT` handling is
+therefore fallback or compatibility behavior, not the normal backend-primary
+workflow.
 
 ## Peer awareness
 

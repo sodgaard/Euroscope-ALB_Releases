@@ -54,6 +54,13 @@ If shared authority exists and the local instance is not the owner, a manual pre
 
 That behavior is essential: peers must not invent competing canonical orders.
 
+For backend-primary peer sequencing, canonical means the official shared
+sequence truth sent by the FMR. That canonical state is what peers should use
+for order, EAT, PLT, timeline anchor, sequence influence, and special
+treatment. Local model work can still continue around it for live or
+presentational data, but peers should not treat local fallback output as a
+competing canonical sequence while active backend authority still exists.
+
 ## Sorting and filtering in EAT:AR
 
 ### Inputs
@@ -149,6 +156,11 @@ the sequencing algorithm itself.
 - seqsync modes decide how that canonical result is transmitted to peers
 - `horizon` can suppress far-floating aircraft from canonical backend sync without changing the local AR or LT calculation
 - `suspend` suppresses canonical `SET2` TX without stopping local AR or LT calculations
+
+On peers, that means the transport layer can change whether canonical backend
+authority remains active even while the local calculation pipeline continues
+running. A received backend `DEL` clears active per-aircraft authority so local
+fallback writes may resume, while stale-message memory remains separate.
 
 That is why the documentation treats seqsync as backend transport behavior
 rather than as a new planning mode.
