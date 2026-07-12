@@ -136,6 +136,23 @@ The technical invariant is:
 
 Orange timing is part of the pre-terminal `ELT-ALB` branch. It may be used while the aircraft is before TMA, before via-fix, or before terminal handling, depending on the current sequencing state and available live data.
 
+The current orange model is not just a raw fixed time. In practical terms:
+
+- config provides orange track miles to touchdown, preferably by exact STAR
+- if the exact STAR is not available, ALB may fall back by via-fix and use the
+  largest configured orange distance for that stream
+- ALB converts that distance into time with three buckets:
+  - final `10 NM`
+  - the preceding `20 NM`
+  - any remaining higher-distance segment
+- the generic baseline assumes roughly `145 KIAS` on the final segment,
+  `180 KIAS` in the TMA segment, and `250 KIAS` in the higher segment
+- when flight-plan performance data exists, ALB can refine those segment speeds
+  for the aircraft instead of relying only on the generic jet baseline
+- when upper-wind data exists, ALB can also adjust the approximate ground speed
+- the resulting ALB branch is still bounded against the live ES branch so the
+  corrected estimate does not run unrealistically far ahead
+
 Orange timing must not be used to keep a stale separate ALB landing estimate alive after the aircraft has become terminal, post-via, on approach, final, landing, or past final fix. In those states, `ELT-ALB` should follow the live branch where appropriate or be cleared when no live estimate is available.
 
 This keeps old route or STAR geometry from misleading the landing timeline once the aircraft is already deep into terminal handling.

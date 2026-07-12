@@ -6,33 +6,145 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-## Unreleased - target 0.3.1D
+Status note:
 
-This section summarizes the next post-`0.3.1C` change set heading toward the
-next public ALB release. The development source tree has already been bumped
-past `0.3.1D`, but no `0.3.1D` package has been published in this release repo
-yet.
+- public release tags and packages in this repo currently run through `0.3.1E`
+- later `0.3.1F` through `0.3.1N` sections below summarize source-history steps
+  that are not represented by public release assets in this repo
+- the current source history does not show separate `0.3.1G` or `0.3.1K`
+  milestones
+
+## 0.3.1N (Source-only)
+
+This section summarizes the `0.3.1N` change set from the development source
+tree.
 
 ### Added
 
-- Added clearer peer visibility for EAT policy in the `Peers` view.
-- Added improved active-timeline PRA display resolution by ICAO and callsign context.
+- Added a local runtime control for the combined hold-display threshold and pre-threshold display mode used by `glEatCombi`.
+- Added grouped display buttons for the compact `EAT` or `PLT` combi selection and the hold-display selection.
+- Added `holdEatWriteOnStartup` so `HLW` can start in a chosen local state on the initial config load.
 
 ### Changed
 
-- Fixed FMR EAT mode policy synchronization on peers.
-- Clarified HOLD_EAT authority so `HLW` is the active local write gate.
-- Retired the `HLS` control-bar button from normal operator use while keeping legacy compatibility state.
-- Removed `SEAT` from the normal backend-primary authority path. Backend-primary `SET2` authority now carries canonical EAT, and the final `/HOLD_EAT/HHMM/` write is only an aircraft-visible side effect. Legacy `SEAT` handling remains only as fallback or compatibility code.
-- Kept peer PRA display informational only.
-- Replaced the peer-list `HLS` column with an EAT-policy view while keeping ETA as the `ES` or `ALB` branch indicator.
-- Cleared stale `HIG` and RT-issue state more cleanly on `/XHOLD/` and related non-hold scratchpad updates.
+- `eatModeOnStartup` and `etaModeOnStartup` are now applied only during the initial config load instead of being reapplied on every config reload.
+- Startup `EAT` and `ETA` mode strings now accept valid values case-insensitively and fall back independently to `AR` and `ES` if missing or invalid.
+- Runtime `EAT`, `ETA`, and `HLW` selections are now preserved across `Reload config`.
+- Hold-display runtime settings are seeded from config and reset on a successful config reload.
+- The new hold-display button keeps hold-inside-threshold display fixed to countdown while making the pre-threshold display easier to adjust locally.
+- Control-bar display buttons now use grouped styling, fixed-width labels, and more stable spacing so neighboring buttons do not shift.
+
+### Fixed
+
+- Unsupported `holdGtXState` values are now normalized more safely to `Blank`.
+- Tooltip and window cleanup around the new hold-display controls is handled more safely during shutdown.
 
 ### Technical notes
 
-- These changes are aimed at clearer authority boundaries and cleaner peer display behavior.
-- The development source tree has already moved on to a `0.3.1E` virgin version bump after these changes.
-- They do not intentionally change the core `EAT:LT` or `EAT:AR` sequencing model.
+- This change set is mainly startup-config and local display/runtime cleanup.
+- Shared sequencing logic, peer synchronization, and the normal ALB planning models are not intentionally changed by the new hold-display controls.
+
+## 0.3.1M (Source-only)
+
+### Added
+
+- Added a cleaner normal operator surface by hiding more legacy-visible control-bar items.
+
+### Changed
+
+- Hid the visible `FPC` control-bar button while preserving underlying `FPC` state, protocol behavior, peer sync, and logging behavior.
+- Hid the visible `Scenarios` menu while preserving internal scenario config and apply logic for compatibility.
+- Moved `Peers(...)` to appear immediately after `Layout` in the visible menu order.
+
+### Technical notes
+
+- This step is mainly public UI cleanup rather than a change to ALB planning logic.
+
+## 0.3.1L (Source-only)
+
+### Added
+
+- Expanded cloud operational logging across ALB authority and policy flows.
+
+### Technical notes
+
+- This step is mainly operational logging and internal traceability work.
+
+## 0.3.1J (Source-only)
+
+### Added
+
+- Added backend-authority timeout and timeout-now release handling for reduced-sync and horizon coverage-loss cases.
+- Added throttled backend-health and auto-fallback diagnostics.
+- Added clearer FMR recovery and backend owner-shadow diagnostics.
+- Added alias telemetry for the `MODEL_HANDOFF` performance cause.
+
+### Changed
+
+- Runway `Advance 1` peer requests can now proceed without requiring local predecessor context.
+- `Advance 1` direct local apply and runway peer-request routing are now handled more explicitly.
+- Natural resequence reset now clears committed-slot and LT gap latches more cleanly.
+- Repeated same-fix `HOLD` scratchpad assignments now preserve `HOLD_EAT` state more safely.
+- `HOLD` and `XHOLD` scratchpad ingestion is now treated more like event handling instead of implicit state clear on scratchpad restore.
+- Near-origin `RDA` visual-clear diagnostics were clarified.
+
+### Technical notes
+
+- This step is a mixed backend-recovery, peer-sequencing, and hold-ingestion cleanup pass.
+
+## 0.3.1I (Source-only)
+
+### Added
+
+- Added a non-reentrant snapshot guard for structured backend recording.
+- Added pending-retry tracking for temporary structured-recording snapshot collisions.
+
+### Changed
+
+- Temporary device-busy or resource-busy snapshot collisions are now treated as recoverable instead of disabling structured recording for the session.
+
+### Fixed
+
+- Fixed carrier-list self-lock and recording-lock callouts.
+
+## 0.3.1H (Source-only)
+
+### Fixed
+
+- Corrected a thrown exception.
+
+## 0.3.1F (Source-only)
+
+### Added
+
+- Added peer performance telemetry and FMR warning or report logging.
+- Added lower-noise backend sequence authority-transition and blocked-write diagnostics.
+- Added more focused apply-path and `HOLD_EAT` performance diagnostics while reducing `SET2` receive churn.
+
+### Changed
+
+- Separated active backend sequence authority from stale receive-revision memory so `DEL` clears peer write-blocking authority without losing stale-message protection.
+- Aligned source comments with the backend sequence `DEL` authority teardown behavior.
+
+## 0.3.1E (Released)
+
+### Changed
+
+- Replaced the peer-list `HLS` display column with an EAT-policy column while keeping ETA as the `ES` or `ALB` branch indicator.
+- Cleared `HIG` and RT-issue state more cleanly on `/XHOLD/` and related non-hold scratchpad updates.
+- Preserved exiting-hold `HOLD_EAT` protection more safely.
+- Kept OBS-list removal retryable when flight-plan removal is temporarily unavailable.
+- Kept peer PRA display informational only while improving PR-count resolution by ICAO and callsign in the active-timeline context.
+
+## 0.3.1D (Released)
+
+### Changed
+
+- Fixed FMR EAT-mode policy synchronization on peers.
+- Clarified `HOLD_EAT` authority so `HLW` is the active local write gate.
+- Retired the `HLS` control-bar button from normal operator use while keeping legacy compatibility state.
+- Kept `SEAT` as legacy or fallback-only hold-EAT handling rather than part of the normal backend-primary path.
+- Refreshed timeline notes more reliably on peer clear, expiry, and count changes.
 
 ## 0.3.1C
 

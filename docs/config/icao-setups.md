@@ -55,6 +55,42 @@ The `airports.<ICAO>` block can also hold advanced airport-specific tuning such 
 
 `viafix_track_nm_orange` is part of the airport timing model. It tunes the orange route or STAR track-mile estimate used by the ALB estimate branch before terminal or post-via phases.
 
+### How orange timing feeds `ELT-ALB`
+
+`viafix_track_nm_orange` is the airport-side input to ALB's corrected landing
+estimate branch.
+
+In simplified form:
+
+1. ALB starts from the aircraft's current via-fix timing anchor or EVTO.
+2. It looks up an orange distance-to-land, preferably by exact STAR name.
+3. It converts that distance into seconds using a staged descent model.
+4. It adds that time to the via-fix anchor to build `ELT-ALB`.
+
+Current lookup behavior:
+
+- exact STAR match is preferred
+- if there is no exact STAR match, ALB may fall back by via-fix and use the
+  largest configured orange distance among STARs for that same stream
+
+Current timing assumptions:
+
+- final `10 NM` uses a final-approach style speed assumption
+- the `20 NM` before that uses a TMA-style speed assumption
+- any remaining distance uses a higher, pre-terminal descent assumption
+- when aircraft performance and upper-wind data are available, ALB can refine
+  the estimate instead of relying only on the generic baseline
+
+Operationally, that means the orange values are not arbitrary display numbers.
+They directly affect how early or late `ELT-ALB` and ALB-based landing planning
+appear before the aircraft reaches the more live terminal picture.
+
+Once the aircraft is in terminal or post-via handling, ALB should stop leaning
+on the orange distance model and follow the live ES branch where appropriate.
+
+For the detailed property-level reference, see
+[Config File Reference](./config-description.md#viafix_track_nm_orange).
+
 These are valid runtime settings, but they belong in configuration/customization rather than the normal operator guide.
 
 ## Related page

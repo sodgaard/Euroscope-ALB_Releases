@@ -12,14 +12,42 @@ Use these pages for the full operational meaning behind the controls:
 ## Top buttons
 
 - `EAT` or `PLT`: changes what the compact combi field shows in the aircraft rows. It is a local display toggle and does not change the shared sequence logic.
+- `2 EAT`, `2 GL`, `2 SW`, or `2 ---`: local hold-display setup for the compact `glEatCombi` field while an aircraft is still in hold and more than the threshold away from EAT.
 - `TXE*` or `TXE-`: controls whether EAT-related policy is transmitted when you are the manual FMR. In normal operations, only the manual FMR can change this.
 - `EAT:AR`, `EAT:LT`, and sometimes `EAT:TF`: selects the planning basis used for EAT.
   - `EAT:LT` is the recommended modern operating mode
   - `EAT:AR` is the rougher fallback method
   - `EAT:TF` is a separate target-fix mode when present
 - `ETA:ES` or `ETA:ALB`: selects whether the ETA basis follows EuroScope or the ALB calculation.
-- `FPC*` or `FPC-`: toggles fix-passage correction, which lets ALB correct downstream planning after actual fix passage.
 - `HLW*` or `HLW-`: is the active local permission for this ALB instance to write accepted hold timing back to the TopSky holding list.
+
+Current UI note:
+
+- recent ALB builds hide the visible `FPC` top-row button even though the underlying `FPC` state, peer sync, and logging behavior still exist
+
+## Local display buttons
+
+The compact display buttons are local to your client. They do not change shared
+planning policy.
+
+For the hold-display button:
+
+- the number is the minutes before EAT where the display switches to countdown
+- `EAT` means show EAT before that threshold
+- `GL` means show gain or lose before that threshold
+- `SW` means alternate gain or lose and EAT before that threshold
+- `---` means stay blank before that threshold
+
+Mouse actions:
+
+- left-click decreases the threshold by 1 minute
+- right-click increases the threshold by 1 minute
+- double-click cycles the pre-threshold display mode
+
+Example:
+
+- `2 GL` means show gain or lose while the aircraft is in hold and more than 2
+  minutes from EAT, then switch to countdown inside 2 minutes
 
 ## Hold / EAT controls
 
@@ -32,9 +60,13 @@ Use these pages for the full operational meaning behind the controls:
 ## Who can change these buttons
 
 - `EAT` or `PLT` is local display only
+- the hold-display button such as `2 EAT` or `2 GL` is local display only
 - `TXE` is restricted to the manual FMR
 - `Layout`, `Timelines`, and via-fix visibility are local display controls
-- `EAT`, `ETA`, `FPC`, and legacy `HLS` preference state are shared-planning controls and should normally be changed by the controller currently responsible for the shared plan
+- `EAT:AR` / `EAT:LT` / `EAT:TF`, `ETA:ES` / `ETA:ALB`, legacy `HLS`
+  preference state, and underlying `FPC` shared state are shared-planning
+  controls and should normally be changed by the controller currently
+  responsible for the shared plan
 - `HLW` is the active local write permission for the final local `HOLD_EAT` publication side effect
 - `PLR` is a shared planning control
 - `AR` is a shared planning control when the older `EAT:AR` method is being used
@@ -57,8 +89,13 @@ When `ETA:ALB` or `ELT-ALB` is selected, the ALB branch may use the configured o
 Operator-facing rule of thumb:
 
 - before the aircraft is deep into terminal or post-via handling, ALB can use its own corrected branch to give a more useful planning estimate
+- that branch is built from the via-fix timing anchor plus configured orange distance-to-land, then turned into seconds using an ALB descent-speed model
+- the current model uses a rough higher segment, a TMA segment, and a final segment; when flight-plan performance and upper-wind data are available, ALB can refine that estimate further
 - once the aircraft is in terminal or post-via phases, ALB stops forcing a separate corrected landing estimate and follows the live EuroScope branch where appropriate
 - peers should normally follow the FMR's selected ETA policy
+
+For the detailed configuration side of that timing model, see
+[Config File Reference](../config/config-description.md#viafix_track_nm_orange).
 
 ## Dropdown menus
 
@@ -86,10 +123,14 @@ See [Feeder View vs Runway View](planning-modes/views.md) for what that means op
 
 ### Scenarios
 
-The `Scenarios` menu is retained as retired or legacy UI.
+Recent ALB builds hide the visible `Scenarios` menu from the normal control
+bar.
+
+Operationally:
 
 - It exists for compatibility and history
 - It is not part of the recommended current operating method
+- internal scenario config and apply logic still exist for compatibility
 - In normal modern ALB use, the FMR works mainly through `EAT:LT` monitoring and correction instead of scenario switching
 
 ![ALB Dropdown Scenarios](../img/ALB-Popup-Scenarios.png)
@@ -102,6 +143,7 @@ Shows an informational list of ALB peers for the active airport or airports.
 
 - This menu is for awareness, not for actions
 - It is the quick way to see whether another ALB instance is already coordinating the plan
+- in current simplified control-bar layouts, `Peers` appears immediately after `Layout`
 - It can also show the peer's current EAT policy and ETA branch context in a compact form
 
 ### Layout

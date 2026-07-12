@@ -73,6 +73,9 @@ top-level settings, the runtime reads only the exact expected key name.
 | `scratchpadRunwayOverride` | bool | `false` | Enables scratchpad runway override parsing for `assignedRunwayOverride`. |
 | `timeSyncBeacons` | bool | `false` | Enables time-sync beacon support. |
 | `timelineSort` | string | `targetFixEta` | Default timeline sort mode. Accepted values include `target` / `tfe` and `landing` / `lde` / `lnd`. |
+| `eatModeOnStartup` | string | `AR` | Startup EAT mode, applied only during the initial config load. Accepted values are `AR`, `TF`, and `LT` case-insensitively. |
+| `etaModeOnStartup` | string | `ES` | Startup ETA source, applied only during the initial config load. Accepted values are `ES` and `ALB` case-insensitively. |
+| `holdEatWriteOnStartup` | bool | `false` | Startup state for local `HLW`, applied only during the initial config load. |
 | `holdEatLockWindowMinutes` | int | `5` | Hold/EAT lock window in minutes. Applied only if greater than 0. |
 | `holdEatRecentChangeMinutes` | int | `2` | Recent-change window for hold/EAT logic in minutes. Applied only if greater than 0. |
 | `aircraftLastSeenSweepMinutes` | int | `2` | How often ALB sweeps persisted aircraft state for expiry. Applied only if greater than 0. |
@@ -87,6 +90,23 @@ top-level settings, the runtime reads only the exact expected key name.
 | `tagLayouts` | object | required | Tag layout definitions. |
 | `tmaAreas` | array | optional | TMA polygon definitions. |
 | `airports` | object | optional | Airport-specific fallback circles, runway metadata, and advanced airport tuning. |
+
+### Startup-only policy keys
+
+`eatModeOnStartup`, `etaModeOnStartup`, and `holdEatWriteOnStartup` are read
+only during the initial config load.
+
+That means:
+
+- they are useful for your preferred startup baseline
+- they do not force the runtime back to those values on every `Reload config`
+- missing or invalid values fall back independently to safe defaults
+
+Current independent fallbacks are:
+
+- `eatModeOnStartup` -> `AR`
+- `etaModeOnStartup` -> `ES`
+- `holdEatWriteOnStartup` -> `false`
 
 ## Housekeeping
 
@@ -316,6 +336,29 @@ Accepted state values are case-insensitive and normalized. Common values:
 | `afterPassYMinutes` | int | After-passage window length in minutes. Values below 0 are clamped to 0. |
 | `afterPassFirstYState` | string | Display in the first `Y` minutes after passage. |
 | `afterPassAfterYState` | string | Display after the first `Y` minutes after passage. |
+
+Operational notes:
+
+- `holdXSec` and `holdGtXState` seed the local runtime hold-display control on
+  startup and on a successful config reload
+- the top-row hold-display button then lets each client adjust that threshold
+  and pre-threshold hold display locally at runtime
+- the normal hold-display button cycle is `Eat` -> `GainLoose` ->
+  `SwitchGainLooseEat` -> `Blank` -> back to `Eat`
+- `holdLeXState` is the inside-threshold display and is normally kept as
+  `Countdown`
+- unsupported `holdGtXState` values are normalized to `Blank`
+
+The hold-display button uses compact labels such as:
+
+- `2 EAT`
+- `2 GL`
+- `2 SW`
+- `2 ---`
+
+The number is the minutes before EAT where ALB switches to countdown. The
+suffix shows what `glEatCombi` displays while the aircraft is still farther out
+than that threshold.
 
 ## Timelines
 
@@ -584,6 +627,79 @@ Rules:
 - values must be numeric
 - values must be greater than `0`
 - values must be less than `500`
+
+How ALB uses these values:
+
+- ALB first tries an exact STAR-name match for the aircraft's assigned or
+  persisted STAR
+- if there is no exact STAR match, ALB may fall back by via-fix and use the
+  largest configured orange distance among STARs that map to that same via-fix
+- the configured value represents track miles from the via-fix or holding-area
+  side of the arrival toward touchdown
+
+### Orange timing model behind `ELT-ALB`
+
+Before the aircraft is deep into terminal or post-via handling, ALB can build
+its own landing estimate branch from:
+
+1. the current via-fix timing anchor or EVTO
+2. the configured orange distance
+3. a descent-speed model that converts track miles into seconds
+
+The generic baseline model splits the orange distance into three buckets:
+
+- final `10 NM`
+- the preceding `20 NM` TMA segment
+- any remaining higher-distance segment before that
+
+The baseline bucket assumptions are roughly:
+
+- higher segment: about `250 KIAS` near `FL100`
+- TMA segment: about `180 KIAS`
+- final `10 NM`: about `145 KIAS`
+
+ALB then converts those IAS assumptions into approximate TAS and time. In the
+generic fallback model that is roughly:
+
+- `250 KIAS` -> about `290 KTAS`
+- `180 KIAS` -> about `185 KTAS`
+- `145 KIAS` -> about `149 KTAS`
+
+### Aircraft-aware refinement, wind, and clamping
+
+When aircraft performance data is available, ALB can refine the orange timing
+using the flight plan's descent-speed information instead of only the generic
+jet baseline.
+
+The current aircraft-aware model generally uses:
+
+- a higher descent speed around the aircraft's filed level
+- a lower descent speed around `6000 ft`
+- a final descent speed around `3000 ft`
+- wake-category-aware bounds so the final segment does not become unrealistic
+
+When upper-wind data is available, ALB also lets that wind influence the orange
+timing by adjusting the approximate ground speed along the route.
+
+To avoid an unrealistically optimistic ALB branch, the orange result is also
+bounded against the live ES branch. In practice that means `ELT-ALB` is not
+allowed to run too far ahead of the live EuroScope-based landing estimate.
+
+### Practical tuning guidance
+
+- treat `viafix_track_nm_orange` as airport-specific planning calibration, not
+  as a cosmetic display tweak
+- if the value is too short, `ELT-ALB` and ALB-based landing planning become
+  too early
+- if the value is too long, `ELT-ALB` and ALB-based landing planning become too
+  late
+- once the aircraft is terminal or post-via, ALB should stop relying on orange
+  distance timing and follow the live ES branch where appropriate
+
+For a more operational explanation, see
+[ICAO / Airport Setups](./icao-setups.md). For the behavior boundary between
+`ELT-ES` and `ELT-ALB`, see
+[Sequencing Model](../technical/sequencing-model.md).
 
 #### `eat_lt_sequence_lock`
 

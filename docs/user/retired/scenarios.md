@@ -2,6 +2,10 @@
 
 The `Scenarios` menu is retained for compatibility and history, but it is not part of the recommended modern operating method.
 
+Recent ALB builds also hide the visible `Scenarios` menu from the normal
+control bar, even though the legacy scenario config and apply logic still
+exist internally.
+
 ## What scenarios were
 
 Scenarios are predefined sets of via-fix arrival-rate values attached to a timeline.

@@ -7,7 +7,7 @@ Some screenshots in this guide were taken on an older ALB release. They still sh
 ALB is built around four working areas:
 
 1. The top button row for quick policy and display toggles
-2. The menu row for timelines, via-fixes, peers, layout, and a retained legacy scenarios menu
+2. The menu row for timelines, via-fixes, layout, peers, and older retained legacy surfaces
 3. The stats and arrival-planning block at the top left
 4. The timeline area containing the aircraft rows
 
@@ -71,9 +71,30 @@ Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB
 
 `ELT-ALB` may include ALB's configured orange timing before the aircraft is deep into terminal handling. In ALB documentation, orange timing means the configured route or STAR-based track miles from the via-fix or holding-fix area toward touchdown. It is a planning estimate used while the aircraft is still far enough out that route-based timing is useful.
 
+At a practical level, ALB builds that estimate from the via-fix timing anchor
+plus a configured orange distance-to-land. It then converts that distance into
+time with a three-part descent model:
+
+- a higher-distance segment that assumes faster descent speeds
+- a TMA segment for the next part of the arrival
+- a final segment close to landing
+
+The current baseline is roughly jet-like:
+
+- about `250 KIAS` in the higher segment
+- about `180 KIAS` in the TMA segment
+- about `145 KIAS` on the final segment
+
+When flight-plan performance data is available, ALB can refine those segment
+speeds for the specific aircraft. When upper-wind data is available, ALB can
+also let that wind shift the ground-speed side of the estimate.
+
 Once the aircraft is inside terminal or post-via handling, ALB should not keep inventing a separate orange-based landing estimate. At that point the live EuroScope-style branch is normally the safer basis.
 
 The top-row `ETA:ES` or `ETA:ALB` button controls which estimate branch ALB uses where that policy applies.
+
+For the full config and tuning details, see
+[Config File Reference](../config/config-description.md#viafix_track_nm_orange).
 
 ## Status line and peer awareness
 
@@ -82,6 +103,9 @@ The lower information area is used for ALB status text. It is where mode and com
 In current ALB builds, the `Peers` view may also summarize the peer's EAT
 policy and ETA branch context in a compact form. It remains an informational
 surface, not the place where you change authority.
+
+In current simplified control-bar layouts, `Peers` appears immediately after
+`Layout`.
 
 ## Next pages
 
