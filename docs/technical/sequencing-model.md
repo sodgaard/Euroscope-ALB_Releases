@@ -27,6 +27,205 @@ The feeder versus runway split is a view and operational-context distinction, no
 
 `EAT:LT` means landing-timeline planning. It is the preferred current model and uses landing-sequence and slot logic rather than only per-via-fix release spacing.
 
+## WTC-aware LT pair spacing
+
+In `EAT:LT`, ALB applies WTC-aware spacing to the existing canonical landing
+order. It does not independently reorder traffic to optimize the WTC mix.
+
+For two consecutive aircraft:
+
+```text
+leader   = aircraft in front
+follower = aircraft behind
+```
+
+ALB calculates:
+
+```text
+plrSpacingSec =
+    3600 / plannedLandingRate
+
+behindSpacingSec =
+    behindSec[leader][follower]
+
+inFrontSpacingSec =
+    inFrontSec[follower][leader]
+
+requiredSpacingSec =
+    max(
+        plrSpacingSec,
+        behindSpacingSec,
+        inFrontSpacingSec
+    )
+```
+
+The follower's PLT is then constrained by:
+
+```text
+followerPLT =
+    max(
+        followerELT,
+        leaderPLT + requiredSpacingSec
+    )
+```
+
+Natural traffic gaps larger than the required spacing remain unchanged.
+
+## Built-in default matrices
+
+The runtime contains complete built-in defaults, so an airport does not need an
+`eat_lt_spacing` config block for WTC-aware LT spacing to operate.
+
+All values below are seconds.
+
+### `behindSec`
+
+Rows are leaders. Columns are followers.
+
+| Leader \ follower | L | M | H | J |
+|---|---:|---:|---:|---:|
+| L | 30 | 30 | 30 | 30 |
+| M | 60 | 60 | 60 | 60 |
+| H | 120 | 120 | 120 | 120 |
+| J | 180 | 180 | 180 | 180 |
+
+Lookup orientation:
+
+```text
+behindSec[leader][follower]
+```
+
+### `inFrontSec`
+
+Rows are followers. Columns are leaders.
+
+| Follower \ leader | L | M | H | J |
+|---|---:|---:|---:|---:|
+| L | 120 | 120 | 120 | 120 |
+| M | 60 | 60 | 60 | 60 |
+| H | 60 | 60 | 60 | 60 |
+| J | 60 | 60 | 60 | 60 |
+
+Lookup orientation:
+
+```text
+inFrontSec[follower][leader]
+```
+
+The two matrices do not use the same orientation. That distinction is part of
+the current model.
+
+## PLR 40 examples
+
+At PLR 40:
+
+```text
+plrSpacingSec = 3600 / 40 = 90 seconds
+```
+
+Examples:
+
+```text
+Leader L, follower L:
+max(90, 30, 120) = 120 seconds
+```
+
+```text
+Leader M, follower L:
+max(90, 60, 120) = 120 seconds
+```
+
+```text
+Leader M, follower H:
+max(90, 60, 60) = 90 seconds
+```
+
+```text
+Leader H, follower M:
+max(90, 120, 60) = 120 seconds
+```
+
+```text
+Leader J, follower L:
+max(90, 180, 120) = 180 seconds
+```
+
+Effective default table at PLR 40:
+
+| Leader \ follower | L | M | H | J |
+|---|---:|---:|---:|---:|
+| L | 120 | 90 | 90 | 90 |
+| M | 120 | 90 | 90 | 90 |
+| H | 120 | 120 | 120 | 120 |
+| J | 180 | 180 | 180 | 180 |
+
+This effective table changes when PLR changes, because PLR spacing is one of
+the three inputs to the pair-spacing maximum.
+
+## Unknown WTC fallback
+
+ALB uses the EuroScope WTC categories:
+
+- `L` = Light
+- `M` = Medium
+- `H` = Heavy
+- `J` = Super
+
+Missing, blank, or unrecognized WTC values use the airport's configured
+fallback category. The built-in default fallback is `M`.
+
+## Gap-fill and protected FZ2 boundary
+
+The same adjacent-pair spacing model is used across the normal LT chain rather
+than only in one narrow placement path.
+
+That includes:
+
+- normal sequencing comparisons
+- forced or deferred placement decisions
+- FIFO-style gap-fill checks
+- protected `FZ2` endpoint checks
+
+Candidate-specific pair spacing is retained when ALB tests whether a candidate
+can fit into a visible landing hole.
+
+## Pair spacing versus slot tolerance
+
+Required adjacent-pair spacing is not the same thing as LT slot-excess
+tolerance.
+
+Required pair spacing is:
+
+```text
+max(
+    PLR spacing,
+    behind spacing,
+    in-front spacing
+)
+```
+
+LT slot-excess tolerance remains PLR-based. The current tolerance model is
+still one third of PLR spacing, bounded by the existing minimum and maximum
+limits, and then added on top of the planned spacing to form the visible-hole
+threshold.
+
+Example:
+
+```text
+required pair spacing = 120 seconds
+slot-excess tolerance = 30 seconds
+
+candidate feasibility limit =
+    pair target + 30 seconds
+```
+
+These concepts remain distinct:
+
+- required adjacent-pair spacing
+- slot-excess tolerance
+- visible-hole threshold
+- `FZ2` freeze timing
+
 ## Advance 1
 
 Feeder layout:
@@ -156,6 +355,54 @@ The current orange model is not just a raw fixed time. In practical terms:
 Orange timing must not be used to keep a stale separate ALB landing estimate alive after the aircraft has become terminal, post-via, on approach, final, landing, or past final fix. In those states, `ELT-ALB` should follow the live branch where appropriate or be cleared when no live estimate is available.
 
 This keeps old route or STAR geometry from misleading the landing timeline once the aircraft is already deep into terminal handling.
+
+## Expected LR
+
+Expected LR is a demand-limited forecast derived from eligible canonical future
+PLTs.
+
+It counts aircraft in:
+
+```text
+scenarioNow < PLT <= windowEnd
+```
+
+It then calculates:
+
+```text
+expectedLandingRatePerHour =
+    eligibleAircraftCount * 60 / windowMinutes
+```
+
+Because the forecast uses final canonical PLTs, it already reflects:
+
+- PLR
+- WTC pair spacing
+- natural traffic gaps
+- holds
+- frozen or protected slots
+- manual sequence changes
+- gap-fill
+- other constraints already represented by the canonical plan
+
+It is output-only. There is no documented feedback path from Expected LR back
+into PLR, WTC spacing, sequence order, EAT, ELT, PLT, or gap-fill decisions.
+
+The current implementation also resolves duplicate callsigns before counting
+eligible aircraft, so the legend forecast is based on one representative row
+per callsign rather than blindly double-counting every duplicate row.
+
+## FMR and peer boundary for Expected LR
+
+FMR remains authoritative for canonical order, EAT, and PLT.
+
+Peers mirror canonical state. They do not independently resequence traffic just
+because they compute an Expected LR value locally.
+
+Expected LR is calculated locally from the canonical PLTs already available to
+that client. The WTC tables themselves are not transmitted to peers as a
+separate live shared object, and this feature does not require a new `SET2`,
+`POL`, `PREF`, scratchpad, backend, or cloud-schema field.
 
 ## Design invariant
 

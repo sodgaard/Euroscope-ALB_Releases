@@ -6,6 +6,7 @@
 - It is the preferred and current normal operating method.
 - It plans against the landing sequence and runway-side timeline.
 - It is finer than AR because it works from the final landing picture instead of only equal spacing at each via-fix.
+- It now combines airport PLR with WTC-dependent adjacent-pair landing spacing and an informational Expected LR forecast.
 
 ## What the FMR manipulates
 
@@ -28,6 +29,79 @@
 - Peers follow the FMR plan.
 - Peers monitor and use ALB as shared situational awareness.
 - Peers should not independently change shared planning unless they are the FMR or are explicitly working standalone/local.
+
+## How LT spacing works
+
+ALB applies WTC-aware spacing to the established canonical landing order. It
+does not reorder aircraft just because a different WTC pairing would produce a
+different spacing result.
+
+For each adjacent landing pair:
+
+- the leader is the aircraft in front
+- the follower is the aircraft behind
+- ALB compares three spacing inputs in seconds:
+  - the PLR-derived spacing
+  - the minimum spacing required behind that leader
+  - the minimum spacing required in front of that follower
+- the largest of those three becomes the required pair spacing
+
+Operationally that means:
+
+- a natural traffic gap larger than the required spacing is preserved
+- WTC spacing constrains the canonical order but does not independently
+  optimize it
+- missing or unknown WTC falls back to the airport's configured fallback
+  category, which defaults to `M`
+
+## Expected LR
+
+`Expected LR` is the read-only forecast that ALB derives from the current
+canonical future PLTs in `EAT:LT`.
+
+It answers a practical question:
+
+```text
+How many aircraft does the current canonical landing plan place within
+the configured future window, expressed as an hourly rate?
+```
+
+That means it is:
+
+- demand-limited
+- based on final canonical LT PLTs
+- already influenced by PLR, WTC spacing, natural gaps, holds, frozen slots,
+  manual interventions, and the other constraints already present in the plan
+
+It is not:
+
+- a replacement for PLR
+- a warning by itself
+- a direct capacity calculator
+- a feedback input that changes sequencing
+
+## What the legend row means
+
+Below PLR, ALB can show:
+
+```text
+Expected LR: 34 #/h (17/30m, vs PLR -6)
+```
+
+Meaning:
+
+- `34 #/h` is the expected hourly landing rate
+- `17/30m` means 17 eligible canonical PLTs within the next 30 minutes
+- `vs PLR -6` means the forecast is 6 aircraft per hour below the current PLR
+
+If ALB is not in `EAT:LT`, the row shows:
+
+```text
+Expected LR: -- (EAT:LT only)
+```
+
+A lower Expected LR is not automatically a problem. It may simply mean the
+current traffic demand is below the planned landing rate.
 
 ## Sorting and filtering IO
 
@@ -83,6 +157,8 @@
 - Intervene when aircraft are not following ALB's planned sequence or when an operational trigger makes the plan wrong.
 - Use `Advance 1` for a one-position correction.
 - Use `Resequence` to release old fixed/timing baggage and let ALB place the aircraft again under the current plan.
+- Use Expected LR as information about the current canonical plan, not as an
+  automatic instruction to change PLR.
 
 ## Backend seqsync boundary
 

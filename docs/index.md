@@ -22,15 +22,16 @@ Two planning modes matter most in normal use, and relate to how the EAT is calcu
 
 - `EAT:LT` is the preferred modern method and plans against the landing timeline
     - `PLR` Planned Landing Rate (aircraft per hour) - is the rate per airport ALB uses to separate aircraft.
+    - `EAT:LT` now combines that PLR baseline with WTC-dependent adjacent-pair landing spacing and shows a demand-limited `Expected LR` forecast from the resulting canonical PLTs.
 - `EAT:AR` is the older rough fallback method and plans more directly by via-fix arrival spacing
-    - `AR` Arrival Rate - is the rate (minuts separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
+    - `AR` Arrival Rate - is the rate (minutes separation) per ViaFix ALB uses to separate aircraft per ViaFix (STAR).
 
 Feeder versus runway view is a separate choice:
 
 - it reflects the operational role and picture you want, such as upstream feeder or area work versus TMA or runway-side work
 - it does not decide whether the engine mode is `EAT:AR` or `EAT:LT`
 
-Two estimate branches also matter and controls the clculation of duration from ViaFix to Landing:
+Two estimate branches also matter and control the calculation of duration from ViaFix to Landing:
 
 - `ETA:ES` or `ELT-ES` follows the live EuroScope-style estimate branch
 - `ETA:ALB` or `ELT-ALB` follows ALB's own corrected estimate branch when that branch is useful
@@ -53,6 +54,9 @@ The installed package uses a small loader/runtime split:
 - `ALBCore.dll` is the ALB runtime plugin
 
 EuroScope should load `ALB.dll`.
+
+For the controller-facing explanation of the current landing-timeline model, see
+[EAT:LT Landing Timeline Planning](user/planning-modes/eat-lt.md).
 
 ## Start Here
 

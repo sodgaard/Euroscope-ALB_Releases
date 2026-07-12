@@ -705,6 +705,22 @@ Note: this sample preserves legacy `ArrivalScenarios` blocks because existing co
         "22R": { "elevFt": 17 },
         "30": { "elevFt": 17 }
       },
+      "eat_lt_spacing": {
+        "unknownCategory": "M",
+        "expectedRateWindowMinutes": 30,
+        "behindSec": {
+          "L": { "L": 30,  "M": 30,  "H": 30,  "J": 30 },
+          "M": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+          "H": { "L": 120, "M": 120, "H": 120, "J": 120 },
+          "J": { "L": 180, "M": 180, "H": 180, "J": 180 }
+        },
+        "inFrontSec": {
+          "L": { "L": 120, "M": 120, "H": 120, "J": 120 },
+          "M": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+          "H": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+          "J": { "L": 60,  "M": 60,  "H": 60,  "J": 60 }
+        }
+      },
       "eat_lt_sequence_lock": {
         "enabled": true,
         "baseDistanceNm": 115.0,

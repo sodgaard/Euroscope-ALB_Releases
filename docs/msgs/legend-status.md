@@ -27,6 +27,7 @@ If the hold phase column is blank, the aircraft is not currently treated as hold
 ## Common field labels
 
 - `PLR`: planned landing rate
+- `Expected LR`: demand-limited forecast from canonical future LT PLTs
 - `AR`: arrival spacing for a via-fix stream, shown as minutes between releases
 - `Cp`: capacity derived from the current spacing
 - `TMA`: aircraft already in the terminal area
@@ -41,6 +42,35 @@ For the current OBS note set and how to resolve the common ones, see [OBS Notes]
 - `EAT` or `PLT` button: which value the compact combi field is currently showing
 - `*` in a top button label: that option is enabled
 - `-` in a top button label: that option is disabled
+
+## Expected LR row
+
+In `EAT:LT`, the legend row directly below PLR can show:
+
+```text
+Expected LR: 34 #/h (17/30m, vs PLR -6)
+```
+
+Meaning:
+
+- `34 #/h` is the expected hourly landing rate
+- `17/30m` means 17 eligible canonical PLTs within the next 30 minutes
+- `vs PLR -6` means the forecast is 6 aircraft per hour below PLR
+
+If ALB is not in `EAT:LT`, the row shows:
+
+```text
+Expected LR: -- (EAT:LT only)
+```
+
+Display rules:
+
+- the row is informational and read-only
+- a value below PLR is not automatically treated as a warning
+- normal valid values use neutral display coloring
+- no smoothing is applied
+- no trend arrow is applied
+- no automatic PLR adjustment is performed
 
 ## Screenshot note
 

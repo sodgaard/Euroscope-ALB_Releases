@@ -6,13 +6,53 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-Status note:
+## 0.3.1O - WTC-aware EAT:LT spacing and Expected LR
 
-- public release tags and packages in this repo currently run through `0.3.1E`
-- later `0.3.1F` through `0.3.1N` sections below summarize source-history steps
-  that are not represented by public release assets in this repo
-- the current source history does not show separate `0.3.1G` or `0.3.1K`
-  milestones
+### WTC-aware EAT:LT spacing
+
+- Added airport-configurable WTC-dependent landing spacing for `L`, `M`, `H`, and `J`.
+- Landing spacing now uses the largest of:
+  - PLR-derived spacing
+  - minimum spacing behind the leader
+  - minimum space required in front of the follower
+- Added complete built-in default matrices, making config overrides optional.
+- Missing or unknown WTC uses the configured airport fallback category, defaulting to `M`.
+- Applied pair spacing consistently through normal sequencing, forced placement, deferred placement, FIFO gap-fill, protected-`FZ2` endpoint checks, and comparison chains.
+- Preserved natural traffic gaps and the established canonical landing order.
+
+### Expected landing rate
+
+- Added a demand-limited Expected LR forecast based on final canonical LT PLTs.
+- The default forecast window is 30 minutes and may be configured per airport.
+- Added an `Expected LR` row directly below PLR.
+- The row shows:
+  - expected hourly landing rate
+  - eligible aircraft count
+  - forecast window
+  - difference from PLR
+- A result below PLR is informational and is not automatically shown as a warning.
+- No smoothing, trend, or automatic PLR adjustment is applied.
+
+### Hardening
+
+- Improved duplicate-callsign handling in the Expected LR calculation.
+- Preserved candidate-specific spacing during LT gap-fill.
+- Strengthened protected-`FZ2` adjacent-pair checks.
+- Extended WTC-spacing and Expected LR diagnostics.
+- Corrected gap-fill preview diagnostics to use the final assigned PLT.
+
+### Compatibility
+
+- Existing configurations remain valid.
+- WTC matrix overrides are optional.
+- No `SET2`, `POL`, `PREF`, scratchpad, backend, or cloud-schema change was required.
+- FMR remains authoritative for canonical sequence, EAT, and PLT.
+- LT slot tolerance remains PLR-based.
+
+### Validation status
+
+- Implementation, static review, and direct `ALBCore.dll` build verification are complete.
+- Operational live or playback validation remains pending.
 
 ## 0.3.1N (Source-only)
 

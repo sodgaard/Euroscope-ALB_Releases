@@ -605,6 +605,94 @@ Example:
 
 These are used by the current runtime and are valid advanced config.
 
+#### `eat_lt_spacing`
+
+Airport-specific WTC-aware landing-spacing and Expected LR settings for
+`EAT:LT`.
+
+This block is optional. If it is missing, ALB uses complete built-in defaults.
+Existing configs therefore remain valid, and no config-format version increase
+was required for this feature.
+
+Example:
+
+```json
+"eat_lt_spacing": {
+  "unknownCategory": "M",
+  "expectedRateWindowMinutes": 30,
+  "behindSec": {
+    "L": { "L": 30,  "M": 30,  "H": 30,  "J": 30 },
+    "M": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+    "H": { "L": 120, "M": 120, "H": 120, "J": 120 },
+    "J": { "L": 180, "M": 180, "H": 180, "J": 180 }
+  },
+  "inFrontSec": {
+    "L": { "L": 120, "M": 120, "H": 120, "J": 120 },
+    "M": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+    "H": { "L": 60,  "M": 60,  "H": 60,  "J": 60 },
+    "J": { "L": 60,  "M": 60,  "H": 60,  "J": 60 }
+  }
+}
+```
+
+| Property | Type | Default | Accepted values or range | Description |
+|---|---:|---:|---|---|
+| `unknownCategory` | string | `M` | `L`, `M`, `H`, `J` | Fallback WTC category used when an aircraft WTC is missing, blank, or unrecognized. |
+| `expectedRateWindowMinutes` | int | `30` | `5-120` | Future canonical-PLT window used for the Expected LR forecast. |
+| `behindSec` | object | built-in matrix | complete `L/M/H/J` matrix of integer seconds | Minimum spacing behind the leader. |
+| `inFrontSec` | object | built-in matrix | complete `L/M/H/J` matrix of integer seconds | Minimum space required in front of the follower. |
+
+All matrix values are seconds.
+
+Valid WTC categories are:
+
+- `L`
+- `M`
+- `H`
+- `J`
+
+Matrix orientation matters:
+
+- `behindSec[row leader][column follower]`
+- `inFrontSec[row follower][column leader]`
+
+Built-in default matrices:
+
+### Default `behindSec`
+
+| Leader \ follower | L | M | H | J |
+|---|---:|---:|---:|---:|
+| L | 30 | 30 | 30 | 30 |
+| M | 60 | 60 | 60 | 60 |
+| H | 120 | 120 | 120 | 120 |
+| J | 180 | 180 | 180 | 180 |
+
+### Default `inFrontSec`
+
+| Follower \ leader | L | M | H | J |
+|---|---:|---:|---:|---:|
+| L | 120 | 120 | 120 | 120 |
+| M | 60 | 60 | 60 | 60 |
+| H | 60 | 60 | 60 | 60 |
+| J | 60 | 60 | 60 | 60 |
+
+Validation behavior:
+
+- `unknownCategory` must be a valid WTC category or the airport keeps the
+  built-in default fallback of `M`
+- `expectedRateWindowMinutes` must be an integer from `5` through `120`
+- each matrix must be a complete `L/M/H/J` object-of-objects
+- each matrix value must be a finite non-negative integer number of seconds
+- malformed or incomplete matrix definitions are rejected as a whole rather
+  than partly applied
+
+Operational notes:
+
+- config overrides are optional
+- a complete valid airport matrix can override the built-in defaults
+- unknown WTC uses the configured airport fallback category
+- Expected LR remains a local read-only forecast based on canonical future PLTs
+
 #### `viafix_track_nm_orange`
 
 Maps STAR name to configured track miles for ALB's orange timing model.
