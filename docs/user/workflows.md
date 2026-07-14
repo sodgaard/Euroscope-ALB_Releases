@@ -55,6 +55,12 @@ Recommended use:
 - use `horizon` if far-floating aircraft are creating unnecessary churn and only operationally relevant aircraft need canonical synchronization
 - use `suspend` only as an emergency or deliberately degraded mode when canonical `SET2` TX must stop temporarily
 
+How to do it:
+
+- inspect the live mode with `.alb seqsync status`
+- change the live runtime mode with `.alb seqsync normal`, `.alb seqsync throttled`, `.alb seqsync horizon`, or `.alb seqsync suspend`
+- edit top-level `backendSeqSync` in `alb-config.json` if you want different startup or default budgets, then use `.alb reload`
+
 Important limits:
 
 - seqsync commands do not change FMR ownership

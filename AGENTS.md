@@ -103,6 +103,14 @@ When editing this repo:
 - keep wording concise and user-facing
 - avoid copying deep technical design notes from the source repo unless needed
   to explain install, release, or operational behavior
+- when documenting a feature, always also document how a user actually makes
+  ALB act that way:
+  - UI button or menu
+  - mouse interaction
+  - `.alb` command
+  - config edit plus reload or restart
+- do not leave a feature explained only in passive or descriptive terms if
+  there is a real operator or config control surface that drives it
 - do not change generated `site/` content unless the task explicitly requires a
   site rebuild
 

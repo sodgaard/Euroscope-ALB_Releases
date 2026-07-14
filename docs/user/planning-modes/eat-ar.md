@@ -16,6 +16,22 @@
 - Hold/EAT coordination where relevant
 - `ETA:ES` versus `ETA:ALB` policy where relevant
 
+## How you actually change AR behavior
+
+- change one stream `AR` in the stats area:
+  - left-click decreases the interval by 1 minute
+  - right-click increases it by 1 minute
+- or use:
+
+```text
+.alb ar <ViaFix> <minutes>
+```
+
+- switch into `EAT:AR` with the top-row `EAT:AR` button
+- change the ETA branch with the top-row `ETA:ES` or `ETA:ALB` button
+- use aircraft right-click actions such as `Advance 1` and `Resequence` when a
+  specific aircraft needs explicit sequence treatment
+
 ## What the FMR must keep watching
 
 - AR requires more manual tweaking.

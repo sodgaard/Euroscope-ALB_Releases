@@ -27,6 +27,25 @@ The feeder versus runway split is a view and operational-context distinction, no
 
 `EAT:LT` means landing-timeline planning. It is the preferred current model and uses landing-sequence and slot logic rather than only per-via-fix release spacing.
 
+## How users influence sequencing
+
+The sequencing model is not driven by one single transport or algorithm switch.
+Different parts are influenced through different control surfaces:
+
+- `PLR`: stats-area clicks or `.alb plr <rate>`
+- per-via-fix `AR`: stats-area clicks or `.alb ar <ViaFix> <minutes>`
+- planning mode: top-row `EAT:AR`, `EAT:LT`, or `EAT:TF`
+- ETA branch: top-row `ETA:ES` or `ETA:ALB`
+- explicit landing-order intervention: aircraft right-click actions such as
+  `Advance 1` and `Resequence`
+- hold EAT: `HLW` local write gate and legacy `.alb seat <Callsign> <HHMM>`
+- airport LT spacing policy: `airports.<ICAO>.eat_lt_spacing` in
+  `alb-config.json`, then `.alb reload`
+
+That is the practical boundary this page relies on: the technical rules explain
+what ALB does, while the control surface above explains how a user or
+configurator makes ALB behave differently.
+
 ## WTC-aware LT pair spacing
 
 In `EAT:LT`, ALB applies WTC-aware spacing to the existing canonical landing

@@ -10,6 +10,42 @@ In backend-primary healthy operation, canonical per-aircraft EAT authority is
 carried through backend `SEQ/SET2+AC`, not through a normal `SEAT` command-bus
 workflow.
 
+## How you control it
+
+Backend transport and seqsync are not changed by a top-row button. In normal
+use, you control them through `.alb` commands or config.
+
+Runtime commands:
+
+```text
+.alb seqsync status
+.alb seqsync normal
+.alb seqsync throttled
+.alb seqsync horizon
+.alb seqsync suspend
+```
+
+Use them like this:
+
+- `.alb seqsync status` shows the current seqsync mode and queue state
+- `.alb seqsync normal` returns to the default steady-state transport mode
+- `.alb seqsync throttled` keeps all canonical aircraft but rate-limits `SET2`
+  transmission
+- `.alb seqsync horizon` suppresses far-floating canonical churn while keeping
+  operationally relevant or uncertain aircraft canonical
+- `.alb seqsync suspend` deliberately stops normal canonical `SET2`
+  transmission until recovery
+
+Config surface:
+
+- edit top-level `backendSeqSync` in `alb-config.json` when you want different
+  default mode or TX-budget settings
+- apply the changed config with `.alb reload` or by restarting ALB
+
+In shared operation, seqsync changes are part of the authoritative planning
+environment, so they should normally be made by the controller currently acting
+as FMR.
+
 ## Primary versus fallback
 
 Current design split:
@@ -75,6 +111,10 @@ In practical terms:
 
 `throttled`, `horizon`, and `suspend` are explicit seqsync transport modes.
 They are not planning modes like `EAT:AR` or `EAT:LT`.
+
+See [Workflows](../user/workflows.md#backend-seqsync-operation) for the short
+operator workflow and [Troubleshooting](../other/troubleshooting.md#backend-seqsync-status-and-control)
+for the quick command reference.
 
 ## Technical mode behavior
 

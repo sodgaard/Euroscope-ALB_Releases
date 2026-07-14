@@ -18,6 +18,25 @@
 - `ETA:ES` versus `ETA:ALB` policy where relevant
 - Hold/EAT coordination where relevant
 
+## How you actually change LT behavior
+
+- change `PLR` with the stats-area `PLR` field:
+  - left-click decreases by 1
+  - right-click increases by 1
+- or use:
+
+```text
+.alb plr <rate>
+```
+
+- switch into `EAT:LT` with the top-row `EAT:LT` button
+- change the ETA branch with the top-row `ETA:ES` or `ETA:ALB` button
+- use aircraft right-click actions such as `Advance 1` and `Resequence` when a
+  specific aircraft needs explicit sequence treatment
+- adjust airport-specific WTC LT spacing through
+  `airports.<ICAO>.eat_lt_spacing` in `alb-config.json`, then apply it with
+  `.alb reload`
+
 ## What the FMR normally does not manipulate in LT
 
 - The FMR does not normally tweak via-fix AR values in LT mode.
@@ -54,6 +73,14 @@ Operationally that means:
 - missing or unknown WTC falls back to the airport's configured fallback
   category, which defaults to `M`
 
+Controller or maintainer control path:
+
+- day-to-day operators mainly influence the LT result through `PLR`, explicit
+  sequence actions, and the chosen ETA branch
+- maintainers or local configurators influence the WTC pair-spacing policy by
+  editing `airports.<ICAO>.eat_lt_spacing` in `alb-config.json`
+- the WTC spacing policy is not a top-row button or `.alb` command of its own
+
 ## Expected LR
 
 `Expected LR` is the read-only forecast that ALB derives from the current
@@ -79,6 +106,14 @@ It is not:
 - a warning by itself
 - a direct capacity calculator
 - a feedback input that changes sequencing
+
+How to make ALB show it:
+
+- keep ALB in `EAT:LT`
+- ensure the timeline has canonical future PLTs available
+- if needed, change the forecast window through
+  `airports.<ICAO>.eat_lt_spacing.expectedRateWindowMinutes` in
+  `alb-config.json`, then apply with `.alb reload`
 
 ## What the legend row means
 

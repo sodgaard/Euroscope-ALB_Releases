@@ -247,6 +247,13 @@ Operational notes:
 - `horizon` may suppress far-floating canonical candidates while keeping operationally relevant or uncertain aircraft canonical
 - `suspend` suppresses normal canonical `SET2` TX, but operational `DEL` remains allowed and bounded
 - returning from `throttled` or `horizon` to `normal` uses temporary bounded recovery drain until inherited queue backlog is empty
+- edit this block in `alb-config.json` when you want different startup or
+  default transport behavior, then apply it with `.alb reload` or by
+  restarting ALB
+- use `.alb seqsync normal`, `.alb seqsync throttled`, `.alb seqsync horizon`,
+  or `.alb seqsync suspend` when you want to change the live runtime mode
+  immediately without editing config
+- use `.alb seqsync status` to inspect the current live mode and queue picture
 
 ## Backend Peer Health
 
