@@ -45,6 +45,7 @@ Note: this sample preserves legacy `ArrivalScenarios` blocks because existing co
     "frozen1State": "Countdown",
     "frozen2State": "Countdown",
     "switchPeriodSec": 2,
+    "gainLooseEmptyText": "",
     "holdXSec": 120,
     "holdGtXState": "Eat",
     "holdLeXState": "Countdown",

@@ -25,8 +25,18 @@ See [Config File Reference](config-description.md) for the full property list.
 - exactly two target fixes create a dual timeline unless `forceSingleTimeline` is `true`
 - `viaFixes` defines the stream lanes shown in the timeline
 - the placeholder `"-----"` is a visual separator, not a real via-fix lane
+- `destinationAirports` decides which destination ICAOs belong to that active
+  operational picture
 
 This is the main place to change which streams and target fixes belong to a given airport setup.
+
+Practical note:
+
+- current Combi radar-tag output follows the active timeline destination scope
+- if no currently active timeline covers an aircraft's destination, `glEatCombi`
+  stays blank for that traffic
+- to make Combi appear for a destination, activate a timeline whose
+  `destinationAirports` includes that ICAO
 
 ## Feeder versus runway layout behavior
 

@@ -6,6 +6,39 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
+## 0.3.1R
+
+This release follows `0.3.1Q`.
+
+### Added
+
+- Added optional `glEatCombiDisplay.gainLooseEmptyText` config support for a
+  trimmed placeholder when Gain/Lose is the selected Combi state but the actual
+  Gain/Lose value is empty.
+
+### Changed
+
+- `Reload config` no longer re-opens the ALB window if it is currently closed.
+- Combi radar-tag output is now gated by active timeline destination coverage,
+  so only aircraft whose destination belongs to a currently active ALB timeline
+  can show Combi output.
+- Route-based `directRouting` fallback now shows the actual current next fix
+  instead of the following waypoint.
+- Corrected certain compact field labels, including the combined Combi and
+  via-fix timing headings.
+
+### Fixed
+
+- Prevented unrelated non-ALB traffic from showing configured empty Gain/Lose
+  placeholders in Combi output.
+
+### Technical notes
+
+- `openAutomatically` remains the startup auto-open behavior. It is no longer
+  reapplied during later config reloads.
+- `gainLooseEmptyText` is backward-compatible and optional. If omitted or blank,
+  ALB keeps the older empty-string behavior for empty Gain/Lose cases.
+
 ## 0.3.1Q
 
 This release is the next published step after `0.3.1N`.

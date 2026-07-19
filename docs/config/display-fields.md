@@ -72,3 +72,33 @@ Inside each `tagLayouts.<layout>` object you can also control:
 - `timelineSort`: optional per-layout sort preference
 
 See [Timeline / Via-fix / Runway Setups](timelines.md) for the layout behavior side of those settings.
+
+## `glEatCombi` practical note
+
+`glEatCombi` is the compact combined Combi field for Gain/Lose and EAT-style
+display behavior.
+
+How ALB decides whether it can show:
+
+- the layout must include `{"source": "glEatCombi", ...}`
+- the aircraft must belong to traffic relevant to a currently active ALB
+  timeline
+- in practice that means the aircraft destination must be covered by an active
+  timeline's `destinationAirports`
+
+If no active timeline covers that destination, ALB now leaves the Combi output
+blank instead of showing an unrelated placeholder on non-ALB traffic.
+
+If you want a placeholder when Gain/Lose is selected but the real Gain/Lose
+value is empty, use `glEatCombiDisplay.gainLooseEmptyText` in
+[Config File Reference](config-description.md#gleatcombidisplay).
+
+## `directRouting` practical note
+
+`directRouting` is the route or control field that shows either:
+
+- an explicit Direct-To when one is active, or
+- the current next route fix as ALB understands it from the flight plan
+
+In current ALB builds, the route-based fallback is intended to show the actual
+current semantic next fix, not the following waypoint after it.

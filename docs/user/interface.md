@@ -61,6 +61,23 @@ The timeline rows are the operational center of ALB.
 See [Aircraft Actions](aircraft-actions.md) for the right-click behavior.
 See [Feeder View vs Runway View](planning-modes/views.md) for the layout-specific meaning.
 
+## Combi field scope
+
+Some layouts include the compact `glEatCombi` field.
+
+Practical rule:
+
+- ALB only shows Combi output for aircraft that belong to traffic covered by a
+  currently active ALB timeline
+- in practice that means the aircraft destination must be part of an active
+  timeline's `destinationAirports`
+- unrelated traffic outside the active ALB timeline scope is now left blank
+  instead of showing a configured empty Gain/Lose placeholder
+
+If you want Combi to appear for a destination, activate the matching timeline.
+If you want a visible placeholder when Gain/Lose is selected but empty, use
+`glEatCombiDisplay.gainLooseEmptyText` in the config.
+
 ## ELT and ETA in the display
 
 Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB`.

@@ -96,6 +96,7 @@ Current behavior:
 - active runtime selections such as `EAT`, `ETA`, and `HLW` are preserved more
   cleanly than in older builds
 - ALB now also tries to keep the current timeline zoom across reload
+- if the ALB window is currently closed, reload does not pop it open again
 
 ## Hold / EAT
 

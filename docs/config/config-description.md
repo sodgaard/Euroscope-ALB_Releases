@@ -25,7 +25,8 @@ After changing config, apply it with `.alb reload` or the `[Reload config]`
 entry in the `Timelines` menu. A successful reload now preserves the active
 runtime session more cleanly than older builds, including current policy
 selections such as `EAT`, `ETA`, and `HLW`, while also trying to keep the
-current timeline zoom.
+current timeline zoom. Reload does not auto-open the ALB window again if it is
+currently closed.
 
 ## Current config version support
 
@@ -74,7 +75,7 @@ top-level settings, the runtime reads only the exact expected key name.
 | Property | Type | Default | Description |
 |---|---:|---:|---|
 | `configFormatVersion` | int | required in practice | Config schema version. Use `3` for new configs. |
-| `openAutomatically` | bool | `true` | Opens the ALB window when the config is loaded. |
+| `openAutomatically` | bool | `true` | Opens the ALB window on the initial config load. It does not re-open the window on later config reloads. |
 | `logging` | bool | `false` | Enables ALB runtime text logging. |
 | `scratchpadRunwayOverride` | bool | `false` | Enables scratchpad runway override parsing for `assignedRunwayOverride`. |
 | `timeSyncBeacons` | bool | `false` | Enables time-sync beacon support. |
@@ -316,6 +317,7 @@ Example:
   "frozen1State": "Countdown",
   "frozen2State": "Countdown",
   "switchPeriodSec": 2,
+  "gainLooseEmptyText": "",
   "holdXSec": 120,
   "holdGtXState": "Eat",
   "holdLeXState": "Countdown",
@@ -343,6 +345,7 @@ Accepted state values are case-insensitive and normalized. Common values:
 | `frozen1State` | string | Display for frozen state 1. |
 | `frozen2State` | string | Display for frozen state 2. |
 | `switchPeriodSec` | int | Cycling period for `SwitchGainLooseEat`. Values below 1 are clamped to 1. |
+| `gainLooseEmptyText` | string | Optional trimmed placeholder used only when `GainLoose` is the selected display state but the actual Gain/Lose value is empty. |
 | `holdXSec` | int | Hold threshold in seconds. Values below 0 are clamped to 0. |
 | `holdGtXState` | string | Display while in hold and remaining time is greater than `X`. |
 | `holdLeXState` | string | Display while in hold and remaining time is less than or equal to `X`. |
@@ -352,6 +355,12 @@ Accepted state values are case-insensitive and normalized. Common values:
 
 Operational notes:
 
+- `gainLooseEmptyText` is optional and is only used when `glEatCombi` is in a
+  Gain/Lose-based state and the real Gain/Lose text is empty
+- if `gainLooseEmptyText` is blank or omitted, ALB keeps the older behavior and
+  simply shows nothing in that case
+- this placeholder does not replace normal EAT, PLT, countdown, or
+  post-passage behavior
 - `holdXSec` and `holdGtXState` seed the local runtime hold-display control on
   startup and on a successful config reload
 - the top-row hold-display button then lets each client adjust that threshold
@@ -383,7 +392,7 @@ than that threshold.
 | `tagLayout` | string | none | Tag layout id to use. Must exist in `tagLayouts`. |
 | `viaFixes` | string[] | `[]` | Optional via-fix lanes. The placeholder `"-----"` can be used as a visual separator. |
 | `ArrivalScenarios` | object | `{}` | Optional legacy scenario-name to integer-array mapping. Retained for compatibility/history; not recommended as the normal operating method. Arrays must match the number of non-placeholder via-fixes. |
-| `destinationAirports` | string[] | `[]` | Optional destination ICAO filter. If non-empty, only matching destinations are included. |
+| `destinationAirports` | string[] | `[]` | Optional destination ICAO filter. If non-empty, only matching destinations are included. Active-timeline destination coverage also controls whether `glEatCombi` can appear for that traffic. |
 | `runways` | string[] | `[]` | Optional runways relevant for this timeline. |
 | `defaultTimeSpan` | uint | `30` | Initial visible timeline span in minutes. |
 | `forceSingleTimeline` | bool | `false` | Forces a single timeline even when two target fixes are configured. |
@@ -512,7 +521,7 @@ current runtime.
 | `underlyingEAThms` | Underlying EAT with seconds. |
 | `underlyingEATEs` | ES-side underlying EAT branch. |
 | `underlyingEATAlb` / `underlyingEATSso` | SSO/ALB-side underlying EAT branch. |
-| `glEatCombi` | Combined gain/lose and EAT field. |
+| `glEatCombi` | Combined gain/lose and EAT field. For radar-tag/Combi use, ALB now leaves it blank unless the aircraft destination belongs to a currently active timeline. |
 | `viaFixLooseGain` | Via-fix gain/lose display. |
 | `landingLooseGain` | Landing/threshold-based gain/lose display. |
 | `viaFix` | Via-fix lane. |
@@ -550,7 +559,7 @@ current runtime.
 | `altitude` | Altitude/flight level display. |
 | `transitionAltitude` | Transition altitude. |
 | `scratchPad` | Scratchpad text. |
-| `directRouting` | Direct-to or next-route-fix display. |
+| `directRouting` | Direct-to or next-route-fix display. Explicit Direct-To takes precedence; otherwise the fallback shows the aircraft's current semantic next route fix. |
 | `cadFinalAlt` | Controller-assigned final altitude. |
 | `cadTempAlt` | Controller-assigned temporary altitude. Special values `1` and `2` display as `cINS` and `cVIS`. |
 | `cadAssignedHeading` | Controller-assigned heading. |

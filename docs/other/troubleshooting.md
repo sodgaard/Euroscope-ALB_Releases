@@ -28,12 +28,14 @@ Expected behavior in current builds:
 - active runtime selections such as `EAT`, `ETA`, and `HLW` are preserved more
   cleanly than in older builds
 - ALB also tries to preserve the current timeline zoom
+- if the ALB window is currently closed, reload does not open it again
 
 If a changed config value does not take effect, confirm that:
 
 - you edited `alb-config.json`, not only `alb-config.default.json`
 - the JSON stayed valid
 - the setting is not one of the startup-only baseline keys
+- if you expected the ALB window itself to appear, use `.alb open` explicitly
 
 ## Backend seqsync status and control
 
