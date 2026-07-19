@@ -74,29 +74,29 @@ top-level settings, the runtime reads only the exact expected key name.
 
 | Property | Type | Default | Description |
 |---|---:|---:|---|
-| `configFormatVersion` | int | required in practice | Config schema version. Use `3` for new configs. |
-| `openAutomatically` | bool | `true` | Opens the ALB window on the initial config load. It does not re-open the window on later config reloads. |
-| `logging` | bool | `false` | Enables ALB runtime text logging. |
-| `scratchpadRunwayOverride` | bool | `false` | Enables scratchpad runway override parsing for `assignedRunwayOverride`. |
-| `timeSyncBeacons` | bool | `false` | Enables time-sync beacon support. |
-| `timelineSort` | string | `targetFixEta` | Default timeline sort mode. Accepted values include `target` / `tfe` and `landing` / `lde` / `lnd`. |
-| `eatModeOnStartup` | string | `AR` | Startup EAT mode, applied only during the initial config load. Accepted values are `AR`, `TF`, and `LT` case-insensitively. |
-| `etaModeOnStartup` | string | `ES` | Startup ETA source, applied only during the initial config load. Accepted values are `ES` and `ALB` case-insensitively. |
-| `holdEatWriteOnStartup` | bool | `false` | Startup state for local `HLW`, applied only during the initial config load. |
-| `holdEatLockWindowMinutes` | int | `5` | Hold/EAT lock window in minutes. Applied only if greater than 0. |
-| `holdEatRecentChangeMinutes` | int | `2` | Recent-change window for hold/EAT logic in minutes. Applied only if greater than 0. |
 | `aircraftLastSeenSweepMinutes` | int | `2` | How often ALB sweeps persisted aircraft state for expiry. Applied only if greater than 0. |
 | `aircraftOfflineResetMinutes` | int | `5` | Threshold after which unseen aircraft have persisted sequencing/state cleared. Applied only if greater than 0. |
-| `housekeeping` | object | defaults below | Startup housekeeping settings for ALB logs and backend recording folders. |
-| `soundMute` | object | all `false` | Startup mute state for ALB sounds. |
-| `layout` | object | defaults below | EAT display precision/suffix formatting settings. |
-| `backendSeqSync` | object | defaults below | Backend sequence synchronization transport mode and TX-budget settings. |
-| `backendPeerHealth` | object | defaults below | Passive backend peer update-cycle health monitoring and warning thresholds. |
-| `glEatCombiDisplay` | object | defaults below | Optional display mapping for the combined `glEatCombi` field. |
-| `timelines` | object | required | Timeline definitions. |
-| `tagLayouts` | object | required | Tag layout definitions. |
-| `tmaAreas` | array | optional | TMA polygon definitions. |
 | `airports` | object | optional | Airport-specific fallback circles, runway metadata, and advanced airport tuning. |
+| `backendPeerHealth` | object | defaults below | Passive backend peer update-cycle health monitoring and warning thresholds. |
+| `backendSeqSync` | object | defaults below | Backend sequence synchronization transport mode and TX-budget settings. |
+| `configFormatVersion` | int | required in practice | Config schema version. Use `3` for new configs. |
+| `eatModeOnStartup` | string | `AR` | Startup EAT mode, applied only during the initial config load. Accepted values are `AR`, `TF`, and `LT` case-insensitively. |
+| `etaModeOnStartup` | string | `ES` | Startup ETA source, applied only during the initial config load. Accepted values are `ES` and `ALB` case-insensitively. |
+| `glEatCombiDisplay` | object | defaults below | Optional display mapping for the combined `glEatCombi` field. |
+| `holdEatLockWindowMinutes` | int | `5` | Hold/EAT lock window in minutes. Applied only if greater than 0. |
+| `holdEatRecentChangeMinutes` | int | `2` | Recent-change window for hold/EAT logic in minutes. Applied only if greater than 0. |
+| `holdEatWriteOnStartup` | bool | `false` | Startup state for local `HLW`, applied only during the initial config load. |
+| `housekeeping` | object | defaults below | Startup housekeeping settings for ALB logs and backend recording folders. |
+| `layout` | object | defaults below | EAT display precision/suffix formatting settings. |
+| `logging` | bool | `false` | Enables ALB runtime text logging. |
+| `openAutomatically` | bool | `true` | Opens the ALB window on the initial config load. It does not re-open the window on later config reloads. |
+| `scratchpadRunwayOverride` | bool | `false` | Enables scratchpad runway override parsing for `assignedRunwayOverride`. |
+| `soundMute` | object | all `false` | Startup mute state for ALB sounds. |
+| `tagLayouts` | object | required | Tag layout definitions. |
+| `timeSyncBeacons` | bool | `false` | Enables time-sync beacon support. |
+| `timelineSort` | string | `targetFixEta` | Default timeline sort mode. Accepted values include `target` / `tfe` and `landing` / `lde` / `lnd`. |
+| `timelines` | object | required | Timeline definitions. |
+| `tmaAreas` | array | optional | TMA polygon definitions. |
 
 ### Startup-only policy keys
 
@@ -133,11 +133,11 @@ Example:
 
 | Property | Type | Default | Accepted range | Description |
 |---|---:|---:|---:|---|
-| `enabled` | bool | `true` | n/a | Enables runtime housekeeping. |
-| `textLogRetentionDays` | int | `14` | `1-365` | Retention period for ALB text log families. |
-| `textLogMaxFilesPerFamily` | int | `20` | `5-500` | Max number of files kept per text-log family. |
-| `backendRecordingRetentionDays` | int | `14` | `1-365` | Retention period for backend recording material. |
 | `backendRecordingMaxFolderMb` | int | `500` | `50-10000` | Max size for backend recording folder before pruning. |
+| `backendRecordingRetentionDays` | int | `14` | `1-365` | Retention period for backend recording material. |
+| `enabled` | bool | `true` | n/a | Enables runtime housekeeping. |
+| `textLogMaxFilesPerFamily` | int | `20` | `5-500` | Max number of files kept per text-log family. |
+| `textLogRetentionDays` | int | `14` | `1-365` | Retention period for ALB text log families. |
 
 If values are invalid, the runtime falls back to defaults and logs a warning.
 Out-of-range integers are clamped.
@@ -162,9 +162,9 @@ Example:
 | Property | Type | Default | Description |
 |---|---:|---:|---|
 | `all` | bool | `false` | Mutes all ALB sounds. |
-| `missed` | bool | `false` | Mutes missed-approach/go-around related sounds. |
 | `ar.all` | bool | `false` | Mutes all arrival-rate related sounds. |
 | `ar.unselected` | bool | `false` | Mutes arrival-rate sounds for unselected/non-focused contexts. |
+| `missed` | bool | `false` | Mutes missed-approach/go-around related sounds. |
 
 ## Layout
 
@@ -182,9 +182,9 @@ Example:
 
 | Property | Type | Default | Accepted values | Description |
 |---|---:|---:|---|---|
+| `EatDisplayIntervalChars` | string[] | `["","a","b","c","d"]` | up to 5 one-character strings | Suffix characters used by `HHMMx` / `HH:MMx` formats. |
 | `EatDisplayPrecisionSec` | int | `60` | `15` or `60` | Display precision for EAT-style time presentation. |
 | `EatDisplayRecalcPeriodSec` | int | `0` | `0-600` | Display regeneration throttle. `0` means automatic. |
-| `EatDisplayIntervalChars` | string[] | `["","a","b","c","d"]` | up to 5 one-character strings | Suffix characters used by `HHMMx` / `HH:MMx` formats. |
 
 ### Precision and suffix behavior
 
@@ -241,11 +241,11 @@ Fallback behavior:
 
 | Property | Type | Default | Accepted range or values | Description |
 |---|---:|---:|---|---|
-| `mode` | string | `normal` | `normal`, `throttled`, `horizon`, `suspend` | Backend seqsync transport mode. `normal` is immediate in steady state. |
-| `txMaxSet2PerSecond` | int | `10` | `1-200` | Per-second budget for queued canonical `SET2` transmission. Used by `throttled`, `horizon`, `suspend` recovery, and temporary normal recovery drain. |
-| `txMaxSet2PerPoll` | int | `10` | `1-200` | Per-poll budget for queued canonical `SET2` transmission. Used by the same queued or recovery paths as above. |
-| `txQueueMaxAgeSec` | int | `30` | `1-600` | Queue age budget for backend seqsync queue handling. |
 | `authorityLeadMinutes` | int | `10` | `1-60` | Horizon relevance window in minutes. Used by `horizon` to distinguish near-horizon traffic from far-floating traffic. |
+| `mode` | string | `normal` | `normal`, `throttled`, `horizon`, `suspend` | Backend seqsync transport mode. `normal` is immediate in steady state. |
+| `txMaxSet2PerPoll` | int | `10` | `1-200` | Per-poll budget for queued canonical `SET2` transmission. Used by the same queued or recovery paths as above. |
+| `txMaxSet2PerSecond` | int | `10` | `1-200` | Per-second budget for queued canonical `SET2` transmission. Used by `throttled`, `horizon`, `suspend` recovery, and temporary normal recovery drain. |
+| `txQueueMaxAgeSec` | int | `30` | `1-600` | Queue age budget for backend seqsync queue handling. |
 
 Operational notes:
 
@@ -287,13 +287,13 @@ Example:
 
 | Property | Type | Default | Accepted range | Description |
 |---|---:|---:|---:|---|
-| `enabled` | bool | `true` | n/a | Enables passive backend peer health monitoring. |
-| `warnAverageMs` | int | `333` | `100-5000` | Average cycle threshold above which ALB starts treating a peer cycle window as slow. |
-| `recoverAverageMs` | int | `200` | `50-warnAverageMs` | Average cycle threshold below which ALB may treat the peer as recovered. |
-| `windowSec` | int | `30` | `10-300` | Measurement window length in seconds. |
-| `consecutiveWarnWindows` | int | `3` | `1-10` | Number of bad windows required before warning. |
 | `consecutiveRecoverWindows` | int | `2` | `1-10` | Number of good windows required before recovery. |
+| `consecutiveWarnWindows` | int | `3` | `1-10` | Number of bad windows required before warning. |
+| `enabled` | bool | `true` | n/a | Enables passive backend peer health monitoring. |
+| `recoverAverageMs` | int | `200` | `50-warnAverageMs` | Average cycle threshold below which ALB may treat the peer as recovered. |
 | `repeatWarnCooldownSec` | int | `60` | `30-600` | Cooldown before repeat warnings may be sent again. |
+| `warnAverageMs` | int | `333` | `100-5000` | Average cycle threshold above which ALB starts treating a peer cycle window as slow. |
+| `windowSec` | int | `30` | `10-300` | Measurement window length in seconds. |
 
 Operational notes:
 
@@ -338,20 +338,20 @@ Accepted state values are case-insensitive and normalized. Common values:
 
 | Property | Type | Description |
 |---|---:|---|
-| `unknownState` | string | Display when arrival state is unknown. |
-| `unsequencedState` | string | Display when aircraft is unsequenced. |
-| `sequenced1State` | string | Display for sequenced state 1. |
-| `sequenced2State` | string | Display for sequenced state 2. |
+| `afterPassAfterYState` | string | Display after the first `Y` minutes after passage. |
+| `afterPassFirstYState` | string | Display in the first `Y` minutes after passage. |
+| `afterPassYMinutes` | int | After-passage window length in minutes. Values below 0 are clamped to 0. |
 | `frozen1State` | string | Display for frozen state 1. |
 | `frozen2State` | string | Display for frozen state 2. |
-| `switchPeriodSec` | int | Cycling period for `SwitchGainLooseEat`. Values below 1 are clamped to 1. |
 | `gainLooseEmptyText` | string | Optional trimmed placeholder used only when `GainLoose` is the selected display state but the actual Gain/Lose value is empty. |
-| `holdXSec` | int | Hold threshold in seconds. Values below 0 are clamped to 0. |
 | `holdGtXState` | string | Display while in hold and remaining time is greater than `X`. |
 | `holdLeXState` | string | Display while in hold and remaining time is less than or equal to `X`. |
-| `afterPassYMinutes` | int | After-passage window length in minutes. Values below 0 are clamped to 0. |
-| `afterPassFirstYState` | string | Display in the first `Y` minutes after passage. |
-| `afterPassAfterYState` | string | Display after the first `Y` minutes after passage. |
+| `holdXSec` | int | Hold threshold in seconds. Values below 0 are clamped to 0. |
+| `sequenced1State` | string | Display for sequenced state 1. |
+| `sequenced2State` | string | Display for sequenced state 2. |
+| `switchPeriodSec` | int | Cycling period for `SwitchGainLooseEat`. Values below 1 are clamped to 1. |
+| `unknownState` | string | Display when arrival state is unknown. |
+| `unsequencedState` | string | Display when aircraft is unsequenced. |
 
 Operational notes:
 
@@ -388,15 +388,15 @@ than that threshold.
 
 | Property | Type | Default | Description |
 |---|---:|---:|---|
-| `targetFixes` | string[] | required | Aircraft expected to pass one of these fixes are shown in the timeline. Exactly two fixes create a dual timeline unless `forceSingleTimeline` is `true`. |
-| `tagLayout` | string | none | Tag layout id to use. Must exist in `tagLayouts`. |
-| `viaFixes` | string[] | `[]` | Optional via-fix lanes. The placeholder `"-----"` can be used as a visual separator. |
 | `ArrivalScenarios` | object | `{}` | Optional legacy scenario-name to integer-array mapping. Retained for compatibility/history; not recommended as the normal operating method. Arrays must match the number of non-placeholder via-fixes. |
-| `destinationAirports` | string[] | `[]` | Optional destination ICAO filter. If non-empty, only matching destinations are included. Active-timeline destination coverage also controls whether `glEatCombi` can appear for that traffic. |
-| `runways` | string[] | `[]` | Optional runways relevant for this timeline. |
 | `defaultTimeSpan` | uint | `30` | Initial visible timeline span in minutes. |
+| `destinationAirports` | string[] | `[]` | Optional destination ICAO filter. If non-empty, only matching destinations are included. Active-timeline destination coverage also controls whether `glEatCombi` can appear for that traffic. |
 | `forceSingleTimeline` | bool | `false` | Forces a single timeline even when two target fixes are configured. |
+| `runways` | string[] | `[]` | Optional runways relevant for this timeline. |
+| `tagLayout` | string | none | Tag layout id to use. Must exist in `tagLayouts`. |
+| `targetFixes` | string[] | required | Aircraft expected to pass one of these fixes are shown in the timeline. Exactly two fixes create a dual timeline unless `forceSingleTimeline` is `true`. |
 | `viaFixColors` | string[] | palette | Optional custom RGB colors for real via-fix lanes. |
+| `viaFixes` | string[] | `[]` | Optional via-fix lanes. The placeholder `"-----"` can be used as a visual separator. |
 
 ### Notes on `ArrivalScenarios`
 
@@ -433,20 +433,20 @@ Recommended format:
 | Property | Type | Default | Description |
 |---|---:|---:|---|
 | `hideDeselectedViaFixes` | bool | `false` | If `true`, aircraft in deselected via-fix lanes are hidden from the timeline. |
+| `items` | array | required | Ordered list of tag items. |
 | `timelineLayout` | string | runtime default | Layout hint. Accepted values include `runway` and `feeder`. |
 | `timelineSort` | string | runtime default | Optional per-layout sort mode. |
-| `items` | array | required | Ordered list of tag items. |
 
 ## Tag Item Properties
 
 | Property | Type | Default | Description |
 |---|---:|---:|---|
-| `source` | string | `""` | Source field to render. |
-| `width` | uint | `1` | Reserved character width. |
-| `rightAligned` | bool | `false` | Right-aligns the rendered value. |
-| `isViaFixIndicator` | bool | `false` | Colors the field using the via-fix lane color. |
 | `defaultValue` | string | `""` | Fallback/default value, especially for `static`. |
 | `format` | string | `""` | Optional time formatting override for time-backed sources. |
+| `isViaFixIndicator` | bool | `false` | Colors the field using the via-fix lane color. |
+| `rightAligned` | bool | `false` | Right-aligns the rendered value. |
+| `source` | string | `""` | Source field to render. |
+| `width` | uint | `1` | Reserved character width. |
 
 ### `format` strings for time values
 
@@ -469,21 +469,21 @@ the format, so the explicit `width` value is no longer the controlling width.
 These sources can use a `format` string:
 
 - `estimatedLandingTime`
+- `estimatedLandingTimeAlb`
 - `estimatedLandingTimeEs`
 - `estimatedLandingTimeSso`
-- `estimatedLandingTimeAlb`
 - `plannedLandingTime`
+- `plannedLandingTimeAlb`
 - `plannedLandingTimeEs`
 - `plannedLandingTimeSso`
-- `plannedLandingTimeAlb`
-- `underlyingEAT`
-- `underlyingEAThms`
-- `underlyingEATEs`
-- `underlyingEATAlb`
-- `viaFixETO`
-- `viaFixETOhms`
 - `timelineAnchor`
 - `timelineAnchorHms`
+- `underlyingEAT`
+- `underlyingEATAlb`
+- `underlyingEATEs`
+- `underlyingEAThms`
+- `viaFixETO`
+- `viaFixETOhms`
 
 ## Tag Item Sources
 
@@ -492,82 +492,82 @@ current runtime.
 
 | Source | Meaning |
 |---|---|
-| `static` | Static text from `defaultValue`. |
-| `callsign` | Aircraft callsign. |
-| `ATCShort` | Tracking controller short id. |
-| `ATCLong` | Tracking controller long id. |
+| `acno` | Internal aircraft ordinal number. |
+| `aircraftType` | ICAO aircraft type. |
+| `aircraftWtc` | Wake turbulence category. |
+| `altitude` | Altitude/flight level display. |
+| `arrivalSeqDisp` | Display sequence number. |
+| `arrivalSeqFrontier` | Sequencing frontier marker. |
+| `arrivalSeqMax` | Maximum assigned arrival sequence number. |
+| `arrivalSeqMin` | Minimum airborne arrival sequence number. |
+| `arrivalSeqNo` | Raw arrival sequence number. |
+| `ArrivalState` | Determined arrival state. |
 | `assignedRunway` | Assigned landing runway. |
 | `assignedRunwayOverride` | Scratchpad-based runway override. |
 | `assignedStar` | Assigned STAR. |
-| `aircraftType` | ICAO aircraft type. |
-| `aircraftWtc` | Wake turbulence category. |
+| `ATCLong` | Tracking controller long id. |
+| `ATCShort` | Tracking controller short id. |
+| `bookingStatus` | Backend booking/event-slot status text. |
+| `cadAssignedHeading` | Controller-assigned heading. |
+| `cadAssignedRate` | Controller-assigned rate. |
+| `cadAssignedSpeedMach` | Controller-assigned speed (`K...`) or Mach (`M...`). |
+| `cadClearanceFlag` | Clearance flag (`CLR`). |
+| `cadFinalAlt` | Controller-assigned final altitude. |
+| `cadGroundState` | Controller-assigned ground state. |
+| `cadScratchpad` | CAD scratchpad mirror. |
+| `cadTempAlt` | Controller-assigned temporary altitude. Special values `1` and `2` display as `cINS` and `cVIS`. |
+| `callsign` | Aircraft callsign. |
+| `directRouting` | Direct-to or next-route-fix display. Explicit Direct-To takes precedence; otherwise the fallback shows the aircraft's current semantic next route fix. |
+| `distanceGapNmToPrevious` | NM spacing/gap to the previous aircraft. |
+| `estimatedLandingTime` | Active estimated landing time. |
+| `estimatedLandingTimeAlb` / `estimatedLandingTimeSso` | SSO/ALB landing ETA branch. |
+| `estimatedLandingTimeEs` | ES landing ETA branch. |
+| `etaSource` | Current ETA branch/source identifier. |
+| `FlightPhase` | Determined flight phase. |
+| `glEatCombi` | Combined gain/lose and EAT field. For radar-tag/Combi use, ALB now leaves it blank unless the aircraft destination belongs to a currently active timeline. |
+| `groundSpeed` | Ground speed. |
+| `groundSpeed10` | Ground speed in tens. |
+| `holdPhase` | Holding phase indicator. |
+| `holdingEAT` | Hold-related EAT text. |
+| `holdingEATm` | Manual-hold-EAT marker. |
+| `holdingFix` | Holding fix if available. |
+| `inboundGrouping` | Current inbound grouping bucket. |
+| `isPastViaFix` | `Y`/`N` flag for via-fix passage. |
+| `landingLooseGain` | Landing/threshold-based gain/lose display. |
+| `landingSeqIndexCurrent` | Current landing sequence index. |
+| `landingSeqIndexFixed` | Fixed landing sequence index. |
 | `minutesBehindPreceedingRounded` | Spacing behind the preceding aircraft in rounded minutes. |
-| `timeBehindPreceeding` | Spacing behind the preceding aircraft in `mm:ss`. |
+| `obsNote3` | 3-character observation/note abbreviation. |
+| `plannedLandingTime` | Active planned landing time. |
+| `plannedLandingTimeAlb` / `plannedLandingTimeSso` | SSO/ALB planned landing time. |
+| `plannedLandingTimeEs` | ES planned landing time. |
 | `remainingDistance` | Remaining distance to target fix in NM. |
 | `remainingDistance1d` | Remaining distance with one decimal place. |
-| `distanceGapNmToPrevious` | NM spacing/gap to the previous aircraft. |
-| `viaFixDistNmToGo` | Remaining NM to the via-fix. |
-| `viaACToViaFixSec` | Seconds from aircraft to via-fix. |
-| `viaFixToLandingSec` | Planned seconds from via-fix to landing. |
-| `viaFixToLandingSecEs` | ES-based via-fix-to-landing seconds. |
-| `viaFixToLandingSecSso` | SSO/ALB-based via-fix-to-landing seconds. |
-| `estimatedLandingTime` | Active estimated landing time. |
-| `estimatedLandingTimeEs` | ES landing ETA branch. |
-| `estimatedLandingTimeSso` / `estimatedLandingTimeAlb` | SSO/ALB landing ETA branch. |
-| `plannedLandingTime` | Active planned landing time. |
-| `plannedLandingTimeEs` | ES planned landing time. |
-| `plannedLandingTimeSso` / `plannedLandingTimeAlb` | SSO/ALB planned landing time. |
+| `scratchPad` | Scratchpad text. |
+| `static` | Static text from `defaultValue`. |
+| `targetFix` | Active target fix for the aircraft. |
+| `targetFixATCTime` | Estimated time over target fix including delay logic. |
+| `targetFixEta` | Estimated time over target fix. |
+| `timeBehindPreceeding` | Spacing behind the preceding aircraft in `mm:ss`. |
+| `timelineAnchor` / `timelineAnchorHms` | Active timeline anchor time used for ordering/display. |
+| `timelineAnchorSource` | Source of the timeline anchor. |
+| `transitionAltitude` | Transition altitude. |
 | `underlyingEAT` | Active underlying EAT display value. |
-| `underlyingEAThms` | Underlying EAT with seconds. |
-| `underlyingEATEs` | ES-side underlying EAT branch. |
 | `underlyingEATAlb` / `underlyingEATSso` | SSO/ALB-side underlying EAT branch. |
-| `glEatCombi` | Combined gain/lose and EAT field. For radar-tag/Combi use, ALB now leaves it blank unless the aircraft destination belongs to a currently active timeline. |
-| `viaFixLooseGain` | Via-fix gain/lose display. |
-| `landingLooseGain` | Landing/threshold-based gain/lose display. |
+| `underlyingEATEs` | ES-side underlying EAT branch. |
+| `underlyingEAThms` | Underlying EAT with seconds. |
+| `viaACToViaFixSec` | Seconds from aircraft to via-fix. |
 | `viaFix` | Via-fix lane. |
+| `viaFixDistNmToGo` | Remaining NM to the via-fix. |
 | `viaFixETE` | Estimated time enroute to via-fix. |
 | `viaFixETO` | Estimated time over via-fix. |
 | `viaFixETOhms` | Estimated time over via-fix with seconds. |
+| `viaFixLooseGain` | Via-fix gain/lose display. |
 | `viaFixSeqIndexCurrent` | Current per-via-fix sequence index. |
 | `viaFixSeqIndexFixed` | Fixed per-via-fix sequence index. |
-| `landingSeqIndexCurrent` | Current landing sequence index. |
-| `landingSeqIndexFixed` | Fixed landing sequence index. |
-| `targetFix` | Active target fix for the aircraft. |
-| `targetFixEta` | Estimated time over target fix. |
-| `targetFixATCTime` | Estimated time over target fix including delay logic. |
-| `timelineAnchor` / `timelineAnchorHms` | Active timeline anchor time used for ordering/display. |
-| `timelineAnchorSource` | Source of the timeline anchor. |
-| `etaSource` | Current ETA branch/source identifier. |
-| `holdingFix` | Holding fix if available. |
-| `holdingEAT` | Hold-related EAT text. |
-| `holdingEATm` | Manual-hold-EAT marker. |
-| `holdPhase` | Holding phase indicator. |
-| `FlightPhase` | Determined flight phase. |
-| `ArrivalState` | Determined arrival state. |
-| `inboundGrouping` | Current inbound grouping bucket. |
-| `arrivalSeqNo` | Raw arrival sequence number. |
-| `arrivalSeqMin` | Minimum airborne arrival sequence number. |
-| `arrivalSeqMax` | Maximum assigned arrival sequence number. |
-| `arrivalSeqDisp` | Display sequence number. |
-| `arrivalSeqFrontier` | Sequencing frontier marker. |
-| `obsNote3` | 3-character observation/note abbreviation. |
-| `bookingStatus` | Backend booking/event-slot status text. |
-| `acno` | Internal aircraft ordinal number. |
-| `isPastViaFix` | `Y`/`N` flag for via-fix passage. |
-| `groundSpeed` | Ground speed. |
-| `groundSpeed10` | Ground speed in tens. |
-| `altitude` | Altitude/flight level display. |
-| `transitionAltitude` | Transition altitude. |
-| `scratchPad` | Scratchpad text. |
-| `directRouting` | Direct-to or next-route-fix display. Explicit Direct-To takes precedence; otherwise the fallback shows the aircraft's current semantic next route fix. |
-| `cadFinalAlt` | Controller-assigned final altitude. |
-| `cadTempAlt` | Controller-assigned temporary altitude. Special values `1` and `2` display as `cINS` and `cVIS`. |
-| `cadAssignedHeading` | Controller-assigned heading. |
-| `cadAssignedSpeedMach` | Controller-assigned speed (`K...`) or Mach (`M...`). |
-| `cadAssignedRate` | Controller-assigned rate. |
-| `cadGroundState` | Controller-assigned ground state. |
-| `cadClearanceFlag` | Clearance flag (`CLR`). |
-| `cadScratchpad` | CAD scratchpad mirror. |
+| `viaFixToLandingSec` | Planned seconds from via-fix to landing. |
+| `viaFixToLandingSecEs` | ES-based via-fix-to-landing seconds. |
+| `viaFixToLandingSecSso` | SSO/ALB-based via-fix-to-landing seconds. |
 
 If a source string is unknown to the runtime, it typically renders blank.
 
@@ -577,12 +577,12 @@ If a source string is unknown to the runtime, it typically renders blank.
 
 | Property | Type | Description |
 |---|---:|---|
-| `id` | string | Optional human-readable identifier. |
 | `airport` | string | v3 single-airport form. |
 | `airports` | string[] | Alternate multi-airport form. |
-| `runways` | string[] | Runways this polygon applies to. |
-| `poly` | `{lat,lon}[]` | Required polygon points. |
 | `center` | object | Legacy fallback circle form. |
+| `id` | string | Optional human-readable identifier. |
+| `poly` | `{lat,lon}[]` | Required polygon points. |
+| `runways` | string[] | Runways this polygon applies to. |
 
 Matching summary:
 
@@ -598,8 +598,8 @@ Matching summary:
 
 | Property | Type | Description |
 |---|---:|---|
-| `tmaFallback` | object | Optional fallback circle using `center` plus `radiusNm`. |
 | `runways` | object | Runway metadata keyed by runway id, e.g. `"04L": {"elevFt": 17}`. |
+| `tmaFallback` | object | Optional fallback circle using `center` plus `radiusNm`. |
 
 ### `tmaFallback`
 
@@ -659,10 +659,10 @@ Example:
 
 | Property | Type | Default | Accepted values or range | Description |
 |---|---:|---:|---|---|
-| `unknownCategory` | string | `M` | `L`, `M`, `H`, `J` | Fallback WTC category used when an aircraft WTC is missing, blank, or unrecognized. |
-| `expectedRateWindowMinutes` | int | `30` | `5-120` | Future canonical-PLT window used for the Expected LR forecast. |
 | `behindSec` | object | built-in matrix | complete `L/M/H/J` matrix of integer seconds | Minimum spacing behind the leader. |
+| `expectedRateWindowMinutes` | int | `30` | `5-120` | Future canonical-PLT window used for the Expected LR forecast. |
 | `inFrontSec` | object | built-in matrix | complete `L/M/H/J` matrix of integer seconds | Minimum space required in front of the follower. |
+| `unknownCategory` | string | `M` | `L`, `M`, `H`, `J` | Fallback WTC category used when an aircraft WTC is missing, blank, or unrecognized. |
 
 All matrix values are seconds.
 
@@ -829,11 +829,11 @@ Example:
 
 | Property | Type | Description |
 |---|---:|---|
-| `enabled` | bool | Enables this advanced airport-specific threshold. |
 | `baseDistanceNm` | number | Base distance used in threshold derivation. |
-| `extraDistanceNm` | number | Additional buffer distance. |
-| `extraBufferIasKt` | number | IAS used to estimate the extra buffer conversion to time. |
+| `enabled` | bool | Enables this advanced airport-specific threshold. |
 | `extraBufferAltFt` | number | Altitude used with IAS for buffer time estimation. |
+| `extraBufferIasKt` | number | IAS used to estimate the extra buffer conversion to time. |
+| `extraDistanceNm` | number | Additional buffer distance. |
 
 ## Common Ignored or Legacy Keys
 
