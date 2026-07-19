@@ -67,9 +67,35 @@ Important limits:
 - they do not change `EAT:AR` versus `EAT:LT`
 - they do not change ETA policy, backend transport health, or scratchpad fallback state
 - they do not create peer-owned resequencing
+- backend reconnect continuity and mixed backend or scratchpad peer routing are
+  automatic transport behaviors, not a separate operator mode
 
 In `suspend`, peers may retain the last backend-owned overlay until recovery
 resync, explicit `DEL`, FMR ownership change, or local reset.
+
+## Reload config
+
+ALB supports live config reload without treating it as a full cold restart of
+the active session.
+
+See [Buttons & Menus](buttons-and-menus.md#timelines) for the menu entry and
+[Config File Reference](../config/config-description.md) for the config
+surface.
+
+How to do it:
+
+- use `.alb reload`, or
+- use `[Reload config]` at the bottom of the `Timelines` menu
+
+Current behavior:
+
+- a successful reload re-reads `alb-config.json`
+- startup-only defaults such as `eatModeOnStartup`, `etaModeOnStartup`, and
+  `holdEatWriteOnStartup` are not used to force the runtime back to startup
+  values during reload
+- active runtime selections such as `EAT`, `ETA`, and `HLW` are preserved more
+  cleanly than in older builds
+- ALB now also tries to keep the current timeline zoom across reload
 
 ## Hold / EAT
 

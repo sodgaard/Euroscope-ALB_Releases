@@ -21,6 +21,12 @@ Important packaging facts:
 Place `alb-config.json` in the same plugin folder as `ALB.dll` and
 `ALBCore.dll`.
 
+After changing config, apply it with `.alb reload` or the `[Reload config]`
+entry in the `Timelines` menu. A successful reload now preserves the active
+runtime session more cleanly than older builds, including current policy
+selections such as `EAT`, `ETA`, and `HLW`, while also trying to keep the
+current timeline zoom.
+
 ## Current config version support
 
 The current ALB runtime supports:

@@ -106,6 +106,10 @@ Chooses which timeline definitions are active.
 - You can select one or more timelines
 - Timelines come from the ALB config
 - They define destination airport coverage, streams, retained legacy scenario definitions, and default layout behavior
+- The last menu entry, `[Reload config]`, re-reads `alb-config.json` without
+  needing a restart
+- A successful reload preserves local runtime selections more cleanly than
+  older builds and now also tries to keep the current timeline zoom
 
 ![ALB Dropdown Timeline](../img/ALB-Popup-Timelines.png)
 

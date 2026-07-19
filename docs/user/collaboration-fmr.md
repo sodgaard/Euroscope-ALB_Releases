@@ -183,6 +183,11 @@ Available manipulations:
 Use them when transport load or a controlled degraded mode makes it necessary
 to change seqsync behavior.
 
+Backend reconnect continuity and mixed backend or scratchpad peer handling are
+automatic transport behaviors. There is no separate FMR button for them; the
+practical control surface remains FMR ownership, seqsync mode, and normal
+config reload or restart.
+
 ## Config-driven behavior
 
 Some shared-plan behavior is not changed by a live button or direct `.alb`
@@ -208,6 +213,9 @@ After changing config, apply it with:
 ```
 
 or restart ALB.
+
+You can also use `[Reload config]` in the `Timelines` menu when you want the
+same re-read from the UI.
 
 ## Local-only controls that are not FMR authority
 

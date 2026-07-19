@@ -111,6 +111,11 @@ When editing this repo:
   - config edit plus reload or restart
 - do not leave a feature explained only in passive or descriptive terms if
   there is a real operator or config control surface that drives it
+- always finish a documentation-edit pass with a consistency check of internal
+  documentation links and page anchors where practical
+- if a change affects FMR authority, shared controls, or practical operating
+  ownership, keep `docs/user/collaboration-fmr.md` updated as the summary page
+  of available FMR manipulations
 - do not change generated `site/` content unless the task explicitly requires a
   site rebuild
 

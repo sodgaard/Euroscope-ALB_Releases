@@ -6,7 +6,69 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
-## 0.3.1O - WTC-aware EAT:LT spacing and Expected LR
+## 0.3.1Q
+
+This release is the next published step after `0.3.1N`.
+
+It includes the public-facing work developed through the internal `0.3.1O` and
+`0.3.1P` source milestones as well as the final `0.3.1Q` transport and
+continuity hardening.
+
+### Added
+
+- Added airport-configurable WTC-aware `EAT:LT` landing spacing for `L`, `M`,
+  `H`, and `J`.
+- Added the `Expected LR` landing-rate forecast row below `PLR`.
+- Added startup-only baseline keys for preferred startup policy and hold-write
+  state:
+  - `eatModeOnStartup`
+  - `etaModeOnStartup`
+  - `holdEatWriteOnStartup`
+- Added a local runtime hold-display control for the compact `glEatCombi`
+  field.
+
+### Changed
+
+- `EAT:LT` now uses the larger of PLR spacing, minimum spacing behind the
+  leader, and minimum space required in front of the follower while preserving
+  the established canonical landing order.
+- Runtime `EAT`, `ETA`, and `HLW` selections are preserved more cleanly across
+  `Reload config`.
+- Config reload is now transactional and also tries to preserve the current
+  timeline zoom.
+- Backend reconnects and mixed backend or scratchpad peer routing are hardened
+  so collaboration continuity is safer through reconnect windows.
+
+### Fixed
+
+- Hardened ALB close or teardown behavior around config reload and controller
+  finalization.
+- Improved AR debounce shutdown handling on ALB window close.
+- Hardened cloud send timeout handling so failed setup, send, or receive paths
+  fail safely.
+
+### Technical notes
+
+- Mixed-peer reconnect continuity is automatic. Operators still use the normal
+  FMR, seqsync, and config-reload controls.
+- `Expected LR` remains informational. It does not automatically change PLR,
+  LT order, EAT, or PLT.
+
+## 0.3.1P (Source-only)
+
+### Changed
+
+- Made config reload transactional instead of publishing partial live state.
+- Preserved active UI and intercom state more cleanly across successful reload.
+
+### Fixed
+
+- Replaced the detached ALB window finalizer with a joinable controller worker.
+- Fixed finalizer publication and closed-ordering races.
+- Destroyed the ALB controller before plugin singleton and log teardown.
+- Fixed ALB window AR debounce worker lifetime on close.
+
+## 0.3.1O (Source-only) - WTC-aware EAT:LT spacing and Expected LR
 
 ### WTC-aware EAT:LT spacing
 

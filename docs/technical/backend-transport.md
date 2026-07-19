@@ -46,6 +46,28 @@ In shared operation, seqsync changes are part of the authoritative planning
 environment, so they should normally be made by the controller currently acting
 as FMR.
 
+## Reload and reconnect continuity
+
+Recent ALB work hardened two practical continuity areas around the transport
+layer:
+
+- config reload now preserves active UI and intercom state more cleanly
+- backend reconnect handling is now more deliberate about session continuity
+  and mixed backend or scratchpad peer situations
+
+For the operator-facing workflow, see
+[Workflows](../user/workflows.md#reload-config),
+[Buttons & Menus](../user/buttons-and-menus.md#timelines), and
+[Troubleshooting](../other/troubleshooting.md#reload-config-behavior).
+
+Available manipulations:
+
+- use `.alb reload` or `[Reload config]` in the `Timelines` menu to re-read
+  config
+- use `.alb seqsync status` when you need the current live transport picture
+- use the normal FMR and seqsync controls; there is no separate reconnect-mode
+  button
+
 ## Primary versus fallback
 
 Current design split:
@@ -58,6 +80,30 @@ scratchpad is no longer the normal ALB command bus.
 Scratchpad may still appear as the final aircraft-visible side effect, such as
 writing `/HOLD_EAT/HHMM/` locally after canonical backend `SET2` EAT has been
 accepted and applied by the responsible peer.
+
+## Mixed backend and scratchpad peers
+
+ALB can now tolerate mixed peer situations more cleanly when some peers are on
+healthy backend transport and others are effectively scratchpad-only or are
+passing through reconnect windows.
+
+For the operator-facing summary, see
+[Collaboration & FMR](../user/collaboration-fmr.md#backend-transport-controls),
+[Workflows](../user/workflows.md#backend-seqsync-operation), and
+[Troubleshooting](../other/troubleshooting.md#mixed-peers-and-reconnects).
+
+Available manipulations:
+
+- claim or coordinate the active owner with `.alb fmr <ICAO>` when shared-plan
+  ownership needs to be explicit
+- inspect seqsync state with `.alb seqsync status`
+- keep normal transport defaults unless load management or degraded operation
+  requires `.alb seqsync throttled`, `.alb seqsync horizon`, or
+  `.alb seqsync suspend`
+
+There is no separate user-facing button that "turns on" mixed-peer handling.
+The continuity behavior is automatic once the normal backend and fallback paths
+exist.
 
 ## Important transport rule
 
