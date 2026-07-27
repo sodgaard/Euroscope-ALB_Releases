@@ -6,6 +6,53 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
+## 0.3.1T
+
+This release follows the previous public `0.3.1R` release and includes the
+user-facing work that landed after the internal `0.3.1S` milestone.
+
+### Added
+
+- Allowed `EAT:LT` to assign landing slots to aircraft that have a usable
+  landing `ELT` even when fuller route-timing products are not yet available.
+
+### Changed
+
+- Completely reworked the EAT and Combi tag callback path around prepared
+  read-only display snapshots instead of callback-time mutable assembly.
+- ALB can now seal the `ELT-ALB` branch earlier when a validated route
+  via-fix bypass provides good enough timing evidence.
+- Feeder gain/lose no longer shows a misleading `G00` for traffic that is
+  already operationally downstream of where that feeder indication is useful.
+- The new callback model improves tag-rendering consistency, safety, and hot-path
+  responsiveness.
+
+### Technical notes
+
+- This step included the typed-display and immutable-snapshot preparation work
+  needed to support that callback-path redesign.
+
+## 0.3.1S (Source-only)
+
+### Added
+
+- Enabled backend A2A participation for eligible `VIA_PROXY` ALB instances
+  using normal canonical ALB identities.
+
+### Changed
+
+- Tightened backend fallback convergence so mixed backend or scratchpad groups
+  can agree on peer state more cleanly when some peers are on fallback.
+- `EAT:LT` manual `Resequence` is now a more deterministic FMR-owned landing
+  re-entry from the live `ELT` boundary instead of a generic best-fit style
+  placement.
+- AR gain/lose now follows the final authoritative EAT-versus-ETO basis more
+  consistently and honors configured `holdLeXState` inside the hold threshold.
+- `HOLD_EAT` write, restore, provenance, and per-aircraft dedup handling were
+  hardened so repeated planned updates are preserved more safely.
+- Timeline count publication and legend aggregate consistency were corrected.
+- Sequencing integrity is preserved more safely across suppressed `RDA` states.
+
 ## 0.3.1R
 
 This release follows `0.3.1Q`.

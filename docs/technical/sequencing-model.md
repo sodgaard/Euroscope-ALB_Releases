@@ -266,6 +266,11 @@ Runway layout:
 
 It clears fixed sequence and timing baggage, then lets the next normal sequencing pass place the aircraft naturally again. The code comments explicitly describe this as similar to giving the aircraft a fresh re-entry into normal planning logic.
 
+In current LT runway-style handling, that re-entry is meant to be a more
+deterministic authoritative placement from the aircraft's live `ELT` boundary.
+It is not intended to behave like a generic defer, gap-fill, or force-placement
+shortcut.
+
 ## Sequence authority
 
 If shared authority exists and the local instance is not the owner, a manual pre-via swap is not applied locally as a silent fork. Instead, the local side sends a request toward the authority and waits for the authoritative result.
@@ -341,6 +346,9 @@ competing canonical sequence while active backend authority still exists.
 - conformance, route, or sequence warnings
 - a stable order that changes only on explicit or justified triggers
 
+When a usable landing `ELT` exists, LT can still assign a landing slot even if
+some fuller route-derived timing products are not yet available.
+
 ## ES versus ALB estimate branch invariant
 
 The operator UI talks about `ETA:ES` and `ETA:ALB`, while layouts may show
@@ -351,6 +359,12 @@ The technical invariant is:
 - `ELT-ES` is the live EuroScope-style landing estimate branch
 - `ELT-ALB` may use ALB correction before terminal or post-via phases
 - once the aircraft is terminal or post-via, ALB must stop inventing a separate stale corrected landing branch and should follow the live branch where appropriate
+
+Current practical refinement:
+
+- when ALB has a validated route via-fix bypass with good enough route evidence,
+  it can seal the `ELT-ALB` branch earlier instead of waiting for the ordinary
+  full via-fix path
 
 Orange timing is part of the pre-terminal `ELT-ALB` branch. It may be used while the aircraft is before TMA, before via-fix, or before terminal handling, depending on the current sequencing state and available live data.
 

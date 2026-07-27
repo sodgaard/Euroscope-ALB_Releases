@@ -52,6 +52,10 @@ Operationally, `Resequence` returns the aircraft to the current planning logic o
 - stream-oriented re-placement in feeder view
 - landing-sequence-oriented re-placement in runway view
 
+In current `EAT:LT` runway-style use, that landing re-placement is intended to
+be deterministic from the aircraft's live landing-estimate boundary rather than
+a generic "best convenient gap" shove.
+
 ## Clear manual EAT
 
 `Clear manual EAT` removes the aircraft's manual EAT override.

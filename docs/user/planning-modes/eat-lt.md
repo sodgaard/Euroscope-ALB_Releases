@@ -7,6 +7,7 @@
 - It plans against the landing sequence and runway-side timeline.
 - It is finer than AR because it works from the final landing picture instead of only equal spacing at each via-fix.
 - It now combines airport PLR with WTC-dependent adjacent-pair landing spacing and an informational Expected LR forecast.
+- A usable landing `ELT` can now be enough for LT slotting even when fuller route-timing products are not yet available for that aircraft.
 
 ## What the FMR manipulates
 
@@ -191,7 +192,8 @@ current traffic demand is below the planned landing rate.
 - Do not fight small ETA jitter.
 - Intervene when aircraft are not following ALB's planned sequence or when an operational trigger makes the plan wrong.
 - Use `Advance 1` for a one-position correction.
-- Use `Resequence` to release old fixed/timing baggage and let ALB place the aircraft again under the current plan.
+- Use `Resequence` to release old fixed or timing baggage and let ALB place the aircraft again under the current plan.
+- In current LT runway-style use, `Resequence` is intended to re-enter the aircraft deterministically from its live landing-estimate boundary rather than as a generic "best convenient gap" shove.
 - Use Expected LR as information about the current canonical plan, not as an
   automatic instruction to change PLR.
 

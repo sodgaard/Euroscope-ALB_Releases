@@ -74,6 +74,7 @@ Current design split:
 
 - backend A2A is the primary path for shared ALB authority and normal peer synchronization
 - scratchpad intercom remains the compatibility and fallback path
+- eligible live `DIRECT`, `SWEATBOX`, and `VIA_PROXY` ALB instances can now participate in that backend-primary path
 
 When backend-primary is healthy and no scratchpad fallback is active,
 scratchpad is no longer the normal ALB command bus.
@@ -104,6 +105,14 @@ Available manipulations:
 There is no separate user-facing button that "turns on" mixed-peer handling.
 The continuity behavior is automatic once the normal backend and fallback paths
 exist.
+
+Current practical meaning:
+
+- scratchpad traffic from a peer can now act as immediate evidence that that
+  peer is currently operating on the fallback path
+- backend-primary peers can mirror the eligible fallback authority surface for
+  those peers more cleanly while still keeping canonical backend sequence state
+  backend-only
 
 ## Important transport rule
 

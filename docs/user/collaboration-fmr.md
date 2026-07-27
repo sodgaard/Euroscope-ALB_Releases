@@ -83,6 +83,8 @@ That includes canonical backend sequence state.
 - the FMR sends the authoritative backend sequence picture
 - peers mirror that picture instead of inventing competing committed sequence changes
 - backend seqsync load-management modes change how canonical sequence traffic is transmitted, not who owns the shared plan
+- eligible live `VIA_PROXY` peers can now participate in that backend transport picture as normal ALB peers
+- if some peers fall back to scratchpad while others stay on backend transport, ALB now converges that mixed picture more cleanly without changing who the FMR is
 
 For the transport and authority mechanics behind that, see [Collaboration Internals](../technical/collaboration-internals.md) and [Backend Transport](../technical/backend-transport.md).
 

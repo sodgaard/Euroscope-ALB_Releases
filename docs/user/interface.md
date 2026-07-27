@@ -78,6 +78,10 @@ If you want Combi to appear for a destination, activate the matching timeline.
 If you want a visible placeholder when Gain/Lose is selected but empty, use
 `glEatCombiDisplay.gainLooseEmptyText` in the config.
 
+For feeder-style Gain/Lose reading, a blank result can now also be deliberate.
+ALB no longer forces a misleading `G00` for traffic that is already
+operationally downstream of where that feeder indication is useful.
+
 ## ELT and ETA in the display
 
 Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB`.
@@ -105,6 +109,14 @@ The current baseline is roughly jet-like:
 When flight-plan performance data is available, ALB can refine those segment
 speeds for the specific aircraft. When upper-wind data is available, ALB can
 also let that wind shift the ground-speed side of the estimate.
+
+When a validated route via-fix bypass gives ALB good enough timing evidence,
+the `ELT-ALB` branch can now seal earlier instead of waiting for the ordinary
+full route-timing path.
+
+In current LT operation, a usable landing `ELT` can also be enough for ALB to
+assign a landing slot even before every fuller route-derived timing product is
+available.
 
 Once the aircraft is inside terminal or post-via handling, ALB should not keep inventing a separate orange-based landing estimate. At that point the live EuroScope-style branch is normally the safer basis.
 
