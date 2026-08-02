@@ -110,6 +110,9 @@ Chooses which timeline definitions are active.
   needing a restart
 - A successful reload preserves local runtime selections more cleanly than
   older builds and now also tries to keep the current timeline zoom
+- If a restored timeline still depends on a configured legacy default AR or
+  scenario baseline, reload now reapplies that configured baseline as part of
+  the restored timeline state
 
 ![ALB Dropdown Timeline](../img/ALB-Popup-Timelines.png)
 

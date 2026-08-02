@@ -67,6 +67,7 @@ Important limits:
 - they do not change `EAT:AR` versus `EAT:LT`
 - they do not change ETA policy, backend transport health, or scratchpad fallback state
 - they do not create peer-owned resequencing
+- in current `normal`, estimate-only canonical refreshes may also be shaped automatically; there is no separate operator command for that beyond keeping seqsync in `normal`
 - backend reconnect continuity and mixed backend or scratchpad peer routing are
   automatic transport behaviors, not a separate operator mode
 
@@ -96,6 +97,9 @@ Current behavior:
 - active runtime selections such as `EAT`, `ETA`, and `HLW` are preserved more
   cleanly than in older builds
 - ALB now also tries to keep the current timeline zoom across reload
+- if a restored active timeline still relies on legacy configured default AR or
+  scenario values, reload now reapplies that configured baseline instead of
+  leaving active AR state undefined
 - if the ALB window is currently closed, reload does not pop it open again
 
 ## Hold / EAT

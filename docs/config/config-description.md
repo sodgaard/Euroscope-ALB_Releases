@@ -25,8 +25,10 @@ After changing config, apply it with `.alb reload` or the `[Reload config]`
 entry in the `Timelines` menu. A successful reload now preserves the active
 runtime session more cleanly than older builds, including current policy
 selections such as `EAT`, `ETA`, and `HLW`, while also trying to keep the
-current timeline zoom. Reload does not auto-open the ALB window again if it is
-currently closed.
+current timeline zoom. If a restored active timeline still depends on a
+configured legacy default AR or scenario baseline, reload reapplies that
+configured baseline instead of leaving the active AR state undefined. Reload
+does not auto-open the ALB window again if it is currently closed.
 
 ## Current config version support
 
@@ -242,18 +244,19 @@ Fallback behavior:
 | Property | Type | Default | Accepted range or values | Description |
 |---|---:|---:|---|---|
 | `authorityLeadMinutes` | int | `10` | `1-60` | Horizon relevance window in minutes. Used by `horizon` to distinguish near-horizon traffic from far-floating traffic. |
-| `mode` | string | `normal` | `normal`, `throttled`, `horizon`, `suspend` | Backend seqsync transport mode. `normal` is immediate in steady state. |
+| `mode` | string | `normal` | `normal`, `throttled`, `horizon`, `suspend` | Backend seqsync transport mode. In `normal`, operational transitions stay immediate while estimate-only canonical refreshes may be shaped automatically. |
 | `txMaxSet2PerPoll` | int | `10` | `1-200` | Per-poll budget for queued canonical `SET2` transmission. Used by the same queued or recovery paths as above. |
 | `txMaxSet2PerSecond` | int | `10` | `1-200` | Per-second budget for queued canonical `SET2` transmission. Used by `throttled`, `horizon`, `suspend` recovery, and temporary normal recovery drain. |
 | `txQueueMaxAgeSec` | int | `30` | `1-600` | Queue age budget for backend seqsync queue handling. |
 
 Operational notes:
 
-- `normal` is immediate in steady state
+- `normal` keeps operational transitions immediate, but estimate-only canonical refreshes may be shaped automatically
 - `throttled`, `horizon`, `suspend`, and temporary recovery drain use the TX queue budgets
 - `horizon` may suppress far-floating canonical candidates while keeping operationally relevant or uncertain aircraft canonical
 - `suspend` suppresses normal canonical `SET2` TX, but operational `DEL` remains allowed and bounded
 - returning from `throttled` or `horizon` to `normal` uses temporary bounded recovery drain until inherited queue backlog is empty
+- there is no separate config key or runtime command just for the normal-mode estimate shaping; it is part of current `normal`
 - edit this block in `alb-config.json` when you want different startup or
   default transport behavior, then apply it with `.alb reload` or by
   restarting ALB
@@ -401,6 +404,7 @@ than that threshold.
 ### Notes on `ArrivalScenarios`
 
 - Operational note: `ArrivalScenarios` is retained for compatibility and history. Scenarios are no longer part of the recommended normal ALB workflow. Current operation should normally use `EAT:LT` landing-timeline monitoring and correction instead of scenario switching.
+- On successful config reload, if a restored active timeline still depends on a configured legacy default scenario, ALB reapplies that configured baseline so the retained AR picture does not come back undefined.
 - The loader reads the key exactly named `ArrivalScenarios`
 - alternate scenario blocks under other names are ignored
 - placeholder via-fixes such as `"-----"` do not consume scenario values

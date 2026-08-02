@@ -271,6 +271,34 @@ deterministic authoritative placement from the aircraft's live `ELT` boundary.
 It is not intended to behave like a generic defer, gap-fill, or force-placement
 shortcut.
 
+## First canonical entry
+
+Newly observed aircraft do not immediately become canonical ALB sequence
+traffic.
+
+Before first entry, ALB can still track factual live context such as route,
+destination, phase, and other inputs needed to decide whether the aircraft
+belongs in the current planning picture. But it should not yet create the full
+canonical ALB sequencing result for that aircraft.
+
+Practical meaning:
+
+- no canonical sequence position yet
+- no committed ALB PLT yet
+- no normal backend `SET2` publication yet
+- no full ALB planning confidence yet
+
+Once the aircraft reaches the normal first-entry conditions, ALB creates the
+first coherent canonical result and then ordinary sequencing continues from
+there.
+
+Operator surface:
+
+- there is no separate button or `.alb` command for this gate
+- if the route, runway, or timeline is wrong, correct that factual picture
+- otherwise, let the aircraft mature into the normal sequencing picture instead
+  of forcing an early ALB interpretation
+
 ## Sequence authority
 
 If shared authority exists and the local instance is not the owner, a manual pre-via swap is not applied locally as a silent fork. Instead, the local side sends a request toward the authority and waits for the authoritative result.
@@ -348,6 +376,10 @@ competing canonical sequence while active backend authority still exists.
 
 When a usable landing `ELT` exists, LT can still assign a landing slot even if
 some fuller route-derived timing products are not yet available.
+
+If an aircraft is still in the pre-entry factual-only window, ALB may instead
+show an informational unstable-estimate surface rather than treating it as a
+normal fully admitted sequencing result.
 
 ## ES versus ALB estimate branch invariant
 

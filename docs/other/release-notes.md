@@ -6,6 +6,69 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
+## 0.3.1W
+
+This release follows the previous public `0.3.1T` release and includes the
+user-facing work that landed through the internal `0.3.1U` and `0.3.1V`
+milestones.
+
+### Added
+
+- Added first-entry sequencing gating so newly observed aircraft are not turned
+  into canonical ALB sequence traffic before they have reached the normal
+  admission conditions.
+- Added the informational `EST UNST` pre-entry estimate indication for
+  route-resolved aircraft that are still being held outside normal canonical
+  sequencing.
+
+### Changed
+
+- Reworked normal backend seqsync sender behavior so estimate-only `SET2`
+  updates can be bounded and coalesced while operationally important canonical
+  transitions still go out immediately.
+- `Reload config` now reapplies the configured legacy default AR or scenario
+  baseline to restored timelines instead of letting retained AR state come back
+  undefined.
+- Suppressed false `No Fix` style warning behavior for traffic that is still
+  intentionally pre-entry and not yet admitted to normal sequencing.
+- Peer presence and route aging now distinguish backend freshness from
+  scratchpad freshness more cleanly, so peer display and transport-specific
+  authority stay aligned with the route that is actually still fresh.
+
+### Fixed
+
+- Protected follower `HOLD_EAT` timeline lookup more safely.
+- Hardened peer receive handling so a same-revision conflicting `SET2` payload
+  is rejected instead of being treated like a harmless duplicate.
+
+### Technical notes
+
+- This step also advanced the staged recovery-programme transport contract and
+  related runtime hardening in the development source tree.
+
+## 0.3.1V (Source-only)
+
+### Added
+
+- Added the first-entry sequencing gate for newly observed aircraft.
+
+### Changed
+
+- Successful config reload now restores the configured legacy default AR or
+  scenario baseline for retained timelines instead of leaving active AR state
+  undefined.
+
+### Technical notes
+
+- Internal recovery-programme and validation material also advanced in the
+  source tree during this milestone.
+
+## 0.3.1U (Source-only)
+
+### Fixed
+
+- Protected follower `HOLD_EAT` timeline lookup more safely.
+
 ## 0.3.1T
 
 This release follows the previous public `0.3.1R` release and includes the

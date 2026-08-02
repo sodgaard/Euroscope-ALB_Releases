@@ -28,6 +28,8 @@ Expected behavior in current builds:
 - active runtime selections such as `EAT`, `ETA`, and `HLW` are preserved more
   cleanly than in older builds
 - ALB also tries to preserve the current timeline zoom
+- if the restored active timeline still depends on a configured legacy default
+  AR or scenario baseline, reload now reapplies that configured baseline
 - if the ALB window is currently closed, reload does not open it again
 
 If a changed config value does not take effect, confirm that:
@@ -87,6 +89,8 @@ Practical meaning:
   operator-facing controls
 - if transport health changes, use `Peers`, `.alb seqsync status`, and normal
   operational coordination to understand which path is currently in effect
+- peer display can survive on whichever route is still fresh, but
+  transport-specific authority still follows the route that is actually fresh
 
 If a peer seems to have fallen behind after a reconnect window:
 

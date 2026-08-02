@@ -36,6 +36,9 @@ Use them like this:
 - `.alb seqsync suspend` deliberately stops normal canonical `SET2`
   transmission until recovery
 
+There is no separate button or `.alb` command for the newer normal-mode sender
+shaping. It is part of current `normal` seqsync behavior.
+
 Config surface:
 
 - edit top-level `backendSeqSync` in `alb-config.json` when you want different
@@ -114,6 +117,25 @@ Current practical meaning:
   those peers more cleanly while still keeping canonical backend sequence state
   backend-only
 
+## Peer presence and route aging
+
+Current ALB transport logic also keeps backend and scratchpad route freshness
+separate.
+
+Practical meaning:
+
+- either fresh route can keep a peer visible in `Peers`
+- transport-specific authority still follows the route that is actually fresh
+- a peer is treated as lost only after both routes have aged out
+- ordinary retained metadata may remain longer for diagnosis, but that retained
+  metadata does not by itself prove live authority
+
+Operator surface:
+
+- use `Peers` for the quick picture
+- use `.alb seqsync status` when you need the transport-side detail
+- there is no extra command that manually changes this aging model
+
 ## Important transport rule
 
 Canonical per-aircraft sequence state is backend-only.
@@ -157,7 +179,7 @@ In practical terms:
 
 | Mode | Purpose | SET2 behavior | DEL behavior | Notes |
 |---|---|---|---|---|
-| `normal` | Standard operation | Immediate canonical `SET2` | Immediate operational `DEL` | Default mode |
+| `normal` | Standard operation | Immediate operational `SET2`; estimate-only `SET2` may be coalesced and drained under the normal bounded sender contract | Immediate operational `DEL` | Default mode |
 | `throttled` | Smooth backend sequence TX bursts | `SET2` queued as latest-state-wins and budgeted | Operational `DEL` queued at high priority | No suppression; all canonical candidates stay canonical |
 | `horizon` | Reduce churn from far-floating aircraft | Operationally relevant `SET2` queued and budgeted; far-floating `SET2` may be suppressed | Operational `DEL` queued at high priority; overlay-clear `DEL` can clear prior canonical state | Unknown or uncertain cases stay canonical |
 | `suspend` | Emergency or controlled degraded mode | Normal canonical `SET2` TX suppressed | Operational `DEL` still allowed and bounded | Local FMR calculations continue; peers may retain last backend overlay until recovery, explicit `DEL`, FMR change, or local reset |
@@ -175,10 +197,17 @@ for the quick command reference.
 
 ### `normal`
 
-- Immediate canonical `SET2`
+- Operationally meaningful canonical `SET2` changes still transmit immediately
+- Estimate-only `SET2` changes may be coalesced instead of being sent one-for-one
+- The current normal bounded sender contract uses a small drain cap, a cadence guard, and a maximum pending-age guard rather than an operator-managed extra mode
 - Immediate operational `DEL`
-- No suppression
-- No queue requirement in steady state
+- No far-floating suppression
+
+How to get this behavior:
+
+- keep seqsync in `normal` through `.alb seqsync normal`, or
+- set top-level `backendSeqSync.mode` to `normal` in `alb-config.json`, then
+  apply it with `.alb reload`
 
 ### `throttled`
 
@@ -208,7 +237,7 @@ for the quick command reference.
 
 ## Stage 4.1 bounded return to normal
 
-`normal` is immediate in steady state.
+`normal` is the steady-state default.
 
 However, when returning to `normal` from a queued mode with inherited queued
 work, ALB temporarily uses bounded recovery drain so the backlog does not burst
@@ -217,7 +246,8 @@ in one timer poll.
 Current behavior:
 
 - `throttled` or `horizon` to `normal` drains inherited queued work through the configured budgets
-- once the inherited backlog is empty, `normal` returns to ordinary immediate behavior
+- once the inherited backlog is empty, `normal` returns to its ordinary
+  immediate-plus-bounded-shaping behavior
 - `suspend` to `normal` also uses bounded recovery resync instead of uncapped flush behavior
 
 ## EAT boundary
@@ -280,6 +310,7 @@ because a prior delete revision exists.
 ### What happens when `SET2` stops
 
 - if `SET2` simply stops without `DEL`, the last canonical overlay may remain intentionally sticky for short reconnect or continuity windows
+- if the FMR explicitly releases coverage for that aircraft, peer backend authority can also be cleared immediately without waiting for the ordinary freshness timeout
 - if `DEL` is received, active backend authority is explicitly cleared and local fallback may resume
 - a later newer `SET2` can be accepted again and reactivate backend authority
 - there is no separate "restart local calculations" step, because local calculations generally continue running throughout

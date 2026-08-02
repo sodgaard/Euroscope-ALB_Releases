@@ -32,6 +32,9 @@ If the hold phase column is blank, the aircraft is not currently treated as hold
 - `Cp`: capacity derived from the current spacing
 - `TMA`: aircraft already in the terminal area
 - `OBS`: observation or warning slot in the selected layout
+- list-style OBS surfaces can also show a longer informational text such as
+  `EST UNST` for pre-entry traffic that ALB has not yet admitted to normal
+  sequencing
 - Orange timing: ALB's configured route or STAR-based track-mile timing model used as part of the `ELT-ALB` or `ETA:ALB` estimate before terminal live estimates take over
 
 For the current OBS note set and how to resolve the common ones, see [OBS Notes](obs-notes.md).
