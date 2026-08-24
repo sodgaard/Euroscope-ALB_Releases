@@ -799,6 +799,11 @@ To avoid an unrealistically optimistic ALB branch, the orange result is also
 bounded against the live ES branch. In practice that means `ELT-ALB` is not
 allowed to run too far ahead of the live EuroScope-based landing estimate.
 
+Current timing guards also reject a grossly implausible near-via route ETO
+before it is allowed to cascade into the ALB branch. In that situation ALB can
+fall back to the live ES branch or retain a still-trusted prior ALB branch
+until the timing evidence becomes credible again.
+
 ### Practical tuning guidance
 
 - treat `viafix_track_nm_orange` as airport-specific planning calibration, not
@@ -809,6 +814,8 @@ allowed to run too far ahead of the live EuroScope-based landing estimate.
   late
 - once the aircraft is terminal or post-via, ALB should stop relying on orange
   distance timing and follow the live ES branch where appropriate
+- close to the via-fix, a route timing jump that is physically implausible may
+  now be rejected instead of being propagated into the ALB branch
 
 For a more operational explanation, see
 [ICAO / Airport Setups](./icao-setups.md). For the behavior boundary between

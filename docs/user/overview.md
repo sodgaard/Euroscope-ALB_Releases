@@ -27,7 +27,8 @@ Start with [Planning Modes Overview](planning-modes/index.md), then read [EAT:LT
 - Select the relevant `Timeline`
 - Monitor the landing timeline and sequence conformance
 - Use AR controls only when you deliberately want the rougher via-fix release method
-- Watch the stats block to see demand, hold load, and near-term distribution
+- Watch the stats block to see demand, hold load, near-term distribution, and
+  in `EAT:LT`, the informational `Expected LR` forecast
 - Use `Layout` to switch between feeder-focused and landing-focused views
 - Right-click an aircraft when you need an explicit sequence action
 

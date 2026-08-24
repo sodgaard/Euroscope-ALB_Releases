@@ -6,6 +6,74 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
+## 0.4.5
+
+This release publishes the latest `0.4.x` line through August 24, 2026.
+
+### Release position
+
+- `0.4.5` is the current public documentation baseline for the mature `0.4.x`
+  line.
+- No new normal operator workflow was introduced on top of the late `0.4.4`
+  behavior summarized below.
+
+## 0.4.4
+
+This release follows `0.4.1A`.
+
+### Changed
+
+- Stabilized LT order retention and tactical landing placement so late entrants,
+  startup sequencing, and protected traffic preserve a more coherent runway
+  plan.
+- Restored feeder-style AR demand and stream overview from valid via timing
+  without requiring LT-only landing products.
+- Runway `EAT:LT` Gain/Lose display now reads against the current live landing
+  estimate branch instead of relying on a stale scheduler-only comparison
+  basis.
+
+### Fixed
+
+- Prevented catastrophic route-distance contradictions from poisoning
+  `ETA:ES`, `ETA:ALB`, `ELT-ES`, or `ELT-ALB`.
+- Corrected the stable `30'` overview column so unavailable values show as
+  aligned `--%` instead of temporary factual-count substitutions.
+- Refined tactical LT admission and manual-slot precedence so unresolved
+  tactical traffic no longer steals protected manual authority prematurely.
+
+## 0.4.1A
+
+This hotfix follows `0.4.0`.
+
+### Fixed
+
+- Prevented implausible near-via route timing from cascading into the
+  `ETA:ALB` / `ELT-ALB` branch.
+
+### Changed
+
+- When route-derived via-fix timing close to the via-fix is physically
+  implausible, ALB now refuses to let that bad near-via estimate drive the ALB
+  landing branch.
+- In those situations, ALB can fall back to the live ES branch or retain a
+  still-trusted prior ALB branch until the timing evidence becomes credible
+  again.
+- Exiting-hold traffic that is still operationally pre-via keeps its intended
+  hold-planning context instead of being treated like a normal free near-via
+  transition.
+
+## 0.4.0
+
+This release promotes the validated `0.3.1W` line to the `0.4` series after
+the successful VtC run on August 3, 2026.
+
+### Release position
+
+- `0.4.0` is the stable promotion of the matured `0.3.1W` feature and recovery
+  line.
+- The user-facing behavioral highlights of that promoted line are already
+  summarized below under `0.3.1W`.
+
 ## 0.3.1W
 
 This release follows the previous public `0.3.1T` release and includes the

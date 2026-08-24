@@ -24,6 +24,8 @@ The planning block overlaps the upper-left part of the timeline area.
 The top line contains the airport-wide landing plan:
 
 - `PLR` is the planned landing rate
+- `Expected LR` directly below it is the read-only LT forecast row and only
+  shows a real rate in `EAT:LT`
 - the actual landing figure shows recent achieved landing rate
 - the missed figure shows recent missed-approach activity
 
@@ -35,7 +37,17 @@ Each via-fix line then shows the stream-specific planning picture:
 - near-term demand distribution
 - number of aircraft in hold
 - 15-minute buckets
+- the stable `30'` overview column
 - TMA count
+
+Practical reading notes:
+
+- the `30'` header is the fixed 30-minute overview column, not an aircraft
+  count label
+- if that 30-minute percentage is currently unavailable, ALB should now show
+  aligned `--%`
+- in `EAT:AR`, stream demand can still be derived from valid via timing even
+  when LT-only landing products are not available
 
 Lines showing `-----` are separators or subtotal breaks from the configured timeline definition.
 
@@ -90,6 +102,10 @@ Some layouts show landing-time style labels such as `ELT`, `ELT-ES`, or `ELT-ALB
 - `ELT-ES` is the live EuroScope-style branch
 - `ELT-ALB` is the ALB-corrected branch when that branch is relevant
 
+In current Runway `EAT:LT` use, displayed Gain/Lose should be read against the
+current live landing estimate branch. It is meant to show present conformance
+to the plan, not a stale scheduler-only comparison snapshot.
+
 `ELT-ALB` may include ALB's configured orange timing before the aircraft is deep into terminal handling. In ALB documentation, orange timing means the configured route or STAR-based track miles from the via-fix or holding-fix area toward touchdown. It is a planning estimate used while the aircraft is still far enough out that route-based timing is useful.
 
 At a practical level, ALB builds that estimate from the via-fix timing anchor
@@ -109,6 +125,13 @@ The current baseline is roughly jet-like:
 When flight-plan performance data is available, ALB can refine those segment
 speeds for the specific aircraft. When upper-wind data is available, ALB can
 also let that wind shift the ground-speed side of the estimate.
+
+In current builds, ALB also guards the ALB branch against obviously
+implausible near-via route timing. If the route-derived via-fix timing close to
+the via-fix is not physically credible, ALB should not let that bad transition
+timing cascade into `ELT-ALB`. In practice that means the ALB branch may
+temporarily stay on the safer live ES branch, or retain a still-trusted prior
+ALB branch, until the timing picture becomes credible again.
 
 When a validated route via-fix bypass gives ALB good enough timing evidence,
 the `ELT-ALB` branch can now seal earlier instead of waiting for the ordinary

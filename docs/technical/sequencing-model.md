@@ -397,6 +397,16 @@ Current practical refinement:
 - when ALB has a validated route via-fix bypass with good enough route evidence,
   it can seal the `ELT-ALB` branch earlier instead of waiting for the ordinary
   full via-fix path
+- gross route-distance contradictions must be rejected before they can poison
+  either the ES or ALB landing-estimate branch
+- if a near-via route-derived ETO is grossly implausible, ALB should not let
+  that transition timing cascade into the ALB branch just to keep `ELT-ALB`
+  alive
+- in that case, the ALB branch may fall back to `ELT-ES` or retain a still
+  trusted prior ALB branch until the transition timing becomes credible again
+- exiting-hold traffic that is still operationally pre-via keeps its hold-side
+  context for this guard instead of being treated like an ordinary free
+  near-via transition
 
 Orange timing is part of the pre-terminal `ELT-ALB` branch. It may be used while the aircraft is before TMA, before via-fix, or before terminal handling, depending on the current sequencing state and available live data.
 
@@ -416,10 +426,18 @@ The current orange model is not just a raw fixed time. In practical terms:
 - when upper-wind data exists, ALB can also adjust the approximate ground speed
 - the resulting ALB branch is still bounded against the live ES branch so the
   corrected estimate does not run unrealistically far ahead
+- near the via-fix, ALB also rejects grossly implausible route-derived ETO
+  transitions instead of letting them cascade into the ALB branch
 
 Orange timing must not be used to keep a stale separate ALB landing estimate alive after the aircraft has become terminal, post-via, on approach, final, landing, or past final fix. In those states, `ELT-ALB` should follow the live branch where appropriate or be cleared when no live estimate is available.
 
 This keeps old route or STAR geometry from misleading the landing timeline once the aircraft is already deep into terminal handling.
+
+For current Runway `EAT:LT` display behavior, Gain/Lose should compare the
+planned slot against the selected live landing estimate branch. That display
+comparison is intentionally separate from the scheduler's own retained planning
+basis so the operator sees current conformance rather than stale planning-only
+history.
 
 ## Expected LR
 

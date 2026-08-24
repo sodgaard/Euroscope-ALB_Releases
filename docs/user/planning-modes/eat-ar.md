@@ -37,6 +37,10 @@
 - AR requires more manual tweaking.
 - Equal spacing per via-fix is rough and may not produce the best landing timeline.
 - The FMR must adjust via-fix ARs as traffic changes.
+- The AR-side demand picture still depends on valid via timing, but it does
+  not need LT-only landing products to populate the feeder stream overview.
+- `Expected LR` remains an `EAT:LT`-only forecast and should not be read as an
+  AR control surface.
 
 ## What peers do
 

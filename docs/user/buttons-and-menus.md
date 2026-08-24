@@ -91,6 +91,7 @@ Operator-facing rule of thumb:
 - before the aircraft is deep into terminal or post-via handling, ALB can use its own corrected branch to give a more useful planning estimate
 - that branch is built from the via-fix timing anchor plus configured orange distance-to-land, then turned into seconds using an ALB descent-speed model
 - the current model uses a rough higher segment, a TMA segment, and a final segment; when flight-plan performance and upper-wind data are available, ALB can refine that estimate further
+- if a near-via route-derived timing step is obviously implausible, ALB now guards the ALB branch instead of blindly cascading that bad timing into `ETA:ALB` / `ELT-ALB`
 - once the aircraft is in terminal or post-via phases, ALB stops forcing a separate corrected landing estimate and follows the live EuroScope branch where appropriate
 - peers should normally follow the FMR's selected ETA policy
 

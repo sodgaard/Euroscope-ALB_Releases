@@ -30,6 +30,7 @@ If the hold phase column is blank, the aircraft is not currently treated as hold
 - `Expected LR`: demand-limited forecast from canonical future LT PLTs
 - `AR`: arrival spacing for a via-fix stream, shown as minutes between releases
 - `Cp`: capacity derived from the current spacing
+- `30'`: the fixed 30-minute overview column in the stats block
 - `TMA`: aircraft already in the terminal area
 - `OBS`: observation or warning slot in the selected layout
 - list-style OBS surfaces can also show a longer informational text such as
@@ -71,6 +72,7 @@ Display rules:
 - the row is informational and read-only
 - a value below PLR is not automatically treated as a warning
 - normal valid values use neutral display coloring
+- unavailable 30-minute percentage values should show as `--%`
 - no smoothing is applied
 - no trend arrow is applied
 - no automatic PLR adjustment is performed

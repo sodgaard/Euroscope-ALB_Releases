@@ -43,6 +43,9 @@
 - The FMR does not normally tweak via-fix AR values in LT mode.
 - AR may still be visible as legacy/context information, but it is not the active planning driver.
 - Current normal LT operation is monitoring and correction, not constant manual AR tuning.
+- In runway-style LT use, Gain/Lose is read against the current live landing
+  estimate branch so it reflects present conformance rather than a stale
+  scheduler-only basis.
 
 ## What peers do
 
@@ -138,6 +141,9 @@ Expected LR: -- (EAT:LT only)
 
 A lower Expected LR is not automatically a problem. It may simply mean the
 current traffic demand is below the planned landing rate.
+
+By contrast, feeder-style AR demand rows can still use valid via timing in
+their own stream overview without turning `Expected LR` into an AR feature.
 
 ## Sorting and filtering IO
 

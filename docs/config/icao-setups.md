@@ -81,6 +81,14 @@ Current timing assumptions:
 - when aircraft performance and upper-wind data are available, ALB can refine
   the estimate instead of relying only on the generic baseline
 
+Current guard behavior:
+
+- if a near-via route-derived timing step is grossly implausible, ALB now
+  rejects that transition timing instead of letting it cascade into the ALB
+  landing branch
+- in that situation ALB can fall back to the live ES branch or retain a still
+  trusted prior ALB branch until the timing picture becomes credible again
+
 Operationally, that means the orange values are not arbitrary display numbers.
 They directly affect how early or late `ELT-ALB` and ALB-based landing planning
 appear before the aircraft reaches the more live terminal picture.
