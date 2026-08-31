@@ -82,6 +82,7 @@ top-level settings, the runtime reads only the exact expected key name.
 | `backendPeerHealth` | object | defaults below | Passive backend peer update-cycle health monitoring and warning thresholds. |
 | `backendSeqSync` | object | defaults below | Backend sequence synchronization transport mode and TX-budget settings. |
 | `configFormatVersion` | int | required in practice | Config schema version. Use `3` for new configs. |
+| `defaultTimeline` | string | absent | Optional exact configured timeline identifier to select when no prior active timeline can be restored. |
 | `eatModeOnStartup` | string | `AR` | Startup EAT mode, applied only during the initial config load. Accepted values are `AR`, `TF`, and `LT` case-insensitively. |
 | `etaModeOnStartup` | string | `ES` | Startup ETA source, applied only during the initial config load. Accepted values are `ES` and `ALB` case-insensitively. |
 | `glEatCombiDisplay` | object | defaults below | Optional display mapping for the combined `glEatCombi` field. |
@@ -94,6 +95,8 @@ top-level settings, the runtime reads only the exact expected key name.
 | `openAutomatically` | bool | `true` | Opens the ALB window on the initial config load. It does not re-open the window on later config reloads. |
 | `scratchpadRunwayOverride` | bool | `false` | Enables scratchpad runway override parsing for `assignedRunwayOverride`. |
 | `soundMute` | object | all `false` | Startup mute state for ALB sounds. |
+| `startupShowStatistics` | bool | `true` | Initial ALBCore startup presentation: show the statistics and arrival-planning block. |
+| `startupShowTimeline` | bool | `true` | Initial ALBCore startup presentation: show the timeline area. |
 | `tagLayouts` | object | required | Tag layout definitions. |
 | `timeSyncBeacons` | bool | `false` | Enables time-sync beacon support. |
 | `timelineSort` | string | `targetFixEta` | Default timeline sort mode. Accepted values include `target` / `tfe` and `landing` / `lde` / `lnd`. |
@@ -116,6 +119,35 @@ Current independent fallbacks are:
 - `eatModeOnStartup` -> `AR`
 - `etaModeOnStartup` -> `ES`
 - `holdEatWriteOnStartup` -> `false`
+
+## Startup timeline and presentation
+
+These top-level settings affect local startup selection and presentation. They
+do not change FMR authority, planning policy, or shared traffic state.
+
+```json
+{
+  "defaultTimeline": "EKCH-SI",
+  "startupShowTimeline": true,
+  "startupShowStatistics": true
+}
+```
+
+| Key | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `defaultTimeline` | string | absent | Exact configured timeline identifier to select only when ALB cannot restore a prior active timeline. It is not an ICAO, runway, or layout name. |
+| `startupShowTimeline` | bool | `true` | Shows the timeline on the first successful ALBCore startup config load. |
+| `startupShowStatistics` | bool | `true` | Shows the statistics block on the first successful ALBCore startup config load. |
+
+`startupShowTimeline` and `startupShowStatistics` are consumed once at initial
+startup. After that, the local `TL` and `STAT` buttons own the presentation for
+the controller session, including after a window close/reopen or `.alb reload`.
+Missing or invalid values safely behave as `true`.
+
+`defaultTimeline` is considered only when no previous active timeline can be
+restored. A valid existing selection, including a surviving partial
+multi-timeline selection, takes precedence. Apply any config change with
+`.alb reload` or restart ALB.
 
 ## Housekeeping
 

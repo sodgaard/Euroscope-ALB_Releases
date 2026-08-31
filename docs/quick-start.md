@@ -63,3 +63,7 @@ If an aircraft is already in hold and prerequisites are met, you can also set EA
 The recommended modern method is to monitor and correct the landing timeline in `EAT:LT`, not to drive the plan mainly through scenario switching.
 
 For the next step, read [Planning Modes Overview](user/planning-modes/index.md), [EAT:LT Landing Timeline Planning](user/planning-modes/eat-lt.md), [Interface](user/interface.md), and [Buttons & Menus](user/buttons-and-menus.md).
+
+Tip: the local `TL` and `STAT` buttons let you focus the ALB window without
+changing the shared plan. The right-side timeline elevator, `Page Up`,
+`Page Down`, `Home`, and `End` navigate the displayed future timeline only.

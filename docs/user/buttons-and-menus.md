@@ -11,6 +11,12 @@ Use these pages for the full operational meaning behind the controls:
 
 ## Top buttons
 
+- `FULL`: reserved future compute-mode control. It remains disabled in the
+  current release, so ALB runs in `FULL` mode and `LEAN` cannot yet be selected.
+- `TL*` / `TL-`: local timeline visibility. `*` means the timeline is shown;
+  `-` means it is hidden.
+- `STAT*` / `STAT-`: local statistics and arrival-planning-block visibility.
+  `*` means shown; `-` means hidden.
 - `EAT` or `PLT`: changes what the compact combi field shows in the aircraft rows. It is a local display toggle and does not change the shared sequence logic.
 - `2 EAT`, `2 GL`, `2 SW`, or `2 ---`: local hold-display setup for the compact `glEatCombi` field while an aircraft is still in hold and more than the threshold away from EAT.
 - `TXE*` or `TXE-`: controls whether EAT-related policy is transmitted when you are the manual FMR. In normal operations, only the manual FMR can change this.
@@ -24,6 +30,31 @@ Use these pages for the full operational meaning behind the controls:
 Current UI note:
 
 - recent ALB builds hide the visible `FPC` top-row button even though the underlying `FPC` state, peer sync, and logging behavior still exist
+
+The title-bar order is now: `FULL`, `TL`, `STAT`, then the shared planning
+controls, then the local display controls. Separators distinguish those groups;
+the existing `EAT`/`PLT` and hold-combi display controls remain adjacent.
+
+## Timeline visibility and elevator
+
+`TL` and `STAT` are local presentation controls. Click either button to show
+or hide that area. They do not change ALB calculations, the selected planning
+mode, aircraft state, FMR authority, or peer synchronization.
+
+When `TL-` is active, ALB uses compact statistics-only or header-only
+presentation. Manual resizing is unavailable until `TL*` is restored.
+
+For each visible timeline, the vertical elevator at the right edge changes
+only the displayed future time window:
+
+- drag the thumb to choose a future position
+- click above or below the thumb to page
+- `Page Up` moves further into the future; `Page Down` moves back toward now
+- `Home` returns to the current-time view; `End` jumps to the furthest
+  available future view
+
+The elevator is not a sequencing or traffic-management control. Use aircraft
+actions, `PLR`, and the normal FMR workflow for operational changes.
 
 ## Local display buttons
 
@@ -59,6 +90,8 @@ Example:
 
 ## Who can change these buttons
 
+- `FULL`, `TL`, and `STAT` are local presentation controls. `FULL` is disabled
+  in the current release; `TL` and `STAT` are active local visibility toggles.
 - `EAT` or `PLT` is local display only
 - the hold-display button such as `2 EAT` or `2 GL` is local display only
 - `TXE` is restricted to the manual FMR

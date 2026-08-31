@@ -177,6 +177,13 @@ their own stream overview without turning `Expected LR` into an AR feature.
 7. Is the aircraft failing to follow ALB's expected sequence?
    If yes, ALB highlights the conformance problem and expects controller correction.
 
+Current operational rule: normal estimate movement does not by itself justify
+continually reordering the landing plan. When a real operational change is
+needed, use `Advance 1` for a one-position correction or `Resequence` to let
+ALB place the aircraft again under the current LT plan. These actions follow
+the normal FMR authority rules; changing layout, using the timeline elevator,
+or hiding presentation panels does not change the plan.
+
 ### Outputs
 
 - aircraft included, excluded, or dimmed

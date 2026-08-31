@@ -15,6 +15,37 @@ ALB is built around four working areas:
 
 [Open full size](../img/Full-screenshot-ESandALB.png)
 
+## Presentation controls and timeline navigation
+
+The left side of the top button row now starts with local presentation
+controls. They affect only what your ALB window shows. They do not change
+sequencing, timing, FMR authority, or shared peer state.
+
+- `FULL` is a reserved future compute-mode control. It is visible but disabled
+  in the current release, so ALB continues to run in `FULL` mode. `LEAN` is
+  not currently an operator-selectable mode.
+- `TL*` / `TL-` shows or hides the timeline area. `*` means shown and `-`
+  means hidden.
+- `STAT*` / `STAT-` shows or hides the statistics and arrival-planning block.
+
+Click `TL` or `STAT` to change your local presentation. With the timeline
+hidden, ALB can show a compact statistics-only view or a header-only view.
+Normal timeline size is retained and restored when you show the timeline
+again. Manual window resizing is intentionally unavailable while the timeline
+is hidden.
+
+Each visible timeline also has a narrow vertical elevator at its right edge:
+
+- drag the thumb to move through the future portion of that timeline
+- click above or below the thumb to page
+- press `Page Up` to move further into the future and `Page Down` to return
+  toward the current-time view
+- press `Home` to return to the current-time view and `End` to jump to the
+  furthest available future view
+
+The elevator only changes the visible time window. It does not move aircraft,
+change a plan, or alter the shared sequence.
+
 ## Stats and arrival-planning block
 
 The planning block overlaps the upper-left part of the timeline area.
@@ -72,6 +103,11 @@ The timeline rows are the operational center of ALB.
 
 See [Aircraft Actions](aircraft-actions.md) for the right-click behavior.
 See [Feeder View vs Runway View](planning-modes/views.md) for the layout-specific meaning.
+
+In normal `EAT:LT` operation, ALB keeps a shared landing order stable rather
+than continuously reshuffling it for ordinary estimate movement. Use the
+right-click `Advance 1` or `Resequence` actions only when an operational event
+means the existing order no longer represents the traffic situation.
 
 ## Combi field scope
 

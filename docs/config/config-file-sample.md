@@ -6,6 +6,9 @@ Note: this sample preserves legacy `ArrivalScenarios` blocks because existing co
 {
   "configFormatVersion": 3,
   "openAutomatically": true,
+  "defaultTimeline": "EKCH-SI",
+  "startupShowTimeline": true,
+  "startupShowStatistics": true,
   "logging": true,
   "housekeeping": {
     "enabled": true,

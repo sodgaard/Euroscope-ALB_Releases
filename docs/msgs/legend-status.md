@@ -44,8 +44,11 @@ For the current OBS note set and how to resolve the common ones, see [OBS Notes]
 
 - `Peers(n)`: number of currently online ALB peers shown for the active airports
 - `EAT` or `PLT` button: which value the compact combi field is currently showing
-- `*` in a top button label: that option is enabled
-- `-` in a top button label: that option is disabled
+- `TL*` / `TL-`: timeline shown / hidden
+- `STAT*` / `STAT-`: statistics shown / hidden
+- in other toggle-style top-button labels, `*` means enabled and `-` means disabled
+- `FULL`: visible but disabled in the current release; it is a reserved future
+  compute-mode control, not a current operational setting
 
 ## Expected LR row
 

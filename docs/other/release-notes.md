@@ -6,6 +6,42 @@ For detailed asset-by-asset history, use the GitHub releases page:
 
 - [Euroscope-ALB_Releases Releases](https://github.com/sodgaard/Euroscope-ALB_Releases/releases){target="_blank" rel="noopener"}
 
+## 0.4.6 - Streamlined Timeline Controls and Navigation
+
+### Added
+
+- Added local `TL*` / `TL-` and `STAT*` / `STAT-` controls for showing or
+  hiding the timeline and statistics areas. `*` means shown and `-` means
+  hidden.
+- Added a right-side vertical elevator for each visible timeline. Drag the
+  thumb or click the track to navigate the displayed future time window.
+- Added `Page Up`, `Page Down`, `Home`, and `End` navigation for the active
+  timeline elevator.
+- Added optional `startupShowTimeline` and `startupShowStatistics` config
+  defaults for the first successful ALBCore startup.
+
+### Changed
+
+- Reorganised the top button row into presentation, operational, and display
+  groups, with clearer separators and stable button spacing.
+- Added the visible `FULL` / `LEAN` compute-mode control as a reserved future
+  surface. It remains disabled in `0.4.6`, so ALB continues to run in `FULL`
+  mode.
+- With the timeline hidden, ALB uses compact statistics-only or header-only
+  presentation. Manual resizing is disabled in those compact views and normal
+  timeline size is restored when the timeline is shown again.
+- Improved LT order retention and tactical placement so normal estimate
+  movement does not unnecessarily reshuffle the shared landing plan.
+- Improved handling of contradictory route-distance evidence so it does not
+  drive normal timing or sequencing until the route picture becomes credible.
+
+### Operational notes
+
+- `TL`, `STAT`, and the timeline elevator are local presentation controls only.
+  They do not change aircraft state, sequencing, FMR authority, or peer data.
+- Use `Advance 1` or `Resequence` through the normal FMR workflow when the
+  operational traffic situation genuinely requires a sequence change.
+
 ## 0.4.5
 
 This release publishes the latest `0.4.x` line through August 24, 2026.
